@@ -64,11 +64,20 @@ router.post('/login',(req,res,next) => {
         return; 
       }
         if (bcryptjs.compareSync(password,user.passwordHash)) {
-          res.render('profile/myprofile', {user});
+          req.session.currentUser = user;
+          res.redirect('/profile');
         } else {
           res.render('auth/login', {errorMessage: 'Incorrect password'})
         }    
 }).catch(err=>next(err))
 
+});
+
+router.get('/profile', (req, res, next) => {
+  if (!req.session.currentUser) {
+    res.redirect('/login')
+  }
+  
+  res.render('profile/myprofile', {userInSession: req.session.currentUser})
 })
 module.exports = router;
