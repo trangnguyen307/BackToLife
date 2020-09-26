@@ -7,6 +7,8 @@ const mongoose = require('mongoose')
 
 const User = require('../models/User.model.js')
 
+const routeGuard = require('../configs/route-guard.config');
+const uploader = require('../configs/cloudinary.config.js')
 /* GET Signup */
 router.get('/signup', (req, res, next) => {
   res.render('auth/signup');
@@ -80,4 +82,9 @@ router.get('/profile', (req, res, next) => {
   
   res.render('profile/myprofile', {userInSession: req.session.currentUser})
 })
+
+router.post('/logout', (req, res) => {
+  req.session.destroy();
+  res.redirect('/');
+});
 module.exports = router;

@@ -9,6 +9,8 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 
+require('./configs/db.config');
+const bindUserToViewLocals = require('./configs/user-locals.config');
 
 const mongouri = process.env.MONGODB_URI;
 
@@ -25,6 +27,7 @@ const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
+
 
 require('./configs/session.config')(app);
 
@@ -51,7 +54,7 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'Bring back to life';
 
 
 
@@ -60,5 +63,8 @@ app.use('/', index);
 
 const auth = require('./routes/auth.routes');
 app.use('/', auth);
+
+const post = require('./routes/posts.routes');
+app.use('/posts', post);
 
 module.exports = app;
