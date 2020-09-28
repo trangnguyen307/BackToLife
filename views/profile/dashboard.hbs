@@ -1,0 +1,24 @@
+{{#if userInSession}}
+   
+    <h1>My dashboard </h2>
+
+{{!-- TODO --}}
+{{!-- proposition to check --}}
+{{!-- proposition ongoing --}}
+
+{{!-- SEND PROPOSITION --}}
+
+
+    <h2>My points </h2>
+    <p>{{ userInSession.points}}</p>
+    
+ 
+
+    <button>
+        <a href="/profile">Go back to my profile</a>
+    </button>
+
+{{else}}
+    <p>Still no logged in user, sorry!</p>
+    <a href="/login">Please log in to see your profile</a>
+{{/if}}

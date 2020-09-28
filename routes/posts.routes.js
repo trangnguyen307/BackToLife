@@ -35,6 +35,8 @@ router.post('/', fileUploader.single('pic'), function (req, res, next) {
   ;
 });
 
+
+
 // router.get('/post-display', (req, res) => 
 //   res.render('post-display')
 //   );

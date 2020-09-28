@@ -4,17 +4,18 @@ const bcryptjs = require('bcrypt')
 const saltRounds = 10;
 const salt = bcryptjs.genSaltSync(saltRounds)
 const mongoose = require('mongoose')
+const fileUploader = require('../configs/cloudinary.config');
 
 const User = require('../models/User.model.js')
 
 const routeGuard = require('../configs/route-guard.config');
-const uploader = require('../configs/cloudinary.config.js')
+
 /* GET Signup */
 router.get('/signup', (req, res, next) => {
   res.render('auth/signup');
 });
 
-router.post('/signup', (req, res,next)=> {
+router.post('/signup', fileUploader.single('photo'),(req, res,next)=> {
   console.log('values', req.body)
   const plainPassword = req.body.password
   const hashed = bcryptjs.hashSync(plainPassword,salt )
@@ -22,10 +23,15 @@ router.post('/signup', (req, res,next)=> {
 
  User.create({
    username: req.body.username, 
+   myphoto: req.file.path,
    email: req.body.email,
    city: req.body.city,
-   passwordHash: hashed
+   mydescription: req.body.mydescription,
+   passwordHash: hashed,
+   transactions: '', // to get the numnber of transactions done 
+   mypoints: '' // to get the numnber of points collected
  }). then (userFromDb => {
+   console.log(transactions.values)
    res.send('user created')
  }).catch(err => {
    console.log('💥 ', err);
@@ -82,6 +88,15 @@ router.get('/profile', (req, res, next) => {
   
   res.render('profile/myprofile', {userInSession: req.session.currentUser})
 })
+
+router.get('/profile/dashboard', (req, res, next) => {
+  if (!req.session.currentUser) {
+    res.redirect('/login')
+  }
+  
+  res.render('profile/dashboard', {userInSession: req.session.currentUser})
+})
+
 
 router.post('/logout', (req, res) => {
   req.session.destroy();
