@@ -85,6 +85,7 @@ router.get('/profile', (req, res, next) => {
 
 router.post('/logout', (req, res) => {
   req.session.destroy();
+  //console.log('current user:   ',req.session.currentUser);
   res.redirect('/');
 });
 module.exports = router;

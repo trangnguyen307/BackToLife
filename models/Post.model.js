@@ -1,3 +1,4 @@
+const { Date } = require('mongoose');
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
@@ -12,7 +13,7 @@ const PostSchema = Schema({
   type: { type: String, enum: ['good', 'service'] },
 },
 {
-  timestamps: true
+  timestamps: new Date(),
 }
 );
 

@@ -6,3 +6,12 @@ a {
   color: #00B7FF; }
 
 /*# sourceMappingURL=style.css.map */
+
+/* SHOW POST */
+
+#show-post {
+  display: flex;
+}
+#show-post section {
+  margin-left: 30px;
+}

@@ -1,0 +1,40 @@
+<div>
+  <h2>I am looking for</h2>
+  <p>
+    <textarea name="search" placeholder="Type here"></textarea>
+  </p>
+    
+    <select name="Categories">
+      <option value="dressing">Dressing</option>
+      <option value="books/cds">Books/CDs</option>
+      <option value="services">services</option>
+      <option value="beauty">Beauty</option>
+      <option value="IT">IT</option>
+    </select>
+    <select name="type">
+      <option value="good">A good</option>
+      <option value="service">A service</option>
+    </select>
+    <textarea name="city" placeholder="City"></textarea>
+
+</div>
+
+<div>
+  <p>Thumbnail of 5 Categories</p>
+</div>
+
+<div>
+  <h1>Results</h1>
+  <ul>
+{{#each posts}}
+<li>
+  <img src="{{this.picURL}}" style="width: 100px;">
+  <h1>{{this.title}}</h1>
+  <p>Posted at: {{this.createdAt}}</p>
+  <p>
+    <a href="/posts/{{id}}">See details</a>
+  </p>
+</li>
+{{/each}}
+</ul>
+</div>
