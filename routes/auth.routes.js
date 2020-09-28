@@ -81,13 +81,24 @@ router.post('/login',(req,res,next) => {
 
 });
 
-router.get('/profile', (req, res, next) => {
+router.get('/profile/myprofile', (req, res, next) => {
   if (!req.session.currentUser) {
     res.redirect('/login')
   }
   
   res.render('profile/myprofile', {userInSession: req.session.currentUser})
+
 })
+
+//TO CHECK
+//afficher un profile quelconque avec l'id
+router.get('/profile/:profileid', (req, res, next) => {
+  User.findOne({_id: req.params.profileid})
+    res.render('profile/profile', {user})
+  })
+  .catch(err => next(err))
+
+
 
 router.get('/profile/dashboard', (req, res, next) => {
   if (!req.session.currentUser) {
@@ -96,6 +107,8 @@ router.get('/profile/dashboard', (req, res, next) => {
   
   res.render('profile/dashboard', {userInSession: req.session.currentUser})
 })
+
+
 
 
 router.post('/logout', (req, res) => {
