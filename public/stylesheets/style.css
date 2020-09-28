@@ -5,4 +5,7 @@ body {
 a {
   color: #00B7FF; }
 
+#show-post {
+  display: flex; }
+
 /*# sourceMappingURL=style.css.map */
