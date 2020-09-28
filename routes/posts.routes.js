@@ -12,7 +12,7 @@ router.get('/new', function (req, res, next) {
     return;
   }
 
-  res.render('posts/new');
+  res.render('posts/new',{userInSession: req.session.currentUser});
 });
 
 router.post('/new', fileUploader.single('pic'), function (req, res, next) {
@@ -23,7 +23,7 @@ router.post('/new', fileUploader.single('pic'), function (req, res, next) {
   console.log('creatorId:', req.session.currentUser.id)
   Post.create({
     title: req.body.title,
-    creatorId: req.session.currentUser.id,
+    creatorId: req.session.currentUser._id,
     description: req.body.description,
     picURL: req.file.path,
     pointsEstimate:req.body.pointsEstimate,
@@ -41,7 +41,10 @@ router.post('/new', fileUploader.single('pic'), function (req, res, next) {
 router.get('/categories', (req,res,next) => {
   Post.find().sort({"createdAt": -1})
     .then(postsFromDb => {
-      res.render('posts/categories.hbs', {posts : postsFromDb});
+      res.render('posts/categories.hbs', {
+        posts : postsFromDb,
+        userInSession: req.session.currentUser
+      });
 
     })
     .catch(next);
