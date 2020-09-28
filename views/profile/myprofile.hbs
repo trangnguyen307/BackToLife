@@ -1,9 +1,28 @@
 {{#if userInSession}}
-    <h2>Welcome, {{ userInSession.username }}!</h2>
-    <p>This is your profile page my friend!</p>
+   <img src="{{userInSession.myphoto}}" alt>
+    <h2> {{ userInSession.username }}</h2>
+    <p> {{ userInSession.city }}</p>
+
+    <h2>Description</h2>
+    <p>{{ userInSession.mydescription}}</p>
+    <h2>Total of transactions</h2>
+    <p>{{ userInSession.transactions}}</p>
+
+       <h2>Transactions </h2>
+    <p>{{ userInSession.transaction}}</p>
+
+ 
     <button>
-        <a href="/profile">Reload the page</a>
+        <a href="/profile/dashboard">Go to dashboard</a>
     </button>
+
+
+    <h2>My Posts</h2>
+
+
+
+
 {{else}}
     <p>Still no logged in user, sorry!</p>
+    <a href="/login">Please log in to see your profile</a>
 {{/if}}

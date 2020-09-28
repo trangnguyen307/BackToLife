@@ -20,7 +20,7 @@ router.post('/new', fileUploader.single('pic'), function (req, res, next) {
     return next(new Error('You must be logged to create a post'));
   }
   
-  console.log('creatorId:', req.session.currentUser.id)
+  console.log('creatorId:', req.session.currentUser._id)
   Post.create({
     title: req.body.title,
     creatorId: req.session.currentUser._id,
@@ -66,5 +66,9 @@ router.get('/:id', function (req, res, next) {
     .catch(next);
   ;
 });
+
+// router.get('/post-display', (req, res) => 
+//   res.render('post-display')
+//   );
 
 module.exports = router;
