@@ -2,6 +2,7 @@ const express = require('express');
 const { NotExtended } = require('http-errors');
 const router = express.Router();
 const Post = require('../models/Post.model');
+const Offer = require('../models/Offer.model');
 const fileUploader = require('../configs/cloudinary.config');
 const { Router } = require('express');
 
@@ -60,6 +61,7 @@ router.get('/:id', function (req, res, next) {
   const id = req.params.id;
 
   Post.findById(id)
+    .populate()
     .then(post => {
       console.log(post.createdAt.date)
       res.render('posts/show', {
@@ -71,8 +73,33 @@ router.get('/:id', function (req, res, next) {
   ;
 });
 
-// router.get('/post-display', (req, res) => 
-//   res.render('post-display')
-//   );
+// FAIRE UN OFFRE
+router.get('/:id/offer', function (req, res, next) {
+  
+  if (!req.session.currentUser) {
+    return next(new Error('You must be logged to create a post'));
+  }
+
+  res.render('posts/offer', {userInSession: req.session.currentUser})
+});
+router.post('/:id/offer', function (req, res, next) {
+  if (!req.session.currentUser) return next(new Error('You must be logged to create a comment'));
+
+  const id = req.params.id;  
+  const creatorId = Post.findById(id)
+  Offer.create({
+    postId: req.params.id,
+    authorId: req.session.currentUser._id,
+    goodToExchange: req.body.goodToExchange,
+    pointsEstimate: req.body.pointsEstimate,
+    messages: req.body.messages,
+  })
+    .then(offer => {
+      res.redirect(`/categories`);
+    })
+    .catch(next)
+  ;
+})
+
 
 module.exports = router;

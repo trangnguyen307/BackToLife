@@ -1,0 +1,23 @@
+<h1>Make an offer!!!</h1>
+<h2>For: </h2>
+<h3>You are willing to give:</h3>
+<form action="/posts/{{id}}/offer" method="POST" enctype="multipart/form-data">
+  <p>
+    <label for="goodToExchange">Your goods or services:</label>
+    <input type="text" id="goodToExchange" name="goodToExchange" placeholder="A Dress, A Book,..." />
+  </p>
+  <p>
+    <label for="pointsEstimate">Or number of flowers:</label>
+    <input type="text" name="pointsEstimate" id="pointsEstimate" placeholder="1,2,3"/>
+  </p>
+  <p>
+    <label for="messages">Messages:</label>
+    <textarea name="messages" placeholder="Your messages..."></textarea>
+  </p>
+  
+   
+  <button type="submit">Send</button>
+  {{#if errorMessage}}
+    <p class="error">{{errorMessage}}</p>
+  {{/if}}
+</form>

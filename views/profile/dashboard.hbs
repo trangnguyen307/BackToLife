@@ -12,8 +12,12 @@
     <h2>My points </h2>
     <p>{{ userInSession.points}}</p>
     
- 
-
+    <h2>My request</h2>
+    <ul>
+    {{#each userInSession.offers}}
+    <li>{{this.offers}}</li>
+    {{/each}}
+    </ul>
     <button>
         <a href="/profile">Go back to my profile</a>
     </button>

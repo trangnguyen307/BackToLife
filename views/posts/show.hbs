@@ -8,11 +8,10 @@
       <h2>{{post.title}}</h2>
       <p>Numbers of flowers suggested: {{post.pointsEstimate}}</p>
       <p>Description: {{post.description}}</p>
-      <a href="/">Make an offer</a>
+      <a href="/posts/{{post.id}}/offer">Make an offer</a>
     </div>
     <div>
       <p>Posted by {{user.username}} at {{post.createdAt}}</p>
-      <a href="/">Send message</a>
       <a href="/profile">See profile</a>
     </div>
   </section>

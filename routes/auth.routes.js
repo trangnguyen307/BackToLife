@@ -93,8 +93,8 @@ router.get('/profile/dashboard', (req, res, next) => {
   if (!req.session.currentUser) {
     res.redirect('/login')
   }
-  
   res.render('profile/dashboard', {userInSession: req.session.currentUser})
+  
 })
 
 
