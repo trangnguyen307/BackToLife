@@ -8,7 +8,7 @@ const userSchema = new Schema(
       required: [true, 'Username is required.'],
       unique: true
     },
-    myphoto: String,
+    //myphoto: String,
     city: {
       type: String,
       trim: true,
@@ -29,8 +29,12 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Password is required.']
     },
-    // transactions: String, 
-    // mypoints: String
+    transactions: {
+      type: String,
+      default: '0'}, 
+    mypoints: {
+      type: String,
+      default: '2'},
     // add password property here
   },
   {

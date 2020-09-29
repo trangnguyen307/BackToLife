@@ -8,7 +8,20 @@
 
     <h2>My points </h2>
     <p>{{ userInSession.points}}</p>
- 
+    
+    <h2>My requests</h2>
+
+    {{!-- <ul>
+    {{#each userInSession.offers}}
+    <li>{{this.offers}}</li>
+    {{/each}}
+    </ul> --}}
+
+    <h2>Propositions to check</h2>
+<button>Accept</button>
+<button>Decline</button>
+<button>Make another offer</button>
+
 
     <button>
         <a href="/profile/myprofile">Go back to my profile</a>
