@@ -48,6 +48,10 @@ router.get('/categories', (req,res,next) => {
 
     })
     .catch(next);
+});
+
+router.post('/categories', (req,res,next) => {
+  console.log(req.body)
 })
 
 // AFFICHER LE DETAIL D'UN POSTE

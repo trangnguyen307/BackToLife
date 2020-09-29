@@ -8,7 +8,7 @@ const userSchema = new Schema(
       required: [true, 'Username is required.'],
       unique: true
     },
-    myphoto: String,
+    //myphoto: String,
     city: {
       type: String,
       trim: true,

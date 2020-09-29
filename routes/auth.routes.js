@@ -28,8 +28,8 @@ router.post('/signup', fileUploader.single('photo'),(req, res,next)=> {
    city: req.body.city,
    mydescription: req.body.mydescription,
    passwordHash: hashed,
-   transactions: '', // to get the numnber of transactions done 
-   mypoints: '' // to get the numnber of points collected
+  //  transactions: '', // to get the numnber of transactions done 
+  //  mypoints: '' // to get the numnber of points collected
  }). then (userFromDb => {
    console.log(transactions.values)
    res.send('user created')
