@@ -39,6 +39,7 @@ router.post('/new', fileUploader.single('pic'), function (req, res, next) {
   ;
 });
 
+
 // AFFICHER TOUS LES POSTES
 
 router.get('/categories', (req,res,next) => {
@@ -68,9 +69,27 @@ router.get('/categories', (req,res,next) => {
         userInSession: req.session.currentUser,
       });
 
-    })
-    .catch(next);
-});
+//   const query = {
+//     /*
+//     title: {},
+
+//     */
+//   };
+  
+//   if (search) {
+//     query.title = 
+//   }
+
+//   Post.find(query).sort({"createdAt": -1})
+//     .then(postsFromDb => {
+//       res.render('posts/categories.hbs', {
+//         posts : postsFromDb,
+//         userInSession: req.session.currentUser
+//       });
+
+//     })
+//     .catch(next);
+// });
 
 router.post('/categories', (req,res,next) => {
   //console.log(req.body)
@@ -87,6 +106,7 @@ router.get('/:id/offer', function (req, res, next) {
     id: req.params.id
   })
 });
+
 router.post('/:id/offer', function (req, res, next) {
   if (!req.session.currentUser) return next(new Error('You must be logged to create a comment'));
 
@@ -111,7 +131,7 @@ router.post('/:id/offer', function (req, res, next) {
 
   }).catch(next)
   
-})
+});
 
 
 // AFFICHER LE DETAIL D'UN POSTE
@@ -131,8 +151,6 @@ router.get('/:id', function (req, res, next) {
     .catch(next);
   ;
 });
-
-
 
 
 module.exports = router;

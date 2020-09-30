@@ -1,0 +1,29 @@
+{{#if userInSession}}
+
+<h2>Edit {{userInSession.username}}</h2>
+
+<form action="/profile/myprofile" method="POST">
+
+    <label>
+      My photo
+      <input type="file" name="photo">
+    </label>
+  </p>
+
+    <label>
+      City
+      <input type="text" name="city" placeholder="Your city" />
+    </label>
+ 
+    <label>
+      Description
+      <textarea name="mydescription" placeholder="Your description"></textarea>
+    </label>
+
+  <button>Update my profile</button>
+</form>
+
+{{else}}
+    <p>Still no logged in user, sorry!</p>
+    <a href="/login">Please log in to see your profile</a>
+{{/if}}
