@@ -42,7 +42,24 @@ router.post('/new', fileUploader.single('pic'), function (req, res, next) {
 // AFFICHER TOUS LES POSTES
 
 router.get('/categories', (req,res,next) => {
-  Post.find().sort({"createdAt": -1})
+  const {search, categories, type, cities} = req.query
+
+  //
+  // se consittuer un objet query en fonciton de
+  //
+
+  const query = {
+    /*
+    title: {},
+
+    */
+  };
+  
+  if (search) {
+    query.title
+  }
+
+  Post.find(query).sort({"createdAt": -1})
     .then(postsFromDb => {
       res.render('posts/categories.hbs', {
         posts : postsFromDb,
@@ -63,26 +80,33 @@ router.get('/:postid/offer', function (req, res, next) {
     return next(new Error('You must be logged to create a post'));
   }
 
-  res.render('posts/offer', {userInSession: req.session.currentUser})
+  res.render('posts/offer', {
+    userInSession: req.session.currentUser,
+    id: req.params.id
+  })
 });
 router.post('/:postId/offer', function (req, res, next) {
   if (!req.session.currentUser) return next(new Error('You must be logged to create a comment'));
 
-  const id = req.params.id;  // id du poste
-  const creatorId = Post.findById(id).creatorId;
-  Offer.create({
-    postId: req.params.id,
-    
-    authorId: req.session.currentUser._id,
-    goodToExchange: req.body.goodToExchange,
-    pointsEstimate: req.body.pointsEstimate,
-    messages: req.body.messages,
-  })
-    .then(offer => {
-      res.redirect(`/categories`);
-    })
-    .catch(next)
-  ;
+  const id = req.params.id;
+
+  Post.findById(id).then(post => {
+    const creatorId = post.creatorId
+    Offer.create({
+        postId: req.params.id,
+        authorId: req.session.currentUser._id,
+        goodToExchange: req.body.goodToExchange,
+        pointsEstimate: req.body.pointsEstimate,
+        messages: req.body.messages,
+      })
+        .then(offer => {
+          res.redirect(`/posts/categories`);
+        })
+        .catch(next)
+      ;
+
+  }).catch(next)
+  
 })
 
 

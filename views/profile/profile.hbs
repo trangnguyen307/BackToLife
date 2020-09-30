@@ -1,0 +1,22 @@
+
+<img src="{{user.id}}" alt>
+<h2>{{user.username}}</h2>
+<p> {{ user.city }}</p>
+    <h2>Description</h2>
+    <p>{{ user.mydescription}}</p>
+    <h2>Total of transactions</h2>
+    <p>{{ user.transactions}}</p>
+
+    <h2>Posts</h2>
+<ul>
+{{#each posts}}
+<li>
+  <img src="{{this.picURL}}">
+  <h1>{{this.title}}</h1>
+  <p>Posted at: {{this.createdAt}}</p>
+  <p>
+    <a href="/posts/{{id}}">See details</a>
+  </p>
+</li>
+{{/each}}
+</ul>

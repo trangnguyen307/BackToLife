@@ -7,10 +7,6 @@
     <p>{{ userInSession.mydescription}}</p>
     <h2>Total of transactions</h2>
     <p>{{ userInSession.transactions}}</p>
-
-       <h2>Transactions </h2>
-    <p>{{ userInSession.transaction}}</p>
-
  
     <button>
         <a href="/profile/dashboard">Go to dashboard</a>
@@ -18,8 +14,19 @@
 
 
     <h2>My Posts</h2>
-
-
+<ul>
+    
+{{#each posts}}
+<li>
+  <img src="{{this.picURL}}">
+  <h1>{{this.title}}</h1>
+  <p>Posted at: {{this.createdAt}}</p>
+  <p>
+    <a href="/posts/{{id}}">See details</a>
+  </p>
+</li>
+{{/each}}
+</ul>
 
 
 {{else}}

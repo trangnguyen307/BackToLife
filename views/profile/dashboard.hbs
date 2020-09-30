@@ -6,20 +6,25 @@
 {{!-- proposition to check --}}
 {{!-- proposition ongoing --}}
 
-{{!-- SEND PROPOSITION --}}
-
-
     <h2>My points </h2>
     <p>{{ userInSession.points}}</p>
     
-    <h2>My request</h2>
-    <ul>
-    {{#each userInSession.offers}} à verifier
+    <h2>My requests</h2>
+
+    {{!-- <ul>
+    {{#each userInSession.offers}}
     <li>{{this.offers}}</li>
     {{/each}}
-    </ul>
+    </ul> --}}
+
+    <h2>Propositions to check</h2>
+<button>Accept</button>
+<button>Decline</button>
+<button>Make another offer</button>
+
+
     <button>
-        <a href="/profile">Go back to my profile</a>
+        <a href="/profile/myprofile">Go back to my profile</a>
     </button>
 
 {{else}}

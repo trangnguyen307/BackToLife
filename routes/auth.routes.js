@@ -5,7 +5,7 @@ const saltRounds = 10;
 const salt = bcryptjs.genSaltSync(saltRounds)
 const mongoose = require('mongoose')
 const fileUploader = require('../configs/cloudinary.config');
-
+const Post = require('../models/Post.model');
 const User = require('../models/User.model.js')
 
 const routeGuard = require('../configs/route-guard.config');
@@ -28,8 +28,8 @@ router.post('/signup', fileUploader.single('photo'),(req, res,next)=> {
    city: req.body.city,
    mydescription: req.body.mydescription,
    passwordHash: hashed,
-  //  transactions: '', // to get the numnber of transactions done 
-  //  mypoints: '' // to get the numnber of points collected
+   transactions: '', // to get the numnber of transactions done 
+   mypoints: '' // to get the numnber of points collected
  }). then (userFromDb => {
    console.log(transactions.values)
    res.send('user created')
@@ -73,7 +73,7 @@ router.post('/login',(req,res,next) => {
       }
         if (bcryptjs.compareSync(password,user.passwordHash)) {
           req.session.currentUser = user;
-          res.redirect('/profile');
+          res.redirect('/profile/myprofile');
         } else {
           res.render('auth/login', {errorMessage: 'Incorrect password'})
         }    
@@ -81,12 +81,23 @@ router.post('/login',(req,res,next) => {
 
 });
 
-router.get('/profile', (req, res, next) => {
+
+
+router.get('/profile/myprofile', (req, res, next) => {
   if (!req.session.currentUser) {
     res.redirect('/login')
   }
+    Post.find({creatorId:req.session.currentUser.id}).sort({"createdAt": -1})
+      .then(postsFromDb => {
+        res.render('profile/myprofile', {
+          posts : postsFromDb,
+          userInSession: req.session.currentUser
+        });
   
-  res.render('profile/myprofile', {userInSession: req.session.currentUser})
+      })
+      .catch(next);
+  // res.render('profile/myprofile', {userInSession: req.session.currentUser})
+
 })
 
 router.get('/profile/dashboard', (req, res, next) => {
@@ -96,6 +107,17 @@ router.get('/profile/dashboard', (req, res, next) => {
   res.render('profile/dashboard', {userInSession: req.session.currentUser})
   
 })
+
+//Afficher le profile d'un user quelconque
+router.get('/profile/:profileid', (req, res, next) => {
+  User.findOne({_id: req.params.profileid})
+  .then(user => {
+    res.render('profile/profile', {user})
+  }).catch(err => next(err))
+  })
+
+
+
 
 
 router.post('/logout', (req, res) => {
