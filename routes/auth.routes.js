@@ -9,6 +9,7 @@ const Post = require('../models/Post.model');
 const User = require('../models/User.model.js')
 
 const routeGuard = require('../configs/route-guard.config');
+const Offer = require('../models/Offer.model');
 
 /* GET Signup */
 router.get('/signup', (req, res, next) => {
@@ -28,11 +29,12 @@ router.post('/signup', fileUploader.single('photo'),(req, res,next)=> {
    city: req.body.city,
    mydescription: req.body.mydescription,
    passwordHash: hashed,
-   transactions: '', // to get the numnber of transactions done 
-   mypoints: '' // to get the numnber of points collected
+   //transactions: '', // to get the numnber of transactions done 
+   //mypoints: '' // to get the numnber of points collected
  }). then (userFromDb => {
    console.log(transactions.values)
-   res.send('user created')
+   //res.send('user created')
+   res.redirect('/login')
  }).catch(err => {
    console.log('💥 ', err);
  
@@ -87,7 +89,7 @@ router.get('/profile/myprofile', (req, res, next) => {
   if (!req.session.currentUser) {
     res.redirect('/login')
   }
-    Post.find({creatorId:req.session.currentUser.id}).sort({"createdAt": -1})
+    Post.find({creatorId:req.session.currentUser._id}).sort({"createdAt": -1})
       .then(postsFromDb => {
         res.render('profile/myprofile', {
           posts : postsFromDb,
@@ -104,7 +106,13 @@ router.get('/profile/dashboard', (req, res, next) => {
   if (!req.session.currentUser) {
     res.redirect('/login')
   }
-  res.render('profile/dashboard', {userInSession: req.session.currentUser})
+  Offer.find({creatorId:req.session.currentUser._id}).then(offers=> {
+    res.render('profile/dashboard', {
+      userInSession: req.session.currentUser,
+      offers: offers,
+    })
+  }) .catch(next);
+  
   
 })
 

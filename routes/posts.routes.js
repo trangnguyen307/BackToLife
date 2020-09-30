@@ -42,28 +42,30 @@ router.post('/new', fileUploader.single('pic'), function (req, res, next) {
 // AFFICHER TOUS LES POSTES
 
 router.get('/categories', (req,res,next) => {
-  const {search, categories, type, cities} = req.query
-
-  //
-  // se consittuer un objet query en fonciton de
-  //
-
-  const query = {
-    /*
-    title: {},
-
-    */
-  };
+  const {search,categories, city} = req.query
+  console.log('req.query: ',req.query)
   
+  //
+  // se consittuer un objet query en fonction de
+  //
+
+  let query = {};
   if (search) {
-    query.title
+    //const result = req.query.search;
+  query.title = {"$regex": req.query.search, "$options":"i"}
+  }
+  if (categories) {
+    query.categories = req.query.categories
+  }
+  if (city) {
+    query.city = req.query.city
   }
 
-  Post.find(query).sort({"createdAt": -1})
+  Post.find(query).sort({createdAt:-1})
     .then(postsFromDb => {
       res.render('posts/categories.hbs', {
         posts : postsFromDb,
-        userInSession: req.session.currentUser
+        userInSession: req.session.currentUser,
       });
 
     })
@@ -71,10 +73,10 @@ router.get('/categories', (req,res,next) => {
 });
 
 router.post('/categories', (req,res,next) => {
-  console.log(req.body)
+  //console.log(req.body)
 })
 
-router.get('/:postid/offer', function (req, res, next) {
+router.get('/:id/offer', function (req, res, next) {
   
   if (!req.session.currentUser) {
     return next(new Error('You must be logged to create a post'));
@@ -85,15 +87,17 @@ router.get('/:postid/offer', function (req, res, next) {
     id: req.params.id
   })
 });
-router.post('/:postId/offer', function (req, res, next) {
+router.post('/:id/offer', function (req, res, next) {
   if (!req.session.currentUser) return next(new Error('You must be logged to create a comment'));
 
   const id = req.params.id;
+  console.log("req.body:", req.body)
 
   Post.findById(id).then(post => {
-    const creatorId = post.creatorId
+    //const creatorId = post.creatorId
     Offer.create({
         postId: req.params.id,
+        creatorId: post.creatorId,
         authorId: req.session.currentUser._id,
         goodToExchange: req.body.goodToExchange,
         pointsEstimate: req.body.pointsEstimate,
@@ -121,7 +125,7 @@ router.get('/:id', function (req, res, next) {
       console.log(post.createdAt.date)
       res.render('posts/show', {
         post: post,
-        user: req.session.currentUser
+        userInSession: req.session.currentUser
       });
     })
     .catch(next);

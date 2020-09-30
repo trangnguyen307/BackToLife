@@ -8,16 +8,17 @@
       
     
       <select name="categories">
+        <option value="">--Please choose an option--</option>
         <option value="dressing">Dressing</option>
         <option value="books/cds">Books/CDs</option>
-        <option value="services">services</option>
+        <option value="services">Services</option>
         <option value="beauty">Beauty</option>
         <option value="IT">IT</option>
       </select>
-      <select name="type">
+      {{!-- <select name="type">
         <option value="good">A good</option>
         <option value="service">A service</option>
-      </select>
+      </select> --}}
       <textarea name="city" placeholder="City"></textarea>
       <button>filter</button>
   </form>
@@ -30,6 +31,8 @@
 
 <div>
   <h1>Results</h1>
+{{#if posts}}
+
   <ul>
 {{#each posts}}
 <li>
@@ -42,4 +45,8 @@
 </li>
 {{/each}}
 </ul>
+{{else}}
+<p>There is no result!</p>
+<a href="/posts/categories">Back to categories</a>
+{{/if}}
 </div>

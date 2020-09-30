@@ -11,16 +11,24 @@
     
     <h2>My requests</h2>
 
-    {{!-- <ul>
-    {{#each userInSession.offers}}
-    <li>{{this.offers}}</li>
-    {{/each}}
-    </ul> --}}
+    
 
     <h2>Propositions to check</h2>
-<button>Accept</button>
-<button>Decline</button>
-<button>Make another offer</button>
+    <ul>
+    {{#each offers}}
+    <form action="" >
+    <li>
+        <p>From: {{this.authorId}}</p>
+        <p>For: {{this.postId}}</p>
+        <p>Messages: {{this.messages}}</p>
+        <button>Accept</button>
+        <button>Decline</button>
+    </li>
+    {{/each}}
+    </form>
+    </ul>
+    
+    
 
 
     <button>
