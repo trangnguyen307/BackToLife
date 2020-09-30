@@ -6,6 +6,8 @@ const Offer = require('../models/Offer.model');
 const fileUploader = require('../configs/cloudinary.config');
 const { Router } = require('express');
 
+// FAIRE UN OFFRE
+
 // CREER UN POSTE
 router.get('/new', function (req, res, next) {
   if (!req.session.currentUser) {
@@ -55,6 +57,35 @@ router.post('/categories', (req,res,next) => {
   console.log(req.body)
 })
 
+router.get('/:postid/offer', function (req, res, next) {
+  
+  if (!req.session.currentUser) {
+    return next(new Error('You must be logged to create a post'));
+  }
+
+  res.render('posts/offer', {userInSession: req.session.currentUser})
+});
+router.post('/:postId/offer', function (req, res, next) {
+  if (!req.session.currentUser) return next(new Error('You must be logged to create a comment'));
+
+  const id = req.params.id;  // id du poste
+  const creatorId = Post.findById(id).creatorId;
+  Offer.create({
+    postId: req.params.id,
+    
+    authorId: req.session.currentUser._id,
+    goodToExchange: req.body.goodToExchange,
+    pointsEstimate: req.body.pointsEstimate,
+    messages: req.body.messages,
+  })
+    .then(offer => {
+      res.redirect(`/categories`);
+    })
+    .catch(next)
+  ;
+})
+
+
 // AFFICHER LE DETAIL D'UN POSTE
 
 router.get('/:id', function (req, res, next) {
@@ -73,33 +104,7 @@ router.get('/:id', function (req, res, next) {
   ;
 });
 
-// FAIRE UN OFFRE
-router.get('/:id/offer', function (req, res, next) {
-  
-  if (!req.session.currentUser) {
-    return next(new Error('You must be logged to create a post'));
-  }
 
-  res.render('posts/offer', {userInSession: req.session.currentUser})
-});
-router.post('/:id/offer', function (req, res, next) {
-  if (!req.session.currentUser) return next(new Error('You must be logged to create a comment'));
-
-  const id = req.params.id;  
-  const creatorId = Post.findById(id)
-  Offer.create({
-    postId: req.params.id,
-    authorId: req.session.currentUser._id,
-    goodToExchange: req.body.goodToExchange,
-    pointsEstimate: req.body.pointsEstimate,
-    messages: req.body.messages,
-  })
-    .then(offer => {
-      res.redirect(`/categories`);
-    })
-    .catch(next)
-  ;
-})
 
 
 module.exports = router;
