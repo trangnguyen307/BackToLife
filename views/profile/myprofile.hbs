@@ -28,8 +28,11 @@
 {{/each}}
 </ul>
 
+<a href="/profile/{{userFromDB.id}}/myprofile-edit">EDIT</a>
+
 
 {{else}}
     <p>Still no logged in user, sorry!</p>
     <a href="/login">Please log in to see your profile</a>
 {{/if}}
+

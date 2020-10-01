@@ -54,7 +54,6 @@ router.get('/categories', (req,res,next) => {
 
   let query = {};
   if (search) {
-    //const result = req.query.search;
   query.title = {"$regex": req.query.search, "$options":"i"}
   }
   if (categories) {
@@ -69,6 +68,7 @@ router.get('/categories', (req,res,next) => {
       res.render('posts/categories.hbs', {
         posts : postsFromDb,
         userInSession: req.session.currentUser,
+
       })
       .catch(next);
     });

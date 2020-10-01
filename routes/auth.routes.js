@@ -24,10 +24,10 @@ router.post('/signup', fileUploader.single('photo'),(req, res,next)=> {
 
  User.create({
    username: req.body.username, 
-   myphoto: req.file.path,
    email: req.body.email,
    city: req.body.city,
-   mydescription: req.body.mydescription,
+  //  mydescription: req.body.mydescription,
+  //  myphoto: req.file.path,
    passwordHash: hashed,
    //transactions: '', // to get the numnber of transactions done 
    //mypoints: '' // to get the numnber of points collected
@@ -114,13 +114,24 @@ router.get('/profile/dashboard', (req, res, next) => {
   if (!req.session.currentUser) {
     res.redirect('/login')
   }
-  Offer.find({$or: [{creatorId:req.session.currentUser._id},{authorId:req.session.currentUser._id}]}).then(offers=> {
-    console.log(offers)
+
+  const promises = [];
+
+  promises.push(Offer.find({authorId:req.session.currentUser._id}).populate({path:'postId'}).populate({path:'creatorId'}))
+  promises.push(Offer.find({creatorId:req.session.currentUser._id}).populate({path:'postId'}).populate({path:'authorId'}))
+  console.log('promises:  ', promises)
+
+  Promise.all(promises).then(values => {
+    // values: [[], []]
+    values[0] // []
+    values[1] // []
+
     res.render('profile/dashboard', {
-      userInSession: req.session.currentUser,
-      offers: offers,
+      requests: values[0],
+      propositions: values[1],
+      userInSession: req.session.currentUser
     })
-  }) .catch(next); 
+  }).catch(next)
 });
 
 router.post('/profile/dashboard', (req, res, next) => {
@@ -132,6 +143,19 @@ router.post('/profile/dashboard', (req, res, next) => {
 
 });
 
+
+//modifier le profil 
+router.get('/profile/:profileid/myprofile-edit', (req, res, next) => {
+  const id = req.params.profileid;
+
+  User.findOne(id)
+  //{_id: req.session.currentUser._id}
+  .then(userFromDb => res.render('profile/myprofile-edit', {userFromDb}))
+  .catch(err => next(err))
+  
+  ;
+});
+
 //Afficher le profile d'un user quelconque
 router.get('/profile/:profileid', (req, res, next) => {
   User.findOne({_id: req.params.profileid})
@@ -140,17 +164,6 @@ router.get('/profile/:profileid', (req, res, next) => {
   }).catch(err => next(err))
   })
 
-
-
-//modifier le profil 
-router.get('/profile/myprofile-edit', (req, res, next) => {
-  res.send('coucou')
-  // res.render('profile/myprofile-edit')
-  // User.findOne({_id: req.session.currentUser._id})
-  //   .then(userInSession => res.render('profile/myprofile-edit', {userInSession}))
-  //   .catch(err => next(err))
-  ;
-});
 
 // router.post('/profile/myprofile-edit', (req, res, next) => {
 //   User.update({ _id: req.session.currentUser._id }, {
