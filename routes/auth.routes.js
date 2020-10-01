@@ -32,7 +32,6 @@ router.post('/signup', fileUploader.single('photo'),(req, res,next)=> {
    //transactions: '', // to get the numnber of transactions done 
    //mypoints: '' // to get the numnber of points collected
  }). then (userFromDb => {
-   console.log(transactions.values)
    //res.send('user created')
    res.redirect('/login')
  }).catch(err => {
