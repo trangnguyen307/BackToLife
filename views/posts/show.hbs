@@ -11,8 +11,13 @@
       <a href="/posts/{{post.id}}/offer">Make an offer</a>
     </div>
     <div>
+<<<<<<< HEAD
       <p>Posted by <span style="font-weight: bold;">{{userFromDb.username}}</span> at {{post.createdAt}}</p>
       <a href="/profile">See profile</a>
+=======
+      <p>Posted by {{user.username}} at {{post.createdAt}}</p>
+      <a href="/profile/{{user.id}}">See profile</a>
+>>>>>>> 2c644e8870d2c52ba822ff018e51167dca596dd9
     </div>
   </section>
 </div>
