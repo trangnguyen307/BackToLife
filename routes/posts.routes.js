@@ -41,6 +41,7 @@ router.post('/new', fileUploader.single('pic'), function (req, res, next) {
 });
 
 
+
 // AFFICHER TOUS LES POSTES
 
 router.get('/categories', (req,res,next) => {
@@ -68,7 +69,10 @@ router.get('/categories', (req,res,next) => {
       res.render('posts/categories.hbs', {
         posts : postsFromDb,
         userInSession: req.session.currentUser,
-      });
+      })
+      .catch(next);
+    });
+  })
 
 //   const query = {
 //     /*
@@ -157,6 +161,7 @@ router.get('/:id', function (req, res, next) {
     }).catch(next);
   
 });
+
 
 
 module.exports = router;
