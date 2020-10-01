@@ -1,6 +1,7 @@
 const express = require('express');
 const { NotExtended } = require('http-errors');
 const router = express.Router();
+const User = require('../models/User.model');
 const Post = require('../models/Post.model');
 const Offer = require('../models/Offer.model');
 const fileUploader = require('../configs/cloudinary.config');
@@ -122,14 +123,19 @@ router.get('/:id', function (req, res, next) {
   Post.findById(id)
     .populate()
     .then(post => {
-      console.log(post.createdAt.date)
-      res.render('posts/show', {
-        post: post,
-        userInSession: req.session.currentUser
-      });
-    })
-    .catch(next);
-  ;
+      console.log('post creator:',post.creatorId);
+      const id = post.creatorId;
+      User.findById(id).then(userFromDb => {
+        console.log('creator username:',userFromDb.username);
+        res.render('posts/show', {
+          post: post,
+          userInSession: req.session.currentUser,
+          userFromDb: userFromDb
+        })
+      })
+     
+    }).catch(next);
+  
 });
 
 
