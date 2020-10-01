@@ -10,24 +10,38 @@
     <p>{{ userInSession.points}}</p>
     
     <h2>My requests</h2>
-
+    <ul>
+    {{#each requests}}
+    <li>
+        <p>Send to (creatorId): {{this.creatorId.username}}</p>
+        <p>For (postId): {{this.postId.title}}</p>
+        <p>Messages: {{this.messages}}</p>
+        <p>Status: {{this.status}}</p>
+        <form action="/offers/{{_id}}/acceptordecline" method="POST">
+          <input type="radio" name="response" value="accepte">Accept
+          <input type="radio" name="response" value="decline">Decline
+          <button>Send</button>
+        </form>
+    </li>
+    {{/each}}
+    </ul>
     
 
     <h2>Propositions to check</h2>
     <ul>
-    {{#each offers}}
-    <form action="" >
+    {{#each propositions}}
     <li>
-        <p>From (authorId): {{this.authorId}}</p>
-        <p>For (postId): {{this.postId}}</p>
+        <p>From (authorId): {{this.authorId.username}}</p>
+        <p>For (postId): {{this.postId.title}}</p>
         <p>Messages: {{this.messages}}</p>
         <p>Status: {{this.status}}</p>
-        <input type="radio" name="response" value="accepte">Accept
-        <input type="radio" name="response" value="decline">Decline
-        <button>Send</button>
+        <form action="/offers/{{_id}}/acceptordecline" method="POST">
+          <input type="radio" name="response" value="accepte">Accept
+          <input type="radio" name="response" value="decline">Decline
+          <button>Send</button>
+        </form>
     </li>
     {{/each}}
-    </form>
     </ul>
     
     

@@ -53,7 +53,6 @@ router.get('/categories', (req,res,next) => {
 
   let query = {};
   if (search) {
-    //const result = req.query.search;
   query.title = {"$regex": req.query.search, "$options":"i"}
   }
   if (categories) {
@@ -69,28 +68,9 @@ router.get('/categories', (req,res,next) => {
         posts : postsFromDb,
         userInSession: req.session.currentUser,
       });
-
-//   const query = {
-//     /*
-//     title: {},
-
-//     */
-//   };
-  
-//   if (search) {
-//     query.title = 
-//   }
-
-//   Post.find(query).sort({"createdAt": -1})
-//     .then(postsFromDb => {
-//       res.render('posts/categories.hbs', {
-//         posts : postsFromDb,
-//         userInSession: req.session.currentUser
-//       });
-
-//     })
-//     .catch(next);
-// });
+    })
+    .catch(next);
+});
 
 router.post('/categories', (req,res,next) => {
   //console.log(req.body)

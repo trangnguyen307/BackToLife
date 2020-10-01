@@ -114,13 +114,24 @@ router.get('/profile/dashboard', (req, res, next) => {
   if (!req.session.currentUser) {
     res.redirect('/login')
   }
-  Offer.find({$or: [{creatorId:req.session.currentUser._id},{authorId:req.session.currentUser._id}]}).then(offers=> {
-    console.log(offers)
+
+  const promises = [];
+
+  promises.push(Offer.find({authorId:req.session.currentUser._id}).populate({path:'postId'}).populate({path:'creatorId'}))
+  promises.push(Offer.find({creatorId:req.session.currentUser._id}).populate({path:'postId'}).populate({path:'authorId'}))
+  console.log('promises:  ', promises)
+
+  Promise.all(promises).then(values => {
+    // values: [[], []]
+    values[0] // []
+    values[1] // []
+
     res.render('profile/dashboard', {
-      userInSession: req.session.currentUser,
-      offers: offers,
+      requests: values[0],
+      propositions: values[1],
+      userInSession: req.session.currentUser
     })
-  }) .catch(next); 
+  }).catch(next)
 });
 
 router.post('/profile/dashboard', (req, res, next) => {
