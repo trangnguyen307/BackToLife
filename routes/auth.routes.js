@@ -51,7 +51,13 @@ router.post('/signup', fileUploader.single('photo'),(req, res,next)=> {
   })
 })
 
+
+
+
+//
 // Log in route
+//
+
 router.get('/login', (req,res,next) => {
   res.render('auth/login')
 })
@@ -84,6 +90,9 @@ router.post('/login',(req,res,next) => {
 
 
 
+//
+//Profile's route
+//
 router.get('/profile/myprofile', (req, res, next) => {
   if (!req.session.currentUser) {
     res.redirect('/login')
@@ -105,15 +114,23 @@ router.get('/profile/dashboard', (req, res, next) => {
   if (!req.session.currentUser) {
     res.redirect('/login')
   }
-  Offer.find({creatorId:req.session.currentUser._id}).then(offers=> {
+  Offer.find({$or: [{creatorId:req.session.currentUser._id},{authorId:req.session.currentUser._id}]}).then(offers=> {
+    console.log(offers)
     res.render('profile/dashboard', {
       userInSession: req.session.currentUser,
       offers: offers,
     })
-  }) .catch(next);
+  }) .catch(next); 
+});
+
+router.post('/profile/dashboard', (req, res, next) => {
+  if (!req.session.currentUser) {
+    res.redirect('/login')
+  }
   
-  
-})
+
+
+});
 
 //Afficher le profile d'un user quelconque
 router.get('/profile/:profileid', (req, res, next) => {

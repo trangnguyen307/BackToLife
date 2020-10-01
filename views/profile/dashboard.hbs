@@ -18,11 +18,13 @@
     {{#each offers}}
     <form action="" >
     <li>
-        <p>From: {{this.authorId}}</p>
-        <p>For: {{this.postId}}</p>
+        <p>From (authorId): {{this.authorId}}</p>
+        <p>For (postId): {{this.postId}}</p>
         <p>Messages: {{this.messages}}</p>
-        <button>Accept</button>
-        <button>Decline</button>
+        <p>Status: {{this.status}}</p>
+        <input type="radio" name="response" value="accepte">Accept
+        <input type="radio" name="response" value="decline">Decline
+        <button>Send</button>
     </li>
     {{/each}}
     </form>

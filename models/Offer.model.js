@@ -9,6 +9,11 @@ const offerSchema = Schema({
   goodToExchange: String,
   pointsEstimate: String,
   messages: String,
+  status: {
+    type: String,
+    enum: ['pending', 'accepted', 'refused'],
+    default: 'pending'
+  }
 },
 {
   timestamps: true,
