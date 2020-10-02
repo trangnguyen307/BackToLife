@@ -119,7 +119,6 @@ router.get('/profile/dashboard', (req, res, next) => {
 
   promises.push(Offer.find({authorId:req.session.currentUser._id}).populate({path:'postId'}).populate({path:'creatorId'}))
   promises.push(Offer.find({creatorId:req.session.currentUser._id}).populate({path:'postId'}).populate({path:'authorId'}))
-  console.log('promises:  ', promises)
 
   Promise.all(promises).then(values => {
     // values: [[], []]
@@ -134,32 +133,36 @@ router.get('/profile/dashboard', (req, res, next) => {
   }).catch(next)
 });
 
-router.post('/profile/dashboard', (req, res, next) => {
+router.post('/offers/:id/response', (req, res, next) => {
   if (!req.session.currentUser) {
     res.redirect('/login')
   }
-  
+  const id = req.params.id;
+  let status,transaction;
+  if (req.body.response === 'accepte') {
+    status = 'Accepted';
+    //transaction +=1;
+  } else {
+    status = 'Refused';
+  }
+  console.log ('status:::',status)
+  Offer.findByIdAndUpdate(id, {status:status},{new:true}).populate('creatorId','authorId')
+    .then(offerUpdated => {
+      // User.update({$and: [{_id:offerUpdated.creatorId.id},{_id:offerUpdated.creatorId.id}]},{
+      //   transaction:transaction
+      // }).then (res.redirect('/profile/dashboard')).catch(next);
+      res.redirect('/profile/dashboard')
+    })
+    .catch(next);
 
 
 });
 
-//Afficher le profile d'un user quelconque
-router.get('/profile/:profileid', (req, res, next) => {
-  User.findOne({_id: req.params.profileid})
-  .then(user => {
-    res.render('profile/profile', {user, posts: req.params.profileid})
-  }).catch(err => next(err))
-  })
-
-
-
 //modifier le profil 
-router.get('/profile/myprofile-edit', (req, res, next) => {
-  res.send('coucou')
-  // res.render('profile/myprofile-edit')
-  // User.findOne({_id: req.session.currentUser._id})
-  //   .then(userInSession => res.render('profile/myprofile-edit', {userInSession}))
-  //   .catch(err => next(err))
+router.get('/profile/edit', (req, res, next) => {
+  User.findOne({_id: req.session.currentUser._id})
+    .then(userInSession => res.render('profile/myprofile-edit', {userInSession}))
+    .catch(err => next(err))
   ;
 });
 
@@ -173,6 +176,29 @@ router.get('/profile/myprofile-edit', (req, res, next) => {
 //     .catch(err => next(err))
 //   ;
 // });
+
+
+//Afficher le profile d'un user quelconque
+router.get('/profile/:profileid', (req, res, next) => {
+  User.findOne({_id: req.params.profileid})
+  .then(user => { 
+    const id = user.id;
+    Post.find({creatorId:id})
+    .then (posts => {
+      res.render('profile/profile', {
+        userInSession: req.session.currentUser,
+        user: user,
+        posts: posts
+      })
+    })
+    .catch(err => next(err))
+    
+  })
+  .catch(err => next(err))
+  });
+
+
+
 
 
 
