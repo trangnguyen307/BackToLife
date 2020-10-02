@@ -1,4 +1,8 @@
 {{#if userInSession}}
+
+
+<a href="/profile/myprofile-edit">EDIT</a>
+
    <img src="{{userInSession.myphoto}}" alt>
     <h2> {{ userInSession.username }}</h2>
     <p> {{ userInSession.city }}</p>
@@ -27,8 +31,6 @@
 </li>
 {{/each}}
 </ul>
-
-<a href="/profile/{{userFromDB.id}}/myprofile-edit">EDIT</a>
 
 
 {{else}}

@@ -2,8 +2,21 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
+header {
+  display: flex; }
+
+nav {
+  width: 900px; }
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center; }
+
 a {
-  color: #00B7FF; }
+  color: #00B7FF;
+  text-decoration: none; }
 
 #show-post {
   display: flex; }

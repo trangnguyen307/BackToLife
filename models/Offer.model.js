@@ -11,8 +11,8 @@ const offerSchema = Schema({
   messages: String,
   status: {
     type: String,
-    enum: ['pending', 'accepted', 'refused'],
-    default: 'pending'
+    enum: ['Pending', 'Accepted', 'Refused'],
+    default: 'Pending'
   }
 },
 {

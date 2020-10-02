@@ -17,11 +17,6 @@
         <p>For (postId): {{this.postId.title}}</p>
         <p>Messages: {{this.messages}}</p>
         <p>Status: {{this.status}}</p>
-        <form action="/offers/{{_id}}/acceptordecline" method="POST">
-          <input type="radio" name="response" value="accepte">Accept
-          <input type="radio" name="response" value="decline">Decline
-          <button>Send</button>
-        </form>
     </li>
     {{/each}}
     </ul>
@@ -31,14 +26,17 @@
     <ul>
     {{#each propositions}}
     <li>
-        <p>From (authorId): {{this.authorId.username}}</p>
+        <p>From: {{this.authorId.username}}</p>
         <p>For (postId): {{this.postId.title}}</p>
+        <p>Offers: {{this.goodToExchange}} and {{pointsEstimate}} flowers</p>
         <p>Messages: {{this.messages}}</p>
         <p>Status: {{this.status}}</p>
-        <form action="/offers/{{_id}}/acceptordecline" method="POST">
+        {{#if status}}
+        <form action="/offers/{{this.id}}/response" method="POST">
           <input type="radio" name="response" value="accepte">Accept
           <input type="radio" name="response" value="decline">Decline
           <button>Send</button>
+        {{/if}}
         </form>
     </li>
     {{/each}}

@@ -3,10 +3,47 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+header {
+  display: flex;
+}
+
+nav {
+  width: 900px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 a {
   color: #00B7FF;
+  text-decoration: none;
 }
 
 #show-post {
   display: flex;
 }
+
+
+// footer {
+//   display: flex;
+//   justify-content: center;
+//   flex-direction: row;
+//   // position: relative;
+  
+// }
+
+// footer ul {
+//   list-style: none;
+//   display: flex;
+//   flex-direction: column;
+// }
+
+// .footerlinks {
+//   display: flex;
+//   justify-content: space-evenly;
+//   align-items: center;
+// }
