@@ -8,7 +8,10 @@ const userSchema = new Schema(
       required: [true, 'Username is required.'],
       unique: true
     },
-    myphoto: String,
+    myphoto: {
+      type:String,
+      default: 'https://res.cloudinary.com/dyybiq3aw/image/upload/v1601581026/project2-upload/photovide_utfkuw.png'
+    },
     city: {
       type: String,
       trim: true,

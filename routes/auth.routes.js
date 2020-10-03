@@ -24,10 +24,10 @@ router.post('/signup', fileUploader.single('photo'),(req, res,next)=> {
 
  User.create({
    username: req.body.username, 
-   myphoto: req.file.path,
    email: req.body.email,
    city: req.body.city,
-   mydescription: req.body.mydescription,
+  //  mydescription: req.body.mydescription,
+  //  myphoto: req.file.path,
    passwordHash: hashed,
    //transactions: '', // to get the numnber of transactions done 
    //mypoints: '' // to get the numnber of points collected
@@ -167,23 +167,33 @@ router.post('/offers/:id/response', (req, res, next) => {
 });
 
 //modifier le profil 
-router.get('/profile/edit', (req, res, next) => {
+router.get('/profile/myprofile-edit', (req, res, next) => {
   User.findOne({_id: req.session.currentUser._id})
     .then(userInSession => res.render('profile/myprofile-edit', {userInSession}))
     .catch(err => next(err))
   ;
 });
 
-// router.post('/profile/myprofile-edit', (req, res, next) => {
-//   User.update({ _id: req.session.currentUser._id }, {
-//     myphoto: req.file.path,
-//     city: req.body.city,
-//     mydescription: req.body.mydescription
-//   })
-//     .then(user => res.redirect('/profile/myprofile'))
-//     .catch(err => next(err))
-//   ;
-// });
+router.post('/profile/myprofile-edit', fileUploader.single('photo'), (req, res, next) => {
+  // const {city, mydescription} = req.body;
+  // console.log('dans edit')
+
+  User.findByIdAndUpdate({ _id: req.session.currentUser._id }, {
+    myphoto: req.file.path,
+    city: req.body.city,
+    mydescription : req.body.mydescription
+  }, {new: true})
+    .then(currentUserUpdated => 
+      // {console.log('test');
+      res.render('profile/myprofile', 
+      {userInSession: currentUserUpdated}
+      )
+    // }
+      
+    )
+    .catch(err => next(err))
+  })
+
 
 
 //Afficher le profile d'un user quelconque

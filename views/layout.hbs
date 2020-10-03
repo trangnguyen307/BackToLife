@@ -7,27 +7,36 @@
   <title>Back to life</title>
   <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
-<body>
-  <div>
-    <nav>
-      <ul>
-        <li><a href="/posts/new">Post</a></li>
-        <li><a href="/posts/categories">Categories</a></li>
-        <li><a href="/profile/myprofile">My profile</a></li>
-        <li id="to-right">
-          {{#if userInSession}}
-            <form id="logout-form" action="/logout" method="POST">
-              <span>Welcome <span style="font-weight: bold;">{{userInSession.username}}</span> !!!</span>
-              <button>Logout</button>
-            </form>
-          {{else}}
-            <a href="/signup">Signup</a> <span> | </span>
-            <a href="/login">Login</a> <span> | </span>
-          {{/if}}
-        </li>
-      </ul>
-    </nav>
 
+<body>
+  <header>
+    <div>
+      <img class="logo" src="" alt="logo" />
+      <span>BackToLife</span>
+    </div>
+    <nav>
+      <div class ="navbuttons">
+        <ul>
+          <li><a href="/posts/new">Post</a></li>
+          <li><a href="/posts/categories">Categories</a></li>
+          <li><a href="/profile/myprofile">My profile</a></li>
+          <div class ="navlogbuttons">
+          <li id="to-right" >
+            {{#if userInSession}}
+              <form id="logout-form" action="/logout" method="POST">
+                <span>Welcome <span style="font-weight: bold;">{{userInSession.username}}</span> !!!</span>
+                <button>Logout</button>
+              </form>
+            {{else}}
+              <a href="/signup">Signup</a> <span> | </span>
+              <a href="/login">Login</a> <span> | </span>
+            {{/if}}
+          </li>
+          </div>
+        </ul>
+      </div>
+    </nav>
+  </header>
     {{!-- <div>
       {{#if user}}
             <form id="logout-form" action="/logout" method="POST">
@@ -39,11 +48,36 @@
         {{/if}}
     </div> --}}
 
-        
-      
-  </div>
+
 
   {{{body}}}
+
+<footer>
+  <div class="footerlinks">
+    <p>FOOTER</p>
+    <ul>
+      <li><a href="/">Homepage</a></li>
+      <li><a href="/posts/new">Post</a></li>
+      <li><a href="/posts/categories">Categories & Posts</a></li>
+      <li><a href="/aboutus">About us</a></li>
+      <li><a href="/aboutus">Help</a></li>
+    </ul>
+  </div>
+
+  <div class="footersociallinks">
+    <ul>
+      <li><img src="" alt ="facebook logo" href="https://www.facebook.com/"></li>
+      <li><img src="" alt ="twitter logo" href="https://www.twitter.com/"></li>
+      <li><img src="" alt ="instagram logo" href="https://www.instagram.com/"></li>
+    </ul>
+  </div>
+
+  <div class="footersignature">
+    <li><img src="" alt ="logo" href="/"></a></li>
+    ©TeamIronJS, 2020
+  </div>
+
+</footer>
 
   <script src="/javascripts/script.js"></script>
 </body>

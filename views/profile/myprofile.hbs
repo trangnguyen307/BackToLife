@@ -1,4 +1,8 @@
 {{#if userInSession}}
+
+
+<a href="/profile/myprofile-edit">EDIT</a>
+
    <img src="{{userInSession.myphoto}}" alt>
     <h2> {{ userInSession.username }}</h2>
     <p> {{ userInSession.city }}</p>
@@ -35,3 +39,4 @@
     <p>Still no logged in user, sorry!</p>
     <a href="/login">Please log in to see your profile</a>
 {{/if}}
+
