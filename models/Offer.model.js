@@ -20,6 +20,15 @@ const offerSchema = Schema({
 }
 );
 
+
+offerSchema.virtual('alreadyanswered').get(function() {
+  if (this.status !== 'Pending') {
+    return true;
+  } else {
+    return false;
+  }
+});
 const Offer = mongoose.model('Offer', offerSchema);
+
 
 module.exports = Offer;

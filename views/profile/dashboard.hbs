@@ -31,13 +31,13 @@
         <p>Offers: {{this.goodToExchange}} and {{pointsEstimate}} flowers</p>
         <p>Messages: {{this.messages}}</p>
         <p>Status: {{this.status}}</p>
-        {{#if status}}
+        {{#unless this.alreadyanswered }}
         <form action="/offers/{{this.id}}/response" method="POST">
           <input type="radio" name="response" value="accepte">Accept
           <input type="radio" name="response" value="decline">Decline
           <button>Send</button>
-        {{/if}}
         </form>
+        {{/unless}}
     </li>
     {{/each}}
     </ul>

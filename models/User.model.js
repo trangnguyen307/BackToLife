@@ -30,8 +30,8 @@ const userSchema = new Schema(
       required: [true, 'Password is required.']
     },
     transactions: {
-      type: String,
-      default: '0'}, 
+      type: Number,
+      default: 0}, 
     mypoints: {
       type: String,
       default: '2'},

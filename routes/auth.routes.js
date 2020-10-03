@@ -124,7 +124,8 @@ router.get('/profile/dashboard', (req, res, next) => {
     // values: [[], []]
     values[0] // []
     values[1] // []
-
+    
+    
     res.render('profile/dashboard', {
       requests: values[0],
       propositions: values[1],
@@ -138,20 +139,27 @@ router.post('/offers/:id/response', (req, res, next) => {
     res.redirect('/login')
   }
   const id = req.params.id;
-  let status,transaction;
+  let status;
   if (req.body.response === 'accepte') {
     status = 'Accepted';
-    //transaction +=1;
-  } else {
+  } else if (req.body.response === 'decline') {
     status = 'Refused';
   }
   console.log ('status:::',status)
-  Offer.findByIdAndUpdate(id, {status:status},{new:true}).populate('creatorId','authorId')
+  Offer.findByIdAndUpdate(id, {status:status},{new:true}).populate('creatorId').populate('authorId')
     .then(offerUpdated => {
-      // User.update({$and: [{_id:offerUpdated.creatorId.id},{_id:offerUpdated.creatorId.id}]},{
-      //   transaction:transaction
-      // }).then (res.redirect('/profile/dashboard')).catch(next);
-      res.redirect('/profile/dashboard')
+      console.log('offerUpdated.creatorId:   ',offerUpdated.creatorId)
+      console.log('offerUpdated.authorId:   ',offerUpdated.authorId)
+      User.updateMany(
+        {_id: {$in: [offerUpdated.creatorId.id,offerUpdated.authorId.id]}},
+        {$inc: { transactions: 1 }},
+        {new:true}
+        )
+      .then (userfromdb => {
+        console.log('user:  ',userfromdb);
+        res.render('profile/dashboard',{});
+      })
+      .catch(next);
     })
     .catch(next);
 
