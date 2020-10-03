@@ -166,19 +166,22 @@ router.get('/profile/myprofile-edit', (req, res, next) => {
   ;
 });
 
-router.post('/profile/myprofile-edit', (req, res, next) => {
-  
-  User.update({ _id: req.session.currentUser._id }, {
+router.post('/profile/myprofile-edit', fileUploader.single('photo'), (req, res, next) => {
+  // const {city, mydescription} = req.body;
+  // console.log('dans edit')
+
+  User.findByIdAndUpdate({ _id: req.session.currentUser._id }, {
     myphoto: req.file.path,
     city: req.body.city,
-    mydescription: req.body.mydescription
-  })
-    .then(currentUser => 
-      // console.log('city', currentUser.city)
-      res.redirect('/profile/myprofile', 
-      // {
-      // userInSession: req.session.currentUser}
-     )
+    mydescription : req.body.mydescription
+  }, {new: true})
+    .then(currentUserUpdated => 
+      // {console.log('test');
+      res.render('profile/myprofile', 
+      {userInSession: currentUserUpdated}
+      )
+    // }
+      
     )
     .catch(err => next(err))
   })
