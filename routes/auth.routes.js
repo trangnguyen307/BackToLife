@@ -53,7 +53,6 @@ router.post('/signup', fileUploader.single('photo'),(req, res,next)=> {
 
 
 
-
 //
 // Log in route
 //
@@ -96,13 +95,20 @@ router.post('/login',(req,res,next) => {
 router.get('/profile/myprofile', (req, res, next) => {
   if (!req.session.currentUser) {
     res.redirect('/login')
+    return;
   }
+
     Post.find({creatorId:req.session.currentUser._id}).sort({"createdAt": -1}) // keep _id to access the id
       .then(postsFromDb => {
-        res.render('profile/myprofile', {
-          posts : postsFromDb,
-          userInSession: req.session.currentUser
-        });
+
+        User.findById(req.session.currentUser._id).then(user => {
+          res.render('profile/myprofile', {
+            posts : postsFromDb,
+            userInSession: user
+          });
+        }).catch(next)
+
+        
   
       })
       .catch(next);
@@ -157,7 +163,7 @@ router.post('/offers/:id/response', (req, res, next) => {
         )
       .then (userfromdb => {
         console.log('user:  ',userfromdb);
-        res.render('profile/dashboard',{});
+        res.redirect('/profile/dashboard');
       })
       .catch(next);
     })
@@ -214,9 +220,6 @@ router.get('/profile/:profileid', (req, res, next) => {
   })
   .catch(err => next(err))
   });
-
-
-
 
 
 
