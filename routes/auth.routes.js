@@ -123,8 +123,8 @@ router.get('/profile/dashboard', (req, res, next) => {
 
   const promises = [];
 
-  promises.push(Offer.find({authorId:req.session.currentUser._id}).populate({path:'postId'}).populate({path:'creatorId'}))
-  promises.push(Offer.find({creatorId:req.session.currentUser._id}).populate({path:'postId'}).populate({path:'authorId'}))
+  promises.push(Offer.find({authorId:req.session.currentUser._id}).populate({path:'postId'}).populate({path:'creatorId'}).populate({path:'goodToExchange'}));
+  promises.push(Offer.find({creatorId:req.session.currentUser._id}).populate({path:'postId'}).populate({path:'authorId'}).populate({path:'goodToExchange'}));
 
   Promise.all(promises).then(values => {
     // values: [[], []]

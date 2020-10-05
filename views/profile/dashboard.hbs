@@ -15,6 +15,7 @@
     <li>
         <p>Send to (creatorId): {{this.creatorId.username}}</p>
         <p>For (postId): {{this.postId.title}}</p>
+        <p>Offer: <a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a></p>
         <p>Messages: {{this.messages}}</p>
         <p>Status: {{this.status}}</p>
     </li>
@@ -26,9 +27,9 @@
     <ul>
     {{#each propositions}}
     <li>
-        <p>From: {{this.authorId.username}}</p>
-        <p>For (postId): {{this.postId.title}}</p>
-        <p>Offers: {{this.goodToExchange}} and {{pointsEstimate}} flowers</p>
+        <p>From: <a href="/profile/{{authorId.id}}" target="blank">{{this.authorId.username}}</a></p>
+        <p>For (postId): <a href="/posts/{{postId.id}}">{{this.postId.title}}</a></p>
+        <p>Offer: <a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a></p>
         <p>Messages: {{this.messages}}</p>
         <p>Status: {{this.status}}</p>
         {{#unless this.alreadyanswered }}

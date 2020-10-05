@@ -6,8 +6,8 @@ const offerSchema = Schema({
   creatorId: {type: Schema.Types.ObjectId, ref: 'User'},
   authorId: {type: Schema.Types.ObjectId, ref: 'User'},
   postId: {type: Schema.Types.ObjectId, ref: 'Post'},
-  goodToExchange: String,
-  pointsEstimate: String,
+  goodToExchange: {type: Schema.Types.ObjectId, ref: 'Post'},
+  //pointsEstimate: String,
   messages: String,
   status: {
     type: String,

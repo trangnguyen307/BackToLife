@@ -74,27 +74,6 @@ router.get('/categories', (req,res,next) => {
     });
   })
 
-//   const query = {
-//     /*
-//     title: {},
-
-//     */
-//   };
-  
-//   if (search) {
-//     query.title = 
-//   }
-
-//   Post.find(query).sort({"createdAt": -1})
-//     .then(postsFromDb => {
-//       res.render('posts/categories.hbs', {
-//         posts : postsFromDb,
-//         userInSession: req.session.currentUser
-//       });
-
-//     })
-//     .catch(next);
-// });
 
 router.post('/categories', (req,res,next) => {
   //console.log(req.body)
@@ -106,10 +85,19 @@ router.get('/:id/offer', function (req, res, next) {
     return next(new Error('You must be logged to create a post'));
   }
 
-  res.render('posts/offer', {
-    userInSession: req.session.currentUser,
-    id: req.params.id
-  })
+  const id = req.params.id
+  Post.findById(id)
+    .then(post => {
+      Post.find({creatorId:req.session.currentUser}).then(postsFromDb => {
+        res.render('posts/offer', {
+          userInSession: req.session.currentUser,
+          post: post,
+          posts: postsFromDb
+        })
+      })
+      
+    })
+    .catch(err => next(err))
 });
 
 router.post('/:id/offer', function (req, res, next) {
@@ -125,10 +113,11 @@ router.post('/:id/offer', function (req, res, next) {
         creatorId: post.creatorId,
         authorId: req.session.currentUser._id,
         goodToExchange: req.body.goodToExchange,
-        pointsEstimate: req.body.pointsEstimate,
-        messages: req.body.messages,
+        //pointsEstimate: req.body.pointsEstimate,
+        messages: req.body.messages
       })
         .then(offer => {
+          console.log('offer:', offer)
           res.redirect(`/posts/categories`);
         })
         .catch(next)
