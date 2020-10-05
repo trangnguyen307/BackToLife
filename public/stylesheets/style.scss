@@ -189,7 +189,7 @@ width: 30px;
   margin-bottom:0;
   font-weight:normal;
   font-size:150%;
-  background:url("https://res.cloudinary.com/dyybiq3aw/image/upload/v1601745001/project2-upload/green_sqmfrw.jpg") center no-repeat; background-size:cover;
+  // background:url("https://res.cloudinary.com/dyybiq3aw/image/upload/v1601745001/project2-upload/green_sqmfrw.jpg") center no-repeat; background-size:cover;
   color:white;
   -webkit-text-stroke: 0.7px #63E3FF;
   padding-top:200px;
@@ -212,16 +212,32 @@ width: 30px;
   // &:visited {
   //   text-decoration: none;
   // }
-
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: slide 18s ease-in-out infinite;
   
 }
+
+@keyframes slide {
+ 0% {
+  background-image:url("https://res.cloudinary.com/dyybiq3aw/image/upload/v1601904157/project2-upload/green2_y6ew9e.jpg");
+  }
+ 50% {
+  background-image:url("https://res.cloudinary.com/dyybiq3aw/image/upload/v1601744999/project2-upload/heart_guyllf.jpg");
+  }
+  100% {
+  background-image:url("https://res.cloudinary.com/dyybiq3aw/image/upload/v1601904157/project2-upload/green2_y6ew9e.jpg");
+  }
+}
+
 
 // #cover h1 {
 //   background-color: rgba(255, 255, 255, 0.5);
 // }
 
 #cover h1 {
-    display: inline-block;
+  display: inline-block;
   list-style: none; 
   text-decoration: none;
   transition: opacity .125s linear;
