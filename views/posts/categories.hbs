@@ -8,12 +8,15 @@
       
     
       <select name="categories">
-        <option value="">--Please choose an option--</option>
-        <option value="dressing">Dressing</option>
-        <option value="books/cds">Books/CDs</option>
-        <option value="services">Services</option>
-        <option value="beauty">Beauty</option>
-        <option value="IT">IT</option>
+        <option value="">--Please choose an option--</option>  
+        {{#each cats}}
+          <option value={{this.name}} {{#if selected}}selected{{/if}}>{{this.name}}</option>
+        {{/each}}
+        {{!-- <option value="dressing" {{#if selected}}selected{{/if}}>Dressing</option>
+        <option value="books/cds" {{#if selected}}selected{{/if}}>Books/CDs</option>
+        <option value="services" {{#if selected}}selected{{/if}}>Services</option>
+        <option value="beauty" {{#if selected}}selected{{/if}}>Beauty</option>
+        <option value="IT" {{#if selected}}selected{{/if}}>IT</option> --}}
       </select>
       {{!-- <select name="type">
         <option value="good">A good</option>

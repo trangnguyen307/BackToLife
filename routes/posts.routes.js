@@ -57,7 +57,8 @@ router.get('/categories', (req,res,next) => {
   query.title = {"$regex": req.query.search, "$options":"i"}
   }
   if (categories) {
-    query.categories = req.query.categories
+    query.categories = req.query.categories;
+    
   }
   if (city) {
     query.city = req.query.city
@@ -65,12 +66,22 @@ router.get('/categories', (req,res,next) => {
 
   Post.find(query).sort({createdAt:-1})
     .then(postsFromDb => {
+      const cats = [{name:'Dressing'},{name:'Books/CDs'},{name:'Services'},{name:'Beauty'},{name:'IT'}];
+      let selected;
+      cats.forEach(cat => {
+        console.log('categorie',cat)
+        console.log('req.query.categories',req.query.categories)
+        if (req.query.categories === cat.name) {
+          cat.selected = true;
+        }
+      })
+      
       res.render('posts/categories.hbs', {
         posts : postsFromDb,
         userInSession: req.session.currentUser,
-
+        cats:cats
       })
-      .catch(next);
+      .catch(err =>next(err));
     });
   })
 
