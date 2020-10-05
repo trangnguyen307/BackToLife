@@ -28,7 +28,9 @@
   <p>
     <a href="/posts/{{id}}">See details</a>
     <a href="/posts/{{id}}/edit">Edit post</a>
-    <a href="/posts/{{id}}/delete">Delete</a>
+      <form action="/posts/{{id}}/delete" method="POST" enctype="multipart/form-data">
+        <button>Delete</button>
+      </form>
   </p>
 </li>
 {{/each}}

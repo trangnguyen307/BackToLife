@@ -137,10 +137,18 @@ router.post('/:id/offer', function (req, res, next) {
   }).catch(next)
   
 });
+//
+// SUPPRIMER D'UN POST
+//
+router.post('/:id/delete',(req,res,next) => {
+  Post.findByIdAndRemove(req.params.id)
+    .then(post => res.redirect('/profile/myprofile'))
+    .catch(err=>next(err))
+})
 
-
+//
 // AFFICHER LE DETAIL D'UN POSTE
-
+//
 router.get('/:id', function (req, res, next) {
   const id = req.params.id;
 
