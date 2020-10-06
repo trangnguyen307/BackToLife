@@ -1,7 +1,9 @@
-<h1>Make an offer!!!</h1>
+{{#if userInSession}}
+<h1>Edit the offer!!!</h1>
+<h2>Send to: {{post.title}}</h2>
 <h2>For: {{post.title}}</h2>
 <h3>You are willing to give:</h3>
-<form action="/posts/{{post.id}}/offer" method="POST">
+<form action="/posts/{{id}}/offer" method="POST">
   <p>
     <label>
       Your goods or services:
@@ -13,18 +15,15 @@
       </select>
     </label>
   </p>
-  {{!-- <p>
-    <label for="pointsEstimate">Or number of flowers:</label>
-    <input type="text" name="pointsEstimate" id="pointsEstimate" placeholder="1,2,3"/>
-  </p> --}}
+
   <p>
     <label for="messages">Messages:</label>
     <textarea name="messages" placeholder="Your messages..."></textarea>
   </p>
-  
-   
+
   <button type="submit">Send</button>
-  {{#if errorMessage}}
-    <p class="error">{{errorMessage}}</p>
-  {{/if}}
 </form>
+{{else}}
+    <p>Still no logged in user, sorry!</p>
+    <a href="/login">Please log in to see your profile</a>
+{{/if}}

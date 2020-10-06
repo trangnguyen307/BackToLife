@@ -123,8 +123,8 @@ router.get('/profile/dashboard', (req, res, next) => {
 
   const promises = [];
 
-  promises.push(Offer.find({authorId:req.session.currentUser._id}).populate({path:'postId'}).populate({path:'creatorId'}))
-  promises.push(Offer.find({creatorId:req.session.currentUser._id}).populate({path:'postId'}).populate({path:'authorId'}))
+  promises.push(Offer.find({authorId:req.session.currentUser._id}).populate({path:'postId'}).populate({path:'creatorId'}).populate({path:'goodToExchange'}));
+  promises.push(Offer.find({creatorId:req.session.currentUser._id}).populate({path:'postId'}).populate({path:'authorId'}).populate({path:'goodToExchange'}));
 
   Promise.all(promises).then(values => {
     // values: [[], []]
@@ -156,16 +156,26 @@ router.post('/offers/:id/response', (req, res, next) => {
     .then(offerUpdated => {
       console.log('offerUpdated.creatorId:   ',offerUpdated.creatorId)
       console.log('offerUpdated.authorId:   ',offerUpdated.authorId)
-      User.updateMany(
-        {_id: {$in: [offerUpdated.creatorId.id,offerUpdated.authorId.id]}},
-        {$inc: { transactions: 1 }},
-        {new:true}
-        )
-      .then (userfromdb => {
-        console.log('user:  ',userfromdb);
-        res.redirect('/profile/dashboard');
-      })
-      .catch(next);
+      if (status==='Accepted') {
+        User.updateMany(
+          {_id: {$in: [offerUpdated.creatorId.id,offerUpdated.authorId.id]}},
+          {$inc: { transactions: 1 }},
+          {new:true}
+          ).then (userfromdb => {
+            console.log('user:  ',userfromdb);
+            res.redirect('/profile/dashboard');
+          })
+          .catch(next);
+      } else {
+        User.updateMany(
+          {_id: {$in: [offerUpdated.creatorId.id,offerUpdated.authorId.id]}},
+          {new:true}
+          ).then (userfromdb => {
+            console.log('user:  ',userfromdb);
+            res.redirect('/profile/dashboard');
+          })
+          .catch(next);
+      }
     })
     .catch(next);
 
@@ -209,11 +219,15 @@ router.get('/profile/:profileid', (req, res, next) => {
     const id = user.id;
     Post.find({creatorId:id})
     .then (posts => {
-      res.render('profile/profile', {
-        userInSession: req.session.currentUser,
-        user: user,
-        posts: posts
-      })
+      if (req.session.currentUser._id===req.params.profileid) {
+        res.render('profile/myprofile',{userInSession:req.session.currentUser,posts})
+      } else {
+        res.render('profile/profile', {
+          userInSession: req.session.currentUser,
+          user: user,
+          posts: posts
+        })
+        }   
     })
     .catch(err => next(err))
     

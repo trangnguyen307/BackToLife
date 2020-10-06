@@ -6,6 +6,16 @@ a {
   text-decoration:none;
   color: #63E3FF;
   margin: 0;
+  &:hover {
+    opacity: 0.5;
+    cursor: pointer;
+    // background-color: black;
+  }
+
+  &:visited {
+    color: #63E3FF;
+    text-decoration: none;
+  }
 }
 
 
@@ -125,17 +135,6 @@ footer a,
   text-decoration: none;
   transition: opacity .125s linear;
   // -webkit-text-stroke: 0.2px #63E3FF;
-  
-  &:hover {
-    opacity: 0.5;
-    cursor: pointer;
-    // background-color: black;
-  }
-
-  &:visited {
-    color: #63E3FF;
-    text-decoration: none;
-  }
 }
 
 
@@ -493,37 +492,42 @@ form input, select {
   text-align: center;
 }
 
-.postcard {
+.searchsection {
+  margin: 0 auto;
+  margin-left: -30px;
+  margin-right: -30px;
+}
+
+.postcard ul {
+  flex-wrap: wrap;
   display: flex;
-  // flex-direction: row;
-  justify-content: space-around;
-  width: 80%;
-  margin: auto;
-  border: 1px solid red;
-
-}
-
-
-//TEST
-#column1 #column2 {
-  width: 50%;
-}
-
-.postcardleft {
-  width: 70%;
-  
-}
-
-.postcardleft img {
-  width: 250px;
-  
-}
-
-.postcardright {
-  width: 70%;
-  position: relative;
+  margin: 0 auto;
   padding: 0;
+  width: 80%
+  
 }
+
+.postcard li {
+  display: block; 
+  // border: 1px solid blue;
+  width: 33.33333%;
+  padding-right:1em;
+  margin-bottom:1em;
+
+}
+
+.postcard li:nth-of-type(3n) {
+  padding-right:0;}
+
+
+.postcard img {
+  display: block;
+  width: 100%;
+  height: 15em;
+  object-fit: cover;
+  
+}
+
 
 #creationdate {
   margin: auto;
@@ -531,29 +535,64 @@ form input, select {
   color: lightgray;
 }
 
-.postcard li {
-  display: flex;
-  flex-direction: row;
-  border: 1px solid blue;
+.postcardtext {
+  padding: 10px 0;
+  text-align: center;
+  background: rgb(175, 175, 175);
+  border:red;
 }
 
+.postcardtext h2{
+  margin: 0;
+  color: white;
+}
+
+#endlink a {
+  display:block;
+  text-align:center;
+  padding-top: 30px;
+  padding-bottom: 60px
+}
+
+// .postcard {
+//   display: flex;
+//   // flex-direction: row;
+//   justify-content: space-around;
+//   width: 80%;
+//   margin: auto;
+//   border: 1px solid red;
+
+// }
+
+// .postcardleft {
+//   width: 70%;
+  
+// }
+
+// .postcardleft img {
+//   width: 250px;
+  
+// }
+
+// .postcardright {
+//   width: 70%;
+//   position: relative;
+//   padding: 0;
+// }
+
+
+
+// .postcard li {
+//   display: flex;
+//   flex-direction: row;
+//   border: 1px solid blue;
+  
+// }
+
 // .postcard ul {
-//   list-style: none;
+//   flex-wrap: wrap;
 // }
 
-// .postcard ul li {
-//   border: 1px solid red; 
-// }
-
-// .postcard ul li img {
-//   width: 100px;
-
-// }
-
-// .postcard ul li #date {
-//   font-size: 14px;
-//   color: lightgray;
-// }
 
 //Show post
 #show-post {

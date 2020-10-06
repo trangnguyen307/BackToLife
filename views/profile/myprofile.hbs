@@ -3,7 +3,7 @@
 
 <a href="/profile/myprofile-edit">EDIT</a>
 
-   <img src="{{userInSession.myphoto}}" alt>
+   <img src="{{userInSession.myphoto}}" style="width: 300px;">
     <h2> {{ userInSession.username }}</h2>
     <p> {{ userInSession.city }}</p>
 
@@ -28,7 +28,9 @@
   <p>
     <a href="/posts/{{id}}">See details</a>
     <a href="/posts/{{id}}/edit">Edit post</a>
-    <a href="/posts/{{id}}/delete">Delete</a>
+      <form action="/posts/{{id}}/delete" method="POST" enctype="multipart/form-data">
+        <button>Delete</button>
+      </form>
   </p>
 </li>
 {{/each}}
