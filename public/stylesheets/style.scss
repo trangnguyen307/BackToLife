@@ -189,7 +189,7 @@ width: 30px;
   margin-bottom:0;
   font-weight:normal;
   font-size:150%;
-  background:url("https://res.cloudinary.com/dyybiq3aw/image/upload/v1601745001/project2-upload/green_sqmfrw.jpg") center no-repeat; background-size:cover;
+  // background:url("https://res.cloudinary.com/dyybiq3aw/image/upload/v1601745001/project2-upload/green_sqmfrw.jpg") center no-repeat; background-size:cover;
   color:white;
   -webkit-text-stroke: 0.7px #63E3FF;
   padding-top:200px;
@@ -212,16 +212,32 @@ width: 30px;
   // &:visited {
   //   text-decoration: none;
   // }
-
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: slide 18s ease-in-out infinite;
   
 }
+
+@keyframes slide {
+ 0% {
+  background-image:url("https://res.cloudinary.com/dyybiq3aw/image/upload/v1601904157/project2-upload/green2_y6ew9e.jpg");
+  }
+ 50% {
+  background-image:url("https://res.cloudinary.com/dyybiq3aw/image/upload/v1601744999/project2-upload/heart_guyllf.jpg");
+  }
+  100% {
+  background-image:url("https://res.cloudinary.com/dyybiq3aw/image/upload/v1601904157/project2-upload/green2_y6ew9e.jpg");
+  }
+}
+
 
 // #cover h1 {
 //   background-color: rgba(255, 255, 255, 0.5);
 // }
 
 #cover h1 {
-    display: inline-block;
+  display: inline-block;
   list-style: none; 
   text-decoration: none;
   transition: opacity .125s linear;
@@ -312,7 +328,9 @@ width: 30px;
   width: 100%;
   font-size: 20px;
   background-color: white;
+
 }
+
 
 /*
   _    _ _____     _____      _                        _           
@@ -332,20 +350,39 @@ width: 30px;
   margin-right : -30px; // to override body padding
   // height: 500px;
   padding: 30px;
+  overflow: hidden;
 }
 
 .categoriesdisplay > div {
   display: flex;
 }
 
-.categoriescontainer {
+.home .categoriescontainer {
   justify-content: center;
   // flex-direction: row;
   position: relative;
   padding-left: 30px;
   padding-right: 30px;
   
+  animation-duration: 10s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+  
 }
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    // width: 300%; 
+  }
+
+  to {
+    margin-left: 0%;
+    // width: 300%;
+  }
+
+}
+
 
 .categoriesboxes {
   font-size: 1em;
@@ -375,17 +412,137 @@ width: 30px;
   }
 }
 
+/*
+
+   _____      _                        _             _____                 
+  / ____|    | |                      (_)           |  __ \                
+ | |     __ _| |_ ___  __ _  ___  _ __ _  ___  ___  | |__) |_ _  __ _  ___ 
+ | |    / _` | __/ _ \/ _` |/ _ \| '__| |/ _ \/ __| |  ___/ _` |/ _` |/ _ \
+ | |___| (_| | ||  __/ (_| | (_) | |  | |  __/\__ \ | |  | (_| | (_| |  __/
+  \_____\__,_|\__\___|\__, |\___/|_|  |_|\___||___/ |_|   \__,_|\__, |\___|
+                       __/ |                                     __/ |     
+                      |___/                                     |___/      
+
+*/
+
+.categoriescontainer {
+  height: 240px;
+}
 
 
+.searchsection {
+  background-color: rgba(196, 244, 255, 0.87);
+  text-align: center;
+  display: block; 
+  background-color: rgba(196, 244, 255, 0.87);
+  margin-left : -30px; // to override body padding
+  margin-right : -30px; // to override body padding
+  // height: 500px;
+  padding: 30px;
+}
+
+.searchsection > div {
+  display: flex;
+}
+// .searchsection .categoriesdisplay{
+//   // position: relative;
+//   margin: 0 auto;
+
+// }
+
+.searchsection .categoriescontainer{
+  // position: relative;
+  justify-content: center;
+
+}
+
+form input, select {
+  width: 250px; 
+  padding: 10px; 
+  font-size: 16px; 
+  // box-shadow:0 0 0.3em rgba(60,60,60,0.4);
+  font-family: "Podkova", serif;
+
+}
+
+#submitloop {
+  position:relative;
+  top: 25px;
+  width: 60px;
+  &:hover {
+      filter: grayscale(100%);
+    }
+}
 
 
+/*
+
+   _____      _                              _____                 _ _       
+  / ____|    | |                            |  __ \               | | |      
+ | |     __ _| |_   _ __   __ _  __ _  ___  | |__) |___  ___ _   _| | |_ ___ 
+ | |    / _` | __| | '_ \ / _` |/ _` |/ _ \ |  _  // _ \/ __| | | | | __/ __|
+ | |___| (_| | |_  | |_) | (_| | (_| |  __/ | | \ \  __/\__ \ |_| | | |_\__ \
+  \_____\__,_|\__| | .__/ \__,_|\__, |\___| |_|  \_\___||___/\__,_|_|\__|___/
+                   | |           __/ |                                       
+                   |_|          |___/                                        
+
+*/
 
 
+.results h1 {
+  text-align: center;
+}
 
+.postcard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 80%;
+  margin: auto;
+  
+}
 
+.postcardleft {
+  width: 50%;
+  
+}
+
+.postcardright {
+  width: 50%;
+  
+}
+
+#creationdate {
+  width: 100%;
+  margin: auto;
+  font-size: 14px;
+  color: lightgray;
+}
+
+.postcard li {
+  display: flex;
+  flex: row;
+}
+
+// .postcard ul {
+//   list-style: none;
+// }
+
+// .postcard ul li {
+//   border: 1px solid red; 
+// }
+
+// .postcard ul li img {
+//   width: 100px;
+
+// }
+
+// .postcard ul li #date {
+//   font-size: 14px;
+//   color: lightgray;
+// }
 
 //Show post
 #show-post {
   display: flex;
 }
-
