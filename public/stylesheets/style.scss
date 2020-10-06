@@ -495,25 +495,37 @@ form input, select {
 
 .postcard {
   display: flex;
-  flex-direction: row;
+  // flex-direction: row;
   justify-content: space-around;
   width: 80%;
   margin: auto;
-  
+  border: 1px solid red;
+
+}
+
+
+//TEST
+#column1 #column2 {
+  width: 50%;
 }
 
 .postcardleft {
-  width: 50%;
+  width: 70%;
+  
+}
+
+.postcardleft img {
+  width: 250px;
   
 }
 
 .postcardright {
-  width: 50%;
-  
+  width: 70%;
+  position: relative;
+  padding: 0;
 }
 
 #creationdate {
-  width: 100%;
   margin: auto;
   font-size: 14px;
   color: lightgray;
@@ -521,7 +533,8 @@ form input, select {
 
 .postcard li {
   display: flex;
-  flex: row;
+  flex-direction: row;
+  border: 1px solid blue;
 }
 
 // .postcard ul {

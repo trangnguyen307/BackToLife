@@ -70,6 +70,37 @@
     <h1>Results</h1>
 
   <div class ="postcard">
+
+  <div class="column1">column 1</div>
+{{#if posts}}
+    <ul>
+    {{#each posts}}
+    <li>
+      {{!-- <li>{{@index}}: {{this}}</li> --}}
+      <div class ="postcardleft">
+        <img src="{{this.picURL}}">
+      </div>
+
+      <div class ="postcardright">
+        <h2>{{this.title}}</h2>
+        <p>
+          <a href="/posts/{{id}}">See details</a>
+        </p>
+        <p id = "creationdate" >Posted at: {{this.createdAt}}</p>
+      </div>
+
+        
+    </li>
+    {{/each}}
+    </ul>
+    {{else}}
+    <p>There is no result!</p>
+    {{!-- <a href="/posts/categories">Back to categories</a> --}}
+    {{/if}}
+
+  <div class="column2">column 2</div>
+
+
     {{#if posts}}
     <ul>
     {{#each posts}}
@@ -83,15 +114,16 @@
         <p>
           <a href="/posts/{{id}}">See details</a>
         </p>
+        <p id = "creationdate" >Posted at: {{this.createdAt}}</p>
       </div>
 
-        <p id = "creationdate" >Posted at: {{this.createdAt}}</p>
+        
     </li>
     {{/each}}
     </ul>
     {{else}}
     <p>There is no result!</p>
-    <a href="/posts/categories">Back to categories</a>
+    {{!-- <a href="/posts/categories">Back to categories</a> --}}
     {{/if}}
 
   </div>
