@@ -1,0 +1,29 @@
+{{#if userInSession}}
+<h1>Edit the offer!!!</h1>
+<h2>Send to: {{post.title}}</h2>
+<h2>For: {{post.title}}</h2>
+<h3>You are willing to give:</h3>
+<form action="/posts/{{id}}/offer" method="POST">
+  <p>
+    <label>
+      Your goods or services:
+      <select name="goodToExchange">
+        <option>--Select--</option>
+        {{#each posts}}
+        <option value="{{id}}">{{title}}</option>
+        {{/each}}
+      </select>
+    </label>
+  </p>
+
+  <p>
+    <label for="messages">Messages:</label>
+    <textarea name="messages" placeholder="Your messages..."></textarea>
+  </p>
+
+  <button type="submit">Send</button>
+</form>
+{{else}}
+    <p>Still no logged in user, sorry!</p>
+    <a href="/login">Please log in to see your profile</a>
+{{/if}}

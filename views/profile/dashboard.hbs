@@ -18,6 +18,13 @@
         <p>Offer: <a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a></p>
         <p>Messages: {{this.messages}}</p>
         <p>Status: {{this.status}}</p>
+        
+        {{#unless this.alreadyanswered }}
+        <a href="/posts/{{this.id}}/editoffer">Edit</a>
+        <form action="" method="POST">
+          <button>Delete</button>
+        </form>
+        {{/unless}}
     </li>
     {{/each}}
     </ul>

@@ -90,7 +90,23 @@ router.post('/categories', (req,res,next) => {
   //console.log(req.body)
 })
 
+//
+//EDITER OFFRE
+//
+router.get('/:offerid/editoffer',(req,res,next) => {
+  //if (!req.session.currentUser) return next(new Error('You must be logged to create a comment'));
 
+  Offer.findById(req.params.offerid)
+    .then(offer => {
+      res.render('posts/offer-edit',{
+        userInSession: req.session.currentUser,
+        offer:offer
+      })
+    })
+    .catch(err=>next(err))
+  
+ 
+})
 //
 //FAIRE D UN OFFRE
 //
@@ -116,7 +132,7 @@ router.get('/:id/offer', function (req, res, next) {
 });
 
 router.post('/:id/offer', function (req, res, next) {
-  if (!req.session.currentUser) return next(new Error('You must be logged to create a comment'));
+  if (!req.session.currentUser) return next(new Error('You must be logged to make an offer'));
 
   const id = req.params.id;
   console.log("req.body:", req.body)
@@ -141,6 +157,14 @@ router.post('/:id/offer', function (req, res, next) {
   }).catch(next)
   
 });
+
+
+
+
+
+//
+//SUPPRIMER OFFRE
+//
 
 //
 // EDITER POST
