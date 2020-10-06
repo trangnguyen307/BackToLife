@@ -1,6 +1,6 @@
 I have an offer!!!!
 <form action="/posts/new" method="POST" enctype="multipart/form-data">
-  <p>
+  {{!-- <p>
     <label>
       Type:
       <select name="type">
@@ -8,11 +8,12 @@ I have an offer!!!!
         <option value="service">A service</option>
       </select>
     </label>
-  </p>
+  </p> --}}
   <p>
     <label>
       Categories:
       <select name="categories">
+         <option>--Please choose an option--</option>
         <option value="Dressing">Dressing</option>
         <option value="Books/CDs">Books/CDs</option>
         <option value="Services">Services</option>
@@ -21,12 +22,7 @@ I have an offer!!!!
       </select>
     </label>
   </p>
-  <p>
-    <label>
-      City:
-      <input type="text" name="city">
-    </label>
-  </p>
+  
   <p>
     <label>
       Title:
@@ -40,6 +36,19 @@ I have an offer!!!!
       <textarea name="description"></textarea>
     </label>
   </p>
+  <p>
+    <label>
+      City:
+      <input type="text" name="city">
+    </label>
+  </p>
+
+  <p>
+    <label>
+      Points Estimated:
+      <input type="text" name="pointsEstimate">
+    </label>
+  </p>
 
   <p>
     <label>
@@ -47,12 +56,7 @@ I have an offer!!!!
       <input type="file" name="pic">
     </label>
   </p>
-  <p>
-    <label>
-      Points Estimated:
-      <input type="text" name="pointsEstimate">
-    </label>
-  </p>
+  
 
   <p>
     <button>Create new post</button>

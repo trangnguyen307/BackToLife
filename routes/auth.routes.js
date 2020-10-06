@@ -209,11 +209,15 @@ router.get('/profile/:profileid', (req, res, next) => {
     const id = user.id;
     Post.find({creatorId:id})
     .then (posts => {
-      res.render('profile/profile', {
-        userInSession: req.session.currentUser,
-        user: user,
-        posts: posts
-      })
+      if (req.session.currentUser._id===req.params.profileid) {
+        res.render('profile/myprofile',{userInSession:req.session.currentUser,posts})
+      } else {
+        res.render('profile/profile', {
+          userInSession: req.session.currentUser,
+          user: user,
+          posts: posts
+        })
+        }   
     })
     .catch(err => next(err))
     

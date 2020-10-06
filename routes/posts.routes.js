@@ -7,7 +7,7 @@ const Offer = require('../models/Offer.model');
 const fileUploader = require('../configs/cloudinary.config');
 const { Router } = require('express');
 
-// FAIRE UN OFFRE
+
 
 // CREER UN POSTE
 router.get('/new', function (req, res, next) {
@@ -90,6 +90,10 @@ router.post('/categories', (req,res,next) => {
   //console.log(req.body)
 })
 
+
+//
+//FAIRE D UN OFFRE
+//
 router.get('/:id/offer', function (req, res, next) {
   
   if (!req.session.currentUser) {
@@ -137,6 +141,45 @@ router.post('/:id/offer', function (req, res, next) {
   }).catch(next)
   
 });
+
+//
+// EDITER POST
+//
+router.get('/:id/edit',(req,res,next) => {
+  Post.findById(req.params.id)
+    .then(post => {
+      const cats = [{name:'Dressing'},{name:'Books/CDs'},{name:'Services'},{name:'Beauty'},{name:'IT'}];
+      let selected;
+      cats.forEach(cat => {
+        console.log('categorie',cat)
+        console.log('post.categories',post.categories)
+        if (post.categories === cat.name) {
+          cat.selected = true;
+        }
+      })
+      res.render('posts/edit', {cats,post,userInSession:req.session.currentUser})
+    })
+    .catch(err=>next(err))
+
+})
+
+router.post('/:id/edit', (req,res,next) => {
+  console.log('req.body:   ',req.body)
+  Post.findOneAndUpdate({_id:req.params.id}, {
+    categories: req.body.categories,
+    title: req.body.title,
+    description: req.body.description,
+    //picURL: req.file.path,
+    pointsEstimate:req.body.pointsEstimate,
+    city: req.body.city
+  },{new:true})
+    .then(postUpdated => {
+      console.log('postupdate:  ',postUpdated)
+      res.redirect ('/profile/myprofile')
+    })
+    .catch(err => next(err))
+})
+
 //
 // SUPPRIMER D'UN POST
 //

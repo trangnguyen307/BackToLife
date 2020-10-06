@@ -1,24 +1,55 @@
 {{#if userInSession}}
 
-<h2>Edit {{}}</h2>
+<h2>Edit for: {{post.title}}</h2>
 
-<form action="/post/{{id}}/edit" method="POST">
+<form action="/posts/{{post._id}}/edit" method="POST">
 
+  
+  <p>
+    Categories:
+    <select name="categories">
+      
+        <option value="">--Please choose an option--</option>  
+        {{#each cats}}
+          <option value={{this.name}} {{#if selected}}selected{{/if}}>{{this.name}}</option>
+        {{/each}}
+      </select>
+  </p>
+  
+  <p>
     <label>
-      My photo
-      <input type="file" name="photo">
+      Title:
+      <textarea name="title">{{post.title}}</textarea>
     </label>
   </p>
 
+  <p>
     <label>
-      City
-      <input type="text" name="city" placeholder="Your city" />
+      Description:
+      <textarea name="description">{{post.description}}</textarea>
     </label>
- 
+  </p>
+  <p>
     <label>
-      Description
-      <textarea name="mydescription" placeholder="Your description"></textarea>
+      City:
+      <input type="text" name="city" value={{post.city}}>
     </label>
+  </p>
+
+  <p>
+    <label>
+      Points Estimated:
+      <input type="text" name="pointsEstimate" value={{post.pointsEstimate}}>
+    </label>
+  </p>
+
+  {{!-- <p>
+    <label>
+      Picture:
+      <input type="file" name="pic">
+    </label>
+  </p> --}}
+  
 
   <button>Update</button>
 </form>
