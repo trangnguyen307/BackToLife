@@ -9,7 +9,7 @@ const PostSchema = Schema({
   picURL: String,
   pointsEstimate: String,
   city: String,
-  categories: { type: String, enum: ['dressing', 'books/cds', 'services', 'beauty', 'IT'] },
+  categories: { type: String, enum: ['Dressing', 'Books/CDs', 'Services', 'Beauty', 'IT'] },
   type: { type: String, enum: ['good', 'service'] },
 },
 {
