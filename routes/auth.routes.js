@@ -156,16 +156,26 @@ router.post('/offers/:id/response', (req, res, next) => {
     .then(offerUpdated => {
       console.log('offerUpdated.creatorId:   ',offerUpdated.creatorId)
       console.log('offerUpdated.authorId:   ',offerUpdated.authorId)
-      User.updateMany(
-        {_id: {$in: [offerUpdated.creatorId.id,offerUpdated.authorId.id]}},
-        {$inc: { transactions: 1 }},
-        {new:true}
-        )
-      .then (userfromdb => {
-        console.log('user:  ',userfromdb);
-        res.redirect('/profile/dashboard');
-      })
-      .catch(next);
+      if (status==='Accepted') {
+        User.updateMany(
+          {_id: {$in: [offerUpdated.creatorId.id,offerUpdated.authorId.id]}},
+          {$inc: { transactions: 1 }},
+          {new:true}
+          ).then (userfromdb => {
+            console.log('user:  ',userfromdb);
+            res.redirect('/profile/dashboard');
+          })
+          .catch(next);
+      } else {
+        User.updateMany(
+          {_id: {$in: [offerUpdated.creatorId.id,offerUpdated.authorId.id]}},
+          {new:true}
+          ).then (userfromdb => {
+            console.log('user:  ',userfromdb);
+            res.redirect('/profile/dashboard');
+          })
+          .catch(next);
+      }
     })
     .catch(next);
 
