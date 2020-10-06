@@ -1,16 +1,16 @@
 {{#if userInSession}}
 <h1>Edit the offer!!!</h1>
-<h2>Send to: {{post.title}}</h2>
-<h2>For: {{post.title}}</h2>
+<h2>Send to: {{offer.creatorId.username}}</h2>
+<h2>For: {{offer.postId.title}}</h2>
 <h3>You are willing to give:</h3>
-<form action="/posts/{{id}}/offer" method="POST">
+<form action="/posts/{{offer.id}}/editoffer" method="POST">
   <p>
     <label>
       Your goods or services:
       <select name="goodToExchange">
         <option>--Select--</option>
         {{#each posts}}
-        <option value="{{id}}">{{title}}</option>
+        <option value="{{this.id}}">{{this.title}}</option>
         {{/each}}
       </select>
     </label>
@@ -18,7 +18,7 @@
 
   <p>
     <label for="messages">Messages:</label>
-    <textarea name="messages" placeholder="Your messages..."></textarea>
+    <textarea name="messages" placeholder="Your messages...">{{offer.messages}}</textarea>
   </p>
 
   <button type="submit">Send</button>

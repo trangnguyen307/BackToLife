@@ -90,23 +90,7 @@ router.post('/categories', (req,res,next) => {
   //console.log(req.body)
 })
 
-//
-//EDITER OFFRE
-//
-router.get('/:offerid/editoffer',(req,res,next) => {
-  //if (!req.session.currentUser) return next(new Error('You must be logged to create a comment'));
 
-  Offer.findById(req.params.offerid)
-    .then(offer => {
-      res.render('posts/offer-edit',{
-        userInSession: req.session.currentUser,
-        offer:offer
-      })
-    })
-    .catch(err=>next(err))
-  
- 
-})
 //
 //FAIRE D UN OFFRE
 //
@@ -159,12 +143,48 @@ router.post('/:id/offer', function (req, res, next) {
 });
 
 
+//
+//EDITER OFFRE
+//
+router.get('/:offerid/editoffer',(req,res,next) => {
+  //if (!req.session.currentUser) return next(new Error('You must be logged to create a comment'));
 
+  Offer.findById(req.params.offerid).populate('creatorId').populate('postId').populate('goodToExchange')
+    .then(offer => {
+      console.log(req.session.currentUser._id)
+      Post.find({creatorId: req.session.currentUser._id}).then (postsFromDb => {
+        res.render('posts/offer-edit',{
+          userInSession: req.session.currentUser,
+          offer:offer,
+          posts:postsFromDb
+        })
+      }).catch(err=>next(err))
+     
+    })
+    .catch(err=>next(err))
+})
+
+router.post('/:offerid/editoffer',(req,res,next) => {
+  Offer.findByIdAndUpdate(req.params.offerid, {
+    goodToExchange: req.body.goodToExchange,
+    messages:req.body.messages
+  }, {new:true})
+    .then(offerUpdated => {
+      console.log('offerUpdated:    ',offerUpdated)
+      res.redirect('/profile/dashboard')
+    })
+    .catcbh(err=>next(err))
+})
 
 
 //
 //SUPPRIMER OFFRE
 //
+router.post('/:id/deleteoffer',(req,res,next) => {
+  Offer.findByIdAndRemove(req.params.id)
+    .then(offer => res.redirect('/profile/dashboard'))
+    .catch(err=>next(err))
+})
 
 //
 // EDITER POST

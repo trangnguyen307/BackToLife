@@ -21,8 +21,8 @@
         
         {{#unless this.alreadyanswered }}
         <a href="/posts/{{this.id}}/editoffer">Edit</a>
-        <form action="" method="POST">
-          <button>Delete</button>
+        <form action="/posts/{{this.id}}/deleteoffer" method="POST">
+          <button>Cancel</button>
         </form>
         {{/unless}}
     </li>
