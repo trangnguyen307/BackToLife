@@ -1,18 +1,32 @@
 <div id="show-post">
   <article>
-    <img src="{{post.picURL}}" style="width: 500px;">
+    {{#each post.picURL}}
+    <img src={{this.path}} style="width: 500px;">
+    {{/each}}
   </article>
 
   <section>
     <div>
       <h2>{{post.title}}</h2>
-      <p>Numbers of flowers suggested: {{post.pointsEstimate}}</p>
-      <p>Description: {{post.description}}</p>
-      <a href="/posts/{{post.id}}/offer">Make an offer</a>
+      <p><span style="font-weight: bold;" >Numbers of flowers suggested:</span> {{post.pointsEstimate}}</p>
     </div>
     <div>
-      <p>Posted by <span style="font-weight: bold;">{{userFromDb.username}}</span> at {{post.createdAt}}</p>
-      <a href="/profile/{{userFromDb.id}}">See profile</a>
+      <p>Description: {{post.description}}</p>
+      <a href="/posts/{{post.id}}/offer" id='showpost-button'>MAKE AN OFFER</a>
+    </div>
+    
+       
+    
+     
+    <div id='showpost-profile-section'>
+      <div>
+        <img src={{userFromDb.myphoto}} alt="Photo of creator">
+      </div>
+      <div>
+        <p>Posted by <span style="font-weight: bold;">{{userFromDb.username}}</span> at {{post.createdAt}}</p>
+        <a href="/profile/{{userFromDb.id}}">See profile</a>
+      </div>
+      
     </div>
   </section>
 </div>

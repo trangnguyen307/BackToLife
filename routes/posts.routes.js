@@ -19,17 +19,17 @@ router.get('/new', function (req, res, next) {
   res.render('posts/new',{userInSession: req.session.currentUser});
 });
 
-router.post('/new', fileUploader.fields([{name:'pic1'},{name:'pic2'},{name:'pic3'}]), function (req, res, next) {
+router.post('/new', fileUploader.fields([{name:'pic1'},{name:'pic2'}]), function (req, res, next) {
   if (!req.session.currentUser) {
     return next(new Error('You must be logged to create a post'));
   }
-  console.log('req.files.path:   ',req.files.path)
+  console.log('req.files.path:   ',req.files)
   console.log('creatorId:', req.session.currentUser._id)
   Post.create({
     title: req.body.title,
     creatorId: req.session.currentUser._id,
     description: req.body.description,
-    picURL: req.files,
+    picURL: [req.files.pic1[0],req.files.pic2[0]],
     pointsEstimate:req.body.pointsEstimate,
     city: req.body.city,
     categories: req.body.categories,
@@ -234,7 +234,7 @@ router.post('/:id/delete',(req,res,next) => {
 })
 
 //
-// AFFICHER LE DETAIL D'UN POSTE
+// AFFICHER LE DETAIL D'UN POST
 //
 router.get('/:id', function (req, res, next) {
   const id = req.params.id;
@@ -242,7 +242,7 @@ router.get('/:id', function (req, res, next) {
   Post.findById(id)
     .populate()
     .then(post => {
-      console.log('post creator:',post.creatorId);
+      console.log('post.picURL:',post.picURL);
       const id = post.creatorId;
       User.findById(id).then(userFromDb => {
         console.log('creator username:',userFromDb.username);
