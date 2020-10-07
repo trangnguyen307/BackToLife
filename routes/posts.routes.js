@@ -19,17 +19,17 @@ router.get('/new', function (req, res, next) {
   res.render('posts/new',{userInSession: req.session.currentUser});
 });
 
-router.post('/new', fileUploader.single('pic'), function (req, res, next) {
+router.post('/new', fileUploader.fields([{name:'pic1'},{name:'pic2'},{name:'pic3'}]), function (req, res, next) {
   if (!req.session.currentUser) {
     return next(new Error('You must be logged to create a post'));
   }
-  
+  console.log('req.files.path:   ',req.files.path)
   console.log('creatorId:', req.session.currentUser._id)
   Post.create({
     title: req.body.title,
     creatorId: req.session.currentUser._id,
     description: req.body.description,
-    picURL: req.file.path,
+    picURL: req.files,
     pointsEstimate:req.body.pointsEstimate,
     city: req.body.city,
     categories: req.body.categories,

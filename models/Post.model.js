@@ -6,7 +6,7 @@ const PostSchema = Schema({
   title: String,
   creatorId: {type: Schema.Types.ObjectId, ref: 'User'},
   description: String,
-  picURL: String,
+  picURL: [String],
   pointsEstimate: String,
   city: String,
   categories: { type: String, enum: ['Dressing', 'Books/CDs', 'Services', 'Beauty', 'IT'] },
