@@ -20,3 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //   });
 // });
+function showImage() {
+  var img = document.getElementById('showpost-img1');
+  var img2 = document.getElementById('showpost-img2');
+  if( img.style.visibility == 'visible') {
+    img.style.visibility = 'hidden';
+    img.style.display = 'none';
+    img2.style.visibility = 'visible';
+    img2.style.display  = 'block';
+} else {
+    img.style.visibility = 'visible';
+    img.style.display = 'block';
+    img2.style.visibility = 'hidden';
+    img2.style.display = 'none';
+}
+
+}

@@ -594,10 +594,8 @@ form input, select {
 // }
 
 
-//Show post
-#show-post {
-  display: flex;
-}
+
+
 /*
 ######                         #######                      
 #     #  ####   ####  #####    #        ####  #####  #    # 
@@ -648,4 +646,86 @@ form input, select {
 #post-an-offer button {
   margin-bottom: 30px;
   padding: 5px;
+}
+/*
+ #####                                                     
+#     # #    #  ####  #    #    #####   ####   ####  ##### 
+#       #    # #    # #    #    #    # #    # #        #   
+ #####  ###### #    # #    #    #    # #    #  ####    #   
+      # #    # #    # # ## #    #####  #    #      #   #   
+#     # #    # #    # ##  ##    #      #    # #    #   #   
+ #####  #    #  ####  #    #    #       ####   ####    #   */
+
+
+#show-post {
+  display: flex;
+  margin: 50px auto;
+  justify-content: center;
+}
+#show-post hr {
+  width: 250px;
+  height: 2px;
+  background-color: black;
+}
+#showpost-previous {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  margin-left: 0px;
+  margin-top: 210px;
+}
+#showpost-next {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  margin-left: 450px;
+  margin-top: 210px;
+}
+#show-post article{
+  position: relative;
+  height: 500px;
+  width: 500px;
+  }
+#showpost-img1 {
+  width:500px;
+  height:500px;
+  visibility:visible;
+  position: absolute;
+}
+#showpost-makeoffer {
+  color: black;
+  background-color: rgba(196, 244, 255, 0.87);
+  padding: 10px 15px;
+  float: right;
+}
+#showpost-img2 {
+  //margin-left: 55px;
+  width:500px;
+  height:500px;
+  visibility:visible;
+  position: absolute;
+}
+#show-post section {
+  margin-left: 60px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+#show-post section div {
+  height: 100px;
+}
+#showpost-main {
+  flex: 1;
+}
+#showpost-button {
+  display: block;
+  float: right;
+}
+#showpost-profile-section {
+  display: flex;
+}
+#showpost-profile-section img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 }

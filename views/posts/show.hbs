@@ -1,23 +1,28 @@
 <div id="show-post">
+  
   <article>
-    {{#each post.picURL}}
-    <img src={{this.path}} style="width: 500px;">
-    {{/each}}
+    <img src={{post.picURL.0.path}} id='showpost-img1'>
+    <img src={{post.picURL.1.path}} id='showpost-img2'>
+    <img src ='../../images/previous.png'onclick="showImage()" id='showpost-previous'>
+    <img src ='../../images/next.png'onclick="showImage()" id='showpost-next'>
   </article>
+
+  
 
   <section>
     <div>
       <h2>{{post.title}}</h2>
       <p><span style="font-weight: bold;" >Numbers of flowers suggested:</span> {{post.pointsEstimate}}</p>
     </div>
+    <hr align="left">
+   
+    <p id='showpost-main'><span style="font-weight: bold;" >Description:</span> {{post.description}}</p>
     <div>
-      <p>Description: {{post.description}}</p>
-      <a href="/posts/{{post.id}}/offer" id='showpost-button'>MAKE AN OFFER</a>
+      <a href="/posts/{{post.id}}/offer" id='showpost-makeoffer'>MAKE AN OFFER</a>
     </div>
     
-       
-    
-     
+    <hr align="left">
+      
     <div id='showpost-profile-section'>
       <div>
         <img src={{userFromDb.myphoto}} alt="Photo of creator">
