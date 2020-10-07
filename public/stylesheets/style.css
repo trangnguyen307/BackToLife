@@ -404,4 +404,53 @@ form input, select {
 #show-post {
   display: flex; }
 
+/*
+######                         #######                      
+#     #  ####   ####  #####    #        ####  #####  #    # 
+#     # #    # #        #      #       #    # #    # ##  ## 
+######  #    #  ####    #      #####   #    # #    # # ## # 
+#       #    #      #   #      #       #    # #####  #    # 
+#       #    # #    #   #      #       #    # #   #  #    # 
+#        ####   ####    #      #        ####  #    # #    # */
+#post-title {
+  display: block;
+  text-align: center;
+  margin-top: 50px; }
+
+#post-an-offer {
+  display: block;
+  text-align: center;
+  margin: 30px auto 50px auto;
+  background: rgba(196, 244, 255, 0.87);
+  width: 35em; }
+
+#post-an-offer label {
+  display: block;
+  margin-bottom: 10px; }
+
+#location {
+  width: 200px;
+  padding: 5px;
+  margin: 10px; }
+
+#post-an-offer select {
+  width: 200px;
+  padding: 5px; }
+
+#input-posttitle {
+  width: 420px; }
+
+#post-an-offer textarea {
+  padding: 10px;
+  margin: 0;
+  width: 420px; }
+
+#flowers {
+  width: 50px;
+  margin-left: 20px; }
+
+#post-an-offer button {
+  margin-bottom: 30px;
+  padding: 5px; }
+
 /*# sourceMappingURL=style.css.map */

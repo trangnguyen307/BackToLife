@@ -1,4 +1,6 @@
-PUBLISH A POST
+<h1 id="post-title">I would like to post</h1>
+<div id="post-an-offer">
+
 <form action="/posts/new" method="POST" enctype="multipart/form-data">
   {{!-- <p>
     <label>
@@ -10,53 +12,48 @@ PUBLISH A POST
     </label>
   </p> --}}
   <p>
-    <label>
-      Categories:
       <select name="categories">
-         <option>--Please choose an option--</option>
+         <option>SELECT A CATEGORY</option>
         <option value="Dressing">Dressing</option>
         <option value="Books/CDs">Books/CDs</option>
         <option value="Services">Services</option>
         <option value="Beauty">Beauty</option>
         <option value="IT">IT</option>
       </select>
-    </label>
+      <input type="text" name="city" placeholder="YOUR LOCATION" id="location">
+    
   </p>
   
   <p>
     <label>
-      Title:
-      <input type="text" name="title">
+      TITLE
     </label>
+    <input type="text" name="title" id="input-posttitle">
+   
   </p>
 
   <p>
     <label>
-      Description:
-      <textarea name="description"></textarea>
+      DESCRIPTION
     </label>
+    <textarea name="description" rows='5' cols="31"></textarea>
+    
   </p>
-  <p>
-    <label>
-      City:
-      <input type="text" name="city">
-    </label>
-  </p>
+
 
   <p>
     <label>
-      Points Estimated:
-      <input type="text" name="pointsEstimate">
+      NUMBER OF FLOWERS ESTIMATED
+    <input type="text" name="pointsEstimate" id="flowers" >
     </label>
   </p>
 
-  <p>
+  <p class='custom-file-input'>
     <label>
-      Picture:
-      <input type="file" multiple name="pic1">
-      <input type="file" multiple name="pic2">
-      <input type="file" multiple name="pic3">
+      PHOTOS:
     </label>
+    <input type="file" multiple name="pic1">
+    <input type="file" multiple name="pic2">  
   </p>
   
 
@@ -64,3 +61,4 @@ PUBLISH A POST
     <button>Create new post</button>
   </p>
 </form>
+</div>
