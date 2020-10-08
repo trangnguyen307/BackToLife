@@ -1,35 +1,39 @@
-<div id="signup">
-  <h2>Signup</h2>
+<div id="signup" class= "formulaire">
+  <h1>Signup</h1>
   <form action="/signup" method="POST" enctype="multipart/form-data">
-    <label>
-      Username
+    <p>
+      <label>
+        Username
+      </label>
       <input type="text" name="username" placeholder="Your username" />
-    </label>
-
-    <label>
-      City
+    </p>
+    <p>
+      <label>City</label>
       <input type="text" name="city" placeholder="Your city" />
-    </label>
- 
-    <label>
-      Email
+    </p>
+    
+    <p>
+      <label>Email</label>
       <input type="text" id="input-email" name="email" placeholder="Your email" />
-    </label>
- 
-    <label>
-      Password
+    </p>
+    <p>
+      <label>Password</label>
       <input type="password" name="password" id="input-password" placeholder="********" />
-    </label>
- 
-    <button>Create account</button>
+    </p>
+     
+    <p>
+      <button>Create account</button>
+    </p>
  
     {{!-- error message will be added here --}}
     {{#if errorMessage}}
     <p class="error">{{errorMessage}}</p>
     {{/if}}
   </form>
-</div>
+
 
 <div>
   <a href="/login">Already have an account? Log in here !!!</a>
+</div>
+
 </div>

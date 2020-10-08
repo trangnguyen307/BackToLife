@@ -97,7 +97,9 @@ router.post('/categories', (req,res,next) => {
 router.get('/:id/offer', function (req, res, next) {
   
   if (!req.session.currentUser) {
-    return next(new Error('You must be logged to create a post'));
+    //return next(new Error('You must be logged to create a post'));
+    res.redirect('/login');
+    return;
   }
 
   const id = req.params.id
@@ -245,10 +247,8 @@ router.get('/:id', function (req, res, next) {
       console.log('post.picURL:',post.picURL);
       const id = post.creatorId;
       User.findById(id).then(userFromDb => {
-        console.log('userFromDb.id:    ',userFromDb.id);
-        console.log('req.session.currentUser._id:   ',req.session.currentUser._id)
         let showbuttonoffer = true;
-        if (req.session.currentUser._id === userFromDb.id) {
+        if (req.session.currentUser && req.session.currentUser._id === userFromDb.id) {
           showbuttonoffer = false;
         }
         res.render('posts/show', {
