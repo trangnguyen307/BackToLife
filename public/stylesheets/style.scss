@@ -577,7 +577,7 @@ form input, select {
 
 .myprofilepage .profilepostcard img {
   display: block;
-  width: 100%;
+  width: auto;
   height: 15em;
   object-fit: cover;
 }
@@ -791,8 +791,13 @@ padding-left: 50px;
 
 #about {
   background-color: rgba(196, 244, 255, 0.87);
-  margin-bottom: 30px;
-  padding: 10px;
+  padding: 10px 40px;
+  width: 40em;
+  display: block;
+  margin: 30px auto;
+}
+#about h1 {
+  text-align: center;
 }
 #about p {
   text-align: justify;
@@ -805,7 +810,7 @@ padding-left: 50px;
   display: flex;
 }
 #about section div  {
-  margin: 30px;
+  margin: auto;
 }
 #about h3 {
   text-align: center;
@@ -819,11 +824,60 @@ padding-left: 50px;
 #     # #      #      #      
 #     # ###### ###### #      */
 
-#help section {
+#help {
   background-color: rgba(196, 244, 255, 0.87);
-  padding: 10px;
+  padding: 40px;
   margin-bottom: 30px;
+  width: 40em;
+  display: block;
+  margin: 40px auto;
 }
+
+#help h1 {
+  text-align: center;
+  margin-top: 10px;
+}
+#help p {
+  font-size: 20px;
+}
+
+/*#       ####   ####     # #    # 
+#      #    # #    #    # ##   # 
+#      #    # #         # # #  # 
+#      #    # #  ###    # #  # # 
+#      #    # #    #    # #   ## 
+######  ####   ####     # #    # */ 
+
+.formulaire {
+  width: 32em;
+  display: block;
+  margin: 30px auto;
+  padding: 20px;
+  text-align: center;
+  background-color:  rgba(196, 244, 255, 0.87);
+}
+.formulaire  form{
+  display: flex;
+  flex-direction: column;
+}
+.formulaire p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.formulaire input {
+  margin-top: 15px;
+}
+.formulaire button {
+  color: black;
+  margin-bottom: 10px;
+}
+.formulaire a {
+  color: black;
+  margin-bottom: 30px;;
+}
+
+
 
 /*
   ______    _ _ _      __                     
@@ -833,4 +887,5 @@ padding-left: 50px;
  | |___| (_| | | |_  | || (_) | |  | | | | | |
  |______\__,_|_|\__| |_| \___/|_|  |_| |_| |_|
 */
+
 
