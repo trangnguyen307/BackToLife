@@ -245,13 +245,19 @@ router.get('/:id', function (req, res, next) {
       console.log('post.picURL:',post.picURL);
       const id = post.creatorId;
       User.findById(id).then(userFromDb => {
-        console.log('creator username:',userFromDb.username);
+        console.log('userFromDb.id:    ',userFromDb.id);
+        console.log('req.session.currentUser._id:   ',req.session.currentUser._id)
+        let showbuttonoffer = true;
+        if (req.session.currentUser._id === userFromDb.id) {
+          showbuttonoffer = false;
+        }
         res.render('posts/show', {
           post: post,
           userInSession: req.session.currentUser,
-          userFromDb: userFromDb
+          userFromDb: userFromDb,
+          showbuttonoffer:showbuttonoffer
         })
-      })
+      }).catch(next);
      
     }).catch(next);
   

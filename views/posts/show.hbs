@@ -17,9 +17,11 @@
     <hr align="left">
    
     <p id='showpost-main'><span style="font-weight: bold;" >Description:</span> {{post.description}}</p>
+    {{#if showbuttonoffer}}
     <div>
       <a href="/posts/{{post.id}}/offer" id='showpost-makeoffer'>MAKE AN OFFER</a>
     </div>
+    {{/if}}
     
     <hr align="left">
       
