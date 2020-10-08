@@ -1,44 +1,67 @@
-{{#if userInSession}}
+<div class ="myprofilepage">
+
+  {{#if userInSession}}
+  <section class="usersinfo">
+
+    <div id ="leftpart">
+        <img src="{{userInSession.myphoto}}">
+    </div>
+
+    <div id="rightpart">
+      <div id= "dashboardandeditprofile">
+          <button id="dashboardbutton">
+              <a href="/profile/dashboard">Go to dashboard</a>
+          </button> 
+          <a id="editbutton" href="/profile/myprofile-edit">Edit my profile</a>
+      </div>
+          <h2> {{ userInSession.username }}</h2> 
+          <p> {{ userInSession.city }}</p>
+
+          <h2>Description</h2>
+          <p>{{ userInSession.mydescription}}</p>
+
+          
+
+          <h3>Total of transactions : {{ userInSession.transactions}} </h3>
+
+    </div>
+
+  </section>
 
 
-<a href="/profile/myprofile-edit">EDIT</a>
+    <section class ="listposts">
 
-   <img src="{{userInSession.myphoto}}" style="width: 300px;">
-    <h2> {{ userInSession.username }}</h2>
-    <p> {{ userInSession.city }}</p>
+        <h2>My Posts</h2>
 
-    <h2>Description</h2>
-    <p>{{ userInSession.mydescription}}</p>
-    <h2>Total of transactions</h2>
-    <p>{{ userInSession.transactions}}</p>
- 
-    <button>
-        <a href="/profile/dashboard">Go to dashboard</a>
-    </button>
+      <div class ="profilepostcard postcard">
+    <ul>
+    {{#each posts}}
+    <li>
+      <img src="{{this.picURL.0.path}}">
 
-
-    <h2>My Posts</h2>
-<ul>
-    
-{{#each posts}}
-<li>
-  <img src="{{this.picURL}}" style="width: 300px;">
-  <h1>{{this.title}}</h1>
-  <p>Posted at: {{this.createdAt}}</p>
-  <p>
-    <a href="/posts/{{id}}">See details</a>
-    <a href="/posts/{{id}}/edit">Edit post</a>
-      <form action="/posts/{{id}}/delete" method="POST" enctype="multipart/form-data">
-        <button>Delete</button>
-      </form>
-  </p>
-</li>
-{{/each}}
-</ul>
+      <div class ="postcardtext">
+      <h1>{{this.title}}</h1>
+      <p id = "creationdate">Posted at: {{this.createdAt}}</p>
+      <p>
+        <a href="/posts/{{id}}">See details</a> 
+      </p>
+      <p>
+        <a href="/posts/{{id}}/edit">Edit post</a>
+        <form action="/posts/{{id}}/delete" method="POST" enctype="multipart/form-data">
+          <button id ='deletebutton'>Delete</button>
+        </form>
+      </p>
+      </div>
+    </li>
+    {{/each}}
+    </ul>
+      </div>
+    </section>
 
 
-{{else}}
-    <p>Still no logged in user, sorry!</p>
-    <a href="/login">Please log in to see your profile</a>
-{{/if}}
+  {{else}}
+      <p>Still no logged in user, sorry!</p>
+      <a href="/login">Please log in to see your profile</a>
+  {{/if}}
 
+</div> 

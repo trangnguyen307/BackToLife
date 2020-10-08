@@ -25,7 +25,7 @@
             <li>
               {{#if userInSession}}
                 <form id="logout-form" action="/logout" method="POST">
-                  <span>Welcome <span style="font-weight: bold;">{{userInSession.username}}</span> !!!</span>
+                  <span>Hi <span >{{userInSession.username}}</span>!</span>
                   <button>Logout</button>
                 </form>
               {{else}}
