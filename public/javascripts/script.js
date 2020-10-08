@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //   });
 // });
+
 function showImage() {
   var img = document.getElementById('showpost-img1');
   var img2 = document.getElementById('showpost-img2');
@@ -36,3 +37,13 @@ function showImage() {
 }
 
 }
+
+
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+
