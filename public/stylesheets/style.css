@@ -414,7 +414,8 @@ form input, select {
   padding-bottom: 50px; }
 
 .listposts h2 {
-  text-align: center; }
+  text-align: center;
+  padding: 50px; }
 
 .myprofilepage .profilepostcard img {
   display: block;
@@ -470,6 +471,9 @@ button {
  |_|   |_|  \___/|_| |_|_|\___|
                                
 */
+.profilepage {
+  padding-bottom: 50px; }
+
 /*
 ######                         #######                      
 #     #  ####   ####  #####    #        ####  #####  #    # 
@@ -638,5 +642,14 @@ button {
   background-color: rgba(196, 244, 255, 0.87);
   padding: 10px;
   margin-bottom: 30px; }
+
+/*
+  ______    _ _ _      __                     
+ |  ____|  | (_) |    / _|                    
+ | |__   __| |_| |_  | |_ ___  _ __ _ __ ___  
+ |  __| / _` | | __| |  _/ _ \| '__| '_ ` _ \ 
+ | |___| (_| | | |_  | || (_) | |  | | | | | |
+ |______\__,_|_|\__| |_| \___/|_|  |_| |_| |_|
+*/
 
 /*# sourceMappingURL=style.css.map */
