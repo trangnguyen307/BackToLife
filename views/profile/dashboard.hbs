@@ -1,64 +1,67 @@
+<div class ="dashboard">
+
 {{#if userInSession}}
    
     <h1>My dashboard </h2>
 
-{{!-- TODO --}}
-{{!-- proposition to check --}}
-{{!-- proposition ongoing --}}
+    <h2>My points: {{ userInSession.points}}</h2>
 
-    <h2>My points </h2>
-    <p>{{ userInSession.points}}</p>
-    
-    <h2>My requests</h2>
-    <ul>
-    {{#each requests}}
-    <li>
-        <p>Send to (creatorId): {{this.creatorId.username}}</p>
-        <p>For (postId): {{this.postId.title}}</p>
-        <p>Offer: <a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a></p>
-        <p>Messages: {{this.messages}}</p>
-        <p>Status: {{this.status}}</p>
+    <section class ="myrequests">
         
-        {{#unless this.alreadyanswered }}
-        <a href="/posts/{{this.id}}/editoffer">Edit</a>
-        <form action="/posts/{{this.id}}/deleteoffer" method="POST">
-          <button>Cancel</button>
-        </form>
-        {{/unless}}
-    </li>
-    {{/each}}
-    </ul>
-    
 
-    <h2>Propositions to check</h2>
-    <ul>
-    {{#each propositions}}
-    <li>
-        <p>From: <a href="/profile/{{authorId.id}}" target="blank">{{this.authorId.username}}</a></p>
-        <p>For (postId): <a href="/posts/{{postId.id}}">{{this.postId.title}}</a></p>
-        <p>Offer: <a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a></p>
-        <p>Messages: {{this.messages}}</p>
-        <p>Status: {{this.status}}</p>
-        {{#unless this.alreadyanswered }}
-        <form action="/offers/{{this.id}}/response" method="POST">
-          <input type="radio" name="response" value="accepte">Accept
-          <input type="radio" name="response" value="decline">Decline
-          <button>Send</button>
-        </form>
-        {{/unless}}
-    </li>
-    {{/each}}
-    </ul>
-    
-    
+        <div class ="requestpart">
+            <h2>My requests</h2>
+            <ol>
+            {{#each requests}}
+            <li>
+                <p>Send to (creatorId): {{this.creatorId.username}}</p>
+                <p>For (postId): {{this.postId.title}}</p>
+                <p>Offer: <a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a></p>
+                <p>Message: {{this.messages}}</p>
+                <p>Status: {{this.status}}</p>
+                
+                {{#unless this.alreadyanswered }}
+                <a href="/posts/{{this.id}}/editoffer">Edit</a>
+                <form action="/posts/{{this.id}}/deleteoffer" method="POST">
+                <button>Cancel</button>
+                </form>
+                {{/unless}}
+            </li>
+            {{/each}}
+            </ol>
+        </div>
+        <div class="propositionpart">
 
+            <h2>Propositions to check</h2>
+            <ol>
+            {{#each propositions}}
+            <li>
+                <p>From: <a href="/profile/{{authorId.id}}" target="blank">{{this.authorId.username}}</a></p>
+                <p>For (postId): <a href="/posts/{{postId.id}}">{{this.postId.title}}</a></p>
+                <p>Offer: <a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a></p>
+                <p>Messages: {{this.messages}}</p>
+                <p>Status: {{this.status}}</p>
+                {{#unless this.alreadyanswered }}
+                <form action="/offers/{{this.id}}/response" method="POST">
+                <input type="radio" name="response" value="accepte">Accept
+                <input type="radio" name="response" value="decline">Decline
+                <button>Send</button>
+                </form>
+                {{/unless}}
+            </li>
+            {{/each}}
+            </ol>
+        </div>
 
-    <button>
-        <a href="/profile/myprofile">Go back to my profile</a>
-    </button>
+        <div class="endpart">
+            <button>
+                <a href="/profile/myprofile">Go back to my profile</a>
+            </button>
 
-{{else}}
-    <p>Still no logged in user, sorry!</p>
-    <a href="/login">Please log in to see your profile</a>
-{{/if}}
-
+            {{else}}
+                <p>Still no logged in user, sorry!</p>
+                <a href="/login">Please log in to see your profile</a>
+            {{/if}}
+        </div>
+    </section>
+</div>

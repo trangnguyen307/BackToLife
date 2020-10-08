@@ -424,7 +424,7 @@ form input, select {
 
 .myprofilepage .profilepostcard img {
   display: block;
-  width: auto;
+  width: 100%;
   height: 15em;
   object-fit: cover; }
 
@@ -705,5 +705,16 @@ button {
  | |___| (_| | | |_  | || (_) | |  | | | | | |
  |______\__,_|_|\__| |_| \___/|_|  |_| |_| |_|
 */
+.dashboard h1 {
+  text-align: center; }
+
+.myrequests {
+  display: flex; }
+
+.requestpart {
+  flex: 50%; }
+
+.propositionpart {
+  flex: 50%; }
 
 /*# sourceMappingURL=style.css.map */

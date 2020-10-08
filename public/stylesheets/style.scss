@@ -583,7 +583,7 @@ form input, select {
 
 .myprofilepage .profilepostcard img {
   display: block;
-  width: auto;
+  width: 100%;
   height: 15em;
   object-fit: cover;
 }
@@ -895,3 +895,23 @@ padding-left: 50px;
 */
 
 
+
+
+
+
+//DASHBOARD
+
+.dashboard h1 {
+  text-align: center;
+}
+.myrequests {
+  display:flex;
+}
+
+.requestpart {
+  flex:50%;
+}
+
+.propositionpart {
+  flex:50%;
+}
