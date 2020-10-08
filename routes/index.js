@@ -7,5 +7,11 @@ router.get('/', (req, res, next) => {
   res.render('home');
 });
 
+router.get('/about', (req,res,next) => {
+  res.render('about');
+});
+router.get('/help', (req,res,next) => {
+  res.render('help');
+});
 
 module.exports = router;

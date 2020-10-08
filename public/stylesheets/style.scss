@@ -779,3 +779,33 @@ padding-left: 50px;
   height: 100px;
   border-radius: 50%;
 }
+/*
+   #                                                
+  # #   #####   ####  #    # #####    #    #  ####  
+ #   #  #    # #    # #    #   #      #    # #      
+#     # #####  #    # #    #   #      #    #  ####  
+####### #    # #    # #    #   #      #    #      # 
+#     # #    # #    # #    #   #      #    # #    # 
+#     # #####   ####   ####    #       ####   ####   */
+
+#about {
+  background-color: rgba(196, 244, 255, 0.87);
+  margin-bottom: 30px;
+  padding: 10px;
+}
+#about p {
+  text-align: justify;
+}
+#about img {
+  width: 200px;
+  height: 200px;
+}
+#about section {
+  display: flex;
+}
+#about section div  {
+  margin: 30px;
+}
+#about h3 {
+  text-align: center;
+}
