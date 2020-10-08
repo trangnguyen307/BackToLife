@@ -567,13 +567,19 @@ form input, select {
 
 .myprofilepage {
  padding-bottom: 50px;
+
+}
+
+.usersinfo img {
+  object-fit: cover;
+  width: auto;
+  height: 15em;
 }
 
 .listposts h2 {
   text-align: center;
   padding: 50px;
 }
-
 
 .myprofilepage .profilepostcard img {
   display: block;
