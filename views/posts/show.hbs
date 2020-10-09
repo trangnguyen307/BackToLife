@@ -40,12 +40,14 @@
 
     <hr align="left">
 
-    <div id="sharepost">
-      <a href="/posts/{{post.id}}"></a>
-      <p>Share this post with your friends</p>
-      <button onclick="copyToClipboard('#sharepost')"> Click to copy URL : .../posts/{{{post.id}}}</button>
-    </div>    
+
+    <p>Share this post with your friends</p>
+    <p id="sharepost"> 
+    http://ironjs.herokuapp.com/posts/{{this.post.id}}</p>    
+
+    <button onclick="copyToClipboard('#sharepost')"> Click to copy URL in your clipboard !</button> 
     
+
 
   </section>
 </div>

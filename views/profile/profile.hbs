@@ -1,4 +1,4 @@
-<div class="profile"> 
+<div class="profilepage"> 
   <section class="usersinfo">
     <div id ="leftpart">
       <img src="{{user.myphoto}}" alt>
@@ -15,19 +15,26 @@
   </section>
 
   <section class ="listposts">
-        <h2>Posts</h2>
-    <ul>
-    {{#each posts}}
-    <li>
-      <img src="{{this.picURL.0.path}}" style="width: 300px;">
-      <h1>{{this.title}}</h1>
-      <p>Posted at: {{this.createdAt}}</p>
-      <p>
-        <a href="/posts/{{id}}">See details</a>
-      </p>
-    </li>
-    {{/each}}
-    </ul>
+
+        <h2>{{user.username}}'s Posts</h2>
+
+    <div class ="profilepostcard postcard">  
+      <ul>
+      {{#each posts}}
+      <li>
+        <img src="{{this.picURL.0.path}}">
+
+        <div class ="postcardtext">
+          <h1>{{this.title}}</h1>
+          <p id = "creationdate">Posted at: {{this.createdAt}}</p>
+          <p>
+            <a href="/posts/{{id}}">See details</a>
+          </p>
+        </div>
+      </li>
+      {{/each}}
+      </ul>
+    </div> 
 </section>
 
 </div>

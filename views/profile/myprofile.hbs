@@ -34,27 +34,27 @@
         <h2>My Posts</h2>
 
       <div class ="profilepostcard postcard">
-    <ul>
-    {{#each posts}}
-    <li>
-      <img src="{{this.picURL.0.path}}">
+        <ul>
+        {{#each posts}}
+        <li>
+          <img src="{{this.picURL.0.path}}">
 
-      <div class ="postcardtext">
-      <h1>{{this.title}}</h1>
-      <p id = "creationdate">Posted at: {{this.createdAt}}</p>
-      <p>
-        <a href="/posts/{{id}}">See details</a> 
-      </p>
-      <p>
-        <a href="/posts/{{id}}/edit">Edit post</a>
-        <form action="/posts/{{id}}/delete" method="POST" enctype="multipart/form-data">
-          <button id ='deletebutton'>Delete</button>
-        </form>
-      </p>
-      </div>
-    </li>
-    {{/each}}
-    </ul>
+          <div class ="postcardtext">
+            <h1>{{this.title}}</h1>
+            <p id = "creationdate">Posted at: {{this.createdAt}}</p>
+            <p>
+              <a href="/posts/{{id}}">See details</a> 
+            </p>
+            <p>
+              <a href="/posts/{{id}}/edit">Edit post</a>
+              <form action="/posts/{{id}}/delete" method="POST" enctype="multipart/form-data">
+                <button id ='deletebutton'>Delete</button>
+              </form>
+            </p>
+          </div>
+        </li>
+        {{/each}}
+        </ul>
       </div>
     </section>
 
