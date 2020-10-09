@@ -415,7 +415,7 @@ form input, select {
 
 .usersinfo img {
   object-fit: cover;
-  width: auto;
+  width: 280px;
   height: 15em; }
 
 .listposts h2 {
@@ -720,6 +720,68 @@ button {
   line-height: 35px; }
 
 /*
+  _____            _     _                         _ 
+ |  __ \          | |   | |                       | |
+ | |  | | __ _ ___| |__ | |__   ___   __ _ _ __ __| |
+ | |  | |/ _` / __| '_ \| '_ \ / _ \ / _` | '__/ _` |
+ | |__| | (_| \__ \ | | | |_) | (_) | (_| | | | (_| |
+ |_____/ \__,_|___/_| |_|_.__/ \___/ \__,_|_|  \__,_|
+                                                                                                   
+*/
+.dashboard {
+  width: 85%;
+  margin: auto;
+  padding-bottom: 40px; }
+
+#dashboardheader {
+  background-color: rgba(196, 244, 255, 0.87);
+  height: 200px; }
+
+.dashboard h1 {
+  text-align: center;
+  margin-top: 0;
+  padding-top: 50px; }
+
+.dashboard h2 {
+  text-align: center; }
+
+.myrequests {
+  display: flex; }
+
+.myrequests ol {
+  list-style: none;
+  counter-reset: li; }
+
+.myrequests li::before {
+  content: counter(li);
+  color: black;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em; }
+
+.myrequests li {
+  counter-increment: li;
+  padding: 20px;
+  border: 1px solid #63E3FF; }
+
+.requestpart {
+  flex: 50%;
+  text-align: center; }
+
+.requestpart h2 {
+  padding: 30px; }
+
+.propositionpart {
+  flex: 50%;
+  text-align: center; }
+
+.propositionpart h2 {
+  padding: 30px; }
+
+.propositionpart form input {
+  width: 80px; }
+
+/*
   ______    _ _ _      __                     
  |  ____|  | (_) |    / _|                    
  | |__   __| |_| |_  | |_ ___  _ __ _ __ ___  
@@ -727,16 +789,5 @@ button {
  | |___| (_| | | |_  | || (_) | |  | | | | | |
  |______\__,_|_|\__| |_| \___/|_|  |_| |_| |_|
 */
-.dashboard h1 {
-  text-align: center; }
-
-.myrequests {
-  display: flex; }
-
-.requestpart {
-  flex: 50%; }
-
-.propositionpart {
-  flex: 50%; }
 
 /*# sourceMappingURL=style.css.map */

@@ -193,7 +193,7 @@ router.get('/profile/myprofile-edit', (req, res, next) => {
 router.post('/profile/myprofile-edit', fileUploader.single('photo'), (req, res, next) => {
   // const {city, mydescription} = req.body;
   // console.log('dans edit')
-
+  console.log(process.env.CLOUDINARY_KEY)
   User.findByIdAndUpdate({ _id: req.session.currentUser._id }, {
     myphoto: req.file.path,
     city: req.body.city,

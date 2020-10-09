@@ -9,7 +9,7 @@ const { Router } = require('express');
 
 
 
-// CREER UN POSTE
+// CREER UN POST
 router.get('/new', function (req, res, next) {
   if (!req.session.currentUser) {
     res.redirect('/login');
@@ -47,7 +47,7 @@ router.post('/new', fileUploader.fields([{name:'pic'}]), function (req, res, nex
 
 
 
-// AFFICHER TOUS LES POSTES
+// AFFICHER TOUS LES POSTS
 
 router.get('/categories', (req,res,next) => {
   const {search,categories, city} = req.query
@@ -181,7 +181,7 @@ router.post('/:offerid/editoffer',(req,res,next) => {
       console.log('offerUpdated:    ',offerUpdated)
       res.redirect('/profile/dashboard')
     })
-    .catcbh(err=>next(err))
+    .catch(err=>next(err))
 })
 
 
