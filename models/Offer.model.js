@@ -7,7 +7,7 @@ const offerSchema = Schema({
   authorId: {type: Schema.Types.ObjectId, ref: 'User'},
   postId: {type: Schema.Types.ObjectId, ref: 'Post'},
   goodToExchange: {type: Schema.Types.ObjectId, ref: 'Post'},
-  //pointsEstimate: String,
+  pointsEstimate: Number,
   messages: String,
   status: {
     type: String,
@@ -23,6 +23,13 @@ const offerSchema = Schema({
 
 offerSchema.virtual('alreadyanswered').get(function() {
   if (this.status !== 'Pending') {
+    return true;
+  } else {
+    return false;
+  }
+});
+offerSchema.virtual('offerchoosed').get(function() {
+  if (this.goodToExchange) {
     return true;
   } else {
     return false;

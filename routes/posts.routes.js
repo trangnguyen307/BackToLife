@@ -129,24 +129,52 @@ router.post('/:id/offer', function (req, res, next) {
   const id = req.params.id;
   console.log("req.body:", req.body)
 
-  Post.findById(id).then(post => {
-    //const creatorId = post.creatorId
-    Offer.create({
-        postId: req.params.id,
-        creatorId: post.creatorId,
-        authorId: req.session.currentUser._id,
-        goodToExchange: req.body.goodToExchange,
-        //pointsEstimate: req.body.pointsEstimate,
-        messages: req.body.messages
-      })
-        .then(offer => {
-          console.log('offer:', offer)
-          res.redirect(`/posts/categories`);
+  
+    Post.findById(id)
+      .then(post => {
+        User.findById(req.session.currentUser._id)
+        .then(userFromDb => {
+          if (userFromDb.mypoints < req.body.pointsEstimate) {
+            Post.find({creatorId:req.session.currentUser})
+            .then(postsFromDb => {
+              res.render('posts/offer', {
+                userInSession: req.session.currentUser,
+                post: post,
+                posts: postsFromDb,
+                errorMessage:"You don't have enough flowers to make this offer!"}) 
+              })
+            .catch(next)
+          } else {
+            console.log("req.body.goodToExchange      ", req.body.goodToExchange)
+            let goodToExchange;
+            if (req.body.goodToExchange && req.body.goodToExchange !== '--Select--') {
+              goodToExchange = req.body.goodToExchange;
+            } 
+            let pointsEstimate;
+            if (req.body.pointsEstimate) {
+              pointsEstimate = req.body.pointsEstimate;
+            } else {
+              pointsEstimate = 0;
+            }
+            Offer.create({
+              postId: req.params.id,
+              creatorId: post.creatorId,
+              authorId: req.session.currentUser._id,
+              goodToExchange: goodToExchange,
+              pointsEstimate: pointsEstimate,
+              messages: req.body.messages
+            })
+            .then(offer => {
+              console.log('offer:', offer)
+              res.redirect(`/posts/categories`);
+            })
+            .catch(next);
+          }
         })
-        .catch(next)
-      ;
-
-  }).catch(next)
+        .catch(next);
+    
+      }).catch(next)
+  
   
 });
 

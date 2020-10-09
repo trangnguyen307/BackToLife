@@ -3,7 +3,7 @@
 {{#if userInSession}}
     <div id="dashboardheader">
     <h1>My dashboard </h2>
-    <h2>My points: {{ userInSession.points}}</h2>
+    <h2>My flowers: {{ userInSession.mypoints}}</h2>
     </div>
     <section class ="myrequests">
         
@@ -36,11 +36,18 @@
             <li>
                 <p>From: <a href="/profile/{{authorId.id}}" target="blank">{{this.authorId.username}}</a></p>
                 <p>For (postId): <a href="/posts/{{postId.id}}">{{this.postId.title}}</a></p>
-                <p>Offer: <a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a></p>
+                {{!-- <p>Offer: <a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a></p> --}}
                 <p>Messages: {{this.messages}}</p>
                 <p>Status: {{this.status}}</p>
                 {{#unless this.alreadyanswered }}
                 <form action="/offers/{{this.id}}/response" method="POST">
+                <label for="offer">Offers:</label>
+                {{#if offerchoosed}}
+                <input type="radio" name="offer" value={{this.goodToExchange.id}}><a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a>
+                {{else}}
+                <input type="radio" name="offer" value="nothing">Nothing
+                {{/if}}
+                <input type="radio" name="offer" value={{this.pointsEstimate}}> {{this.pointsEstimate}} flowers
                 <input type="radio" name="response" value="accepte">Accept
                 <input type="radio" name="response" value="decline">Decline
                 <p><button>Send</button></p>

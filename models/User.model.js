@@ -36,8 +36,8 @@ const userSchema = new Schema(
       type: Number,
       default: 0}, 
     mypoints: {
-      type: String,
-      default: '2'},
+      type: Number,
+      default: 2},
     // add password property here
   },
   {
