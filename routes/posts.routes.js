@@ -81,7 +81,7 @@ router.get('/categories', (req,res,next) => {
         userInSession: req.session.currentUser,
         cats:cats
       })
-      .catch(err =>next(err));
+      .catch(err => next(err));
     });
   })
 

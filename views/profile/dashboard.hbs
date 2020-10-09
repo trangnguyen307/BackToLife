@@ -1,14 +1,12 @@
 <div class ="dashboard">
 
 {{#if userInSession}}
-   
+    <div id="dashboardheader">
     <h1>My dashboard </h2>
-
     <h2>My points: {{ userInSession.points}}</h2>
-
+    </div>
     <section class ="myrequests">
         
-
         <div class ="requestpart">
             <h2>My requests</h2>
             <ol>
@@ -45,23 +43,21 @@
                 <form action="/offers/{{this.id}}/response" method="POST">
                 <input type="radio" name="response" value="accepte">Accept
                 <input type="radio" name="response" value="decline">Decline
-                <button>Send</button>
+                <p><button>Send</button></p>
                 </form>
                 {{/unless}}
             </li>
             {{/each}}
             </ol>
         </div>
+    </section>
 
-        <div class="endpart">
-            <button>
+        <div id="endlink">
                 <a href="/profile/myprofile">Go back to my profile</a>
-            </button>
-
             {{else}}
                 <p>Still no logged in user, sorry!</p>
                 <a href="/login">Please log in to see your profile</a>
             {{/if}}
         </div>
-    </section>
+    
 </div>
