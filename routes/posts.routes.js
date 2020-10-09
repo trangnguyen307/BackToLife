@@ -19,17 +19,22 @@ router.get('/new', function (req, res, next) {
   res.render('posts/new',{userInSession: req.session.currentUser});
 });
 
-router.post('/new', fileUploader.fields([{name:'pic1'},{name:'pic2'}]), function (req, res, next) {
+router.post('/new', fileUploader.fields([{name:'pic'}]), function (req, res, next) {
   if (!req.session.currentUser) {
     return next(new Error('You must be logged to create a post'));
   }
   console.log('req.files.path:   ',req.files)
   console.log('creatorId:', req.session.currentUser._id)
+  let picURL = [req.files.pic[0]];
+  
+  if (req.files.pic[1]) {
+    picURL.push(req.files.pic[1]);
+  }
   Post.create({
     title: req.body.title,
     creatorId: req.session.currentUser._id,
     description: req.body.description,
-    picURL: [req.files.pic1[0],req.files.pic2[0]],
+    picURL: picURL,
     pointsEstimate:req.body.pointsEstimate,
     city: req.body.city,
     categories: req.body.categories,
@@ -81,9 +86,10 @@ router.get('/categories', (req,res,next) => {
         userInSession: req.session.currentUser,
         cats:cats
       })
-      .catch(err =>next(err));
-    });
-  })
+      
+    })
+    .catch(err =>next(err));
+  });
 
 
 router.post('/categories', (req,res,next) => {
@@ -248,6 +254,12 @@ router.get('/:id', function (req, res, next) {
       const id = post.creatorId;
       User.findById(id).then(userFromDb => {
         let showbuttonoffer = true;
+        let showimage2;
+        if (post.picURL.length === 2) {
+          showimage2 = true;
+        } else {
+          showimage2 = false;
+        }
         if (req.session.currentUser && req.session.currentUser._id === userFromDb.id) {
           showbuttonoffer = false;
         }
@@ -255,6 +267,7 @@ router.get('/:id', function (req, res, next) {
           post: post,
           userInSession: req.session.currentUser,
           userFromDb: userFromDb,
+          showimage2:showimage2,
           showbuttonoffer:showbuttonoffer
         })
       }).catch(next);

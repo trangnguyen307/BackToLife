@@ -2,9 +2,11 @@
   
   <article>
     <img src={{post.picURL.0.path}} id='showpost-img1'>
+    {{#if showimage2}}
     <img src={{post.picURL.1.path}} id='showpost-img2'>
     <img src ='../../images/previous.png'onclick="showImage()" id='showpost-previous'>
     <img src ='../../images/next.png'onclick="showImage()" id='showpost-next'>
+    {{/if}}
   </article>
 
   
