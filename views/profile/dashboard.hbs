@@ -15,11 +15,11 @@
                 <p>Send to (creatorId): {{this.creatorId.username}}</p>
                 <p>For (postId): {{this.postId.title}}</p>
                 <p>Offer: <a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a></p>
-                <p>Message: {{this.messages}}</p>
-                <p>Status: {{this.status}}</p>
+                <p>Message: <span>{{this.messages}}</span> </p>
+                <p id="status">Status: {{this.status}}</p>
                 
                 {{#unless this.alreadyanswered }}
-                <a href="/posts/{{this.id}}/editoffer">Edit</a>
+                <p><a href="/posts/{{this.id}}/editoffer">Edit</a></p>
                 <form action="/posts/{{this.id}}/deleteoffer" method="POST">
                 <button>Cancel</button>
                 </form>
@@ -33,12 +33,13 @@
             <h2>Propositions to check</h2>
             <ol>
             {{#each propositions}}
+            
             <li>
                 <p>From: <a href="/profile/{{authorId.id}}" target="blank">{{this.authorId.username}}</a></p>
                 <p>For (postId): <a href="/posts/{{postId.id}}">{{this.postId.title}}</a></p>
                 <p>Offer: <a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a></p>
-                <p>Messages: {{this.messages}}</p>
-                <p>Status: {{this.status}}</p>
+                <p>Message: <span>{{this.messages}}</span></p>
+                <p id="status">Status: {{this.status}}</p>
                 {{#unless this.alreadyanswered }}
                 <form action="/offers/{{this.id}}/response" method="POST">
                 <input type="radio" name="response" value="accepte">Accept

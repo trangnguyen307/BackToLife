@@ -1,23 +1,26 @@
+<div class ="myprofileedit">
+
+
 {{#if userInSession}}
 
-<h2>Edit {{userInSession.username}} profile info </h2>
+<h1>Edit my profile information </h1>
 
 <form action="/profile/myprofile-edit" method="POST" enctype="multipart/form-data">
 <p>
     <label>
-      My photo
+      MY PHOTO <br>
       <input type="file" name="photo">
     </label>
 </p>
 <p>
     <label>
-      City
+      CITY <br>
       <input type="text" name="city" placeholder="Your city" />
     </label>
 </p>
 <p>
     <label>
-      Description
+      DESCRIPTION <br>
       <textarea name="mydescription" placeholder="Your description"></textarea>
     </label>
 </p>
@@ -28,3 +31,5 @@
     <p>Still no logged in user, sorry!</p>
     <a href="/login">Please log in to see your profile</a>
 {{/if}}
+
+</div>

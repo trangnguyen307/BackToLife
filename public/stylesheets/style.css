@@ -495,9 +495,10 @@ button {
 #post-an-offer {
   display: block;
   text-align: center;
-  margin: 30px auto 50px auto;
   background: rgba(196, 244, 255, 0.87);
-  width: 35em; }
+  width: 50%;
+  margin: auto;
+  padding: 50px; }
 
 #post-an-offer label {
   display: block;
@@ -724,7 +725,8 @@ button {
   text-align: center; }
 
 .myrequests {
-  display: flex; }
+  display: flex;
+  margin-left: -40px; }
 
 .myrequests ol {
   list-style: none;
@@ -739,8 +741,10 @@ button {
 
 .myrequests li {
   counter-increment: li;
-  padding: 20px;
-  border: 1px solid #63E3FF; }
+  padding: 20px; }
+
+.requestpart li .requestPending {
+  background-color: orange; }
 
 .requestpart {
   flex: 50%;
@@ -757,7 +761,22 @@ button {
   padding: 30px; }
 
 .propositionpart form input {
-  width: 80px; }
+  width: 50px; }
+
+.myrequests li:nth-of-type(odd) {
+  background-color: #f0ffff;
+  border: 5px solid #2720270a; }
+
+.myrequests li:nth-of-type(even) {
+  background-color: #2720270a;
+  border: 5px solid rgba(196, 244, 255, 0.87); }
+
+.dashboard span {
+  font-style: italic; }
+
+#status {
+  background-color: yellow;
+  display: inline-block; }
 
 /*
   ______    _ _ _      __                     
@@ -767,5 +786,23 @@ button {
  | |___| (_| | | |_  | || (_) | |  | | | | | |
  |______\__,_|_|\__| |_| \___/|_|  |_| |_| |_|
 */
+.myprofileedit {
+  display: block;
+  background-color: rgba(196, 244, 255, 0.87);
+  width: 50%;
+  margin: auto;
+  padding: 50px;
+  text-align: center; }
+
+.myprofileedit label {
+  display: block;
+  margin-bottom: 10px; }
+
+.myprofileedit input, textarea {
+  margin-top: 10px;
+  width: 420px;
+  padding: 10px;
+  font-size: 16px;
+  font-family: "Podkova", serif; }
 
 /*# sourceMappingURL=style.css.map */

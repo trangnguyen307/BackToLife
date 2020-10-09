@@ -671,9 +671,12 @@ padding-left: 50px;
   //border: 1px solid;
   display: block;
   text-align: center;
-  margin: 30px auto 50px auto;
+  // margin: 50px auto 50px auto;
   background:rgba(196, 244, 255, 0.87);
-  width: 35em;
+  width: 50%;
+  margin: auto;
+  padding: 50px;
+  
 }
 #post-an-offer label {
  display: block;
@@ -899,7 +902,6 @@ padding-left: 50px;
     width: 85%;
     margin: auto;
     padding-bottom: 40px;
-    
 }
 
 #dashboardheader {
@@ -918,7 +920,7 @@ padding-left: 50px;
 }
 .myrequests {
   display:flex;
-  
+  margin-left: -40px;
 }
  
 .myrequests ol {
@@ -937,10 +939,12 @@ padding-left: 50px;
 
 .myrequests li {
   counter-increment: li;
-  padding: 20px;
-  border: 1px solid #63E3FF;
+  padding: 20px;  
 }
 
+.requestpart li .requestPending {
+  background-color: orange;
+}
 
 .requestpart {
   flex:50%;
@@ -961,9 +965,38 @@ padding-left: 50px;
 }
 
 .propositionpart form input {
-  width: 80px;
+  width: 50px;
   
 }
+
+.myrequests li:nth-of-type(odd){
+  background-color: #f0ffff;
+  border: 5px solid #2720270a;
+}
+
+.myrequests li:nth-of-type(even){
+  background-color: #2720270a;
+  border: 5px solid rgba(196, 244, 255, 0.87);
+}
+
+.dashboard span {
+  font-style: italic;
+}
+
+#status {
+  background-color: yellow;
+  display: inline-block;
+}
+
+
+// {{#if this.status = "Pending"}}
+// <li class = "requestPending">
+// {{else if}}
+// <li class = "requestAccepted">
+// {{else}}
+// <li class = "requestRefused"></li>
+// {{/if}}
+
 
 
 /*
@@ -974,4 +1007,27 @@ padding-left: 50px;
  | |___| (_| | | |_  | || (_) | |  | | | | | |
  |______\__,_|_|\__| |_| \___/|_|  |_| |_| |_|
 */
+
+.myprofileedit {
+  display: block;
+  background-color: rgba(196, 244, 255, 0.87);
+  width: 50%;
+  margin: auto;
+  padding: 50px;
+  text-align: center;
+}
+
+.myprofileedit label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.myprofileedit input, textarea{
+  margin-top: 10px;
+  width: 420px;
+  padding: 10px;
+  font-size: 16px;
+  font-family: "Podkova", serif;
+  
+}
 
