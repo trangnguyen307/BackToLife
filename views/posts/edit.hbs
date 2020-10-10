@@ -1,15 +1,16 @@
+<div class ="mypostedit">
+
 {{#if userInSession}}
 
-<h2>Edit for: {{post.title}}</h2>
+<h1>Edit for: {{post.title}}</h1>
 
 <form action="/posts/{{post._id}}/edit" method="POST" enctype="multipart/form-data">
 
-  
   <p>
-    Categories:
+    CATEGORY <br>
     <select name="categories">
       
-        <option value="">--Please choose an option--</option>  
+        <option value="">--Select a category--</option>  
         {{#each cats}}
           <option value={{this.name}} {{#if selected}}selected{{/if}}>{{this.name}}</option>
         {{/each}}
@@ -18,27 +19,27 @@
   
   <p>
     <label>
-      Title:
-      <textarea name="title">{{post.title}}</textarea>
+      TITLE <br>
+      <input type="text" name="title" value="{{post.title}}"></input>
     </label>
   </p>
 
   <p>
     <label>
-      Description:
+      DESCRIPTION <br>
       <textarea name="description">{{post.description}}</textarea>
     </label>
   </p>
   <p>
     <label>
-      City:
+      CITY <br>
       <input type="text" name="city" value="{{post.city}}">
     </label>
   </p>
 
   <p>
     <label>
-      Points Estimated:
+      FLOWERS POINTS ESTIMATED <br>
       <input type="text" name="pointsEstimate" value={{post.pointsEstimate}}>
     </label>
   </p>
@@ -58,3 +59,5 @@
     <p>Still no logged in user, sorry!</p>
     <a href="/login">Please log in to see your profile</a>
 {{/if}}
+
+</div>

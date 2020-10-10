@@ -155,7 +155,7 @@ router.post('/offers/:id/response', (req, res, next) => {
   if (req.body.response === 'accepte') {
     status = 'Accepted';
   } else if (req.body.response === 'decline') {
-    status = 'Refused';
+    status = 'Declined';
   }
   let goodToExchange,pointsEstimate=0;
   if (req.body.offer ==='nothing') {

@@ -1,14 +1,16 @@
+<div class ="myofferedit">
+
 {{#if userInSession}}
-<h1>Edit the offer!!!</h1>
+<h1>Edit the offer</h1>
 <h2>Send to: {{offer.creatorId.username}}</h2>
-<h2>For: {{offer.postId.title}}</h2>
-<h3>You are willing to give:</h3>
+<h2>For the post: {{offer.postId.title}}</h2>
+
 <form action="/posts/{{offer.id}}/editoffer" method="POST">
   <p>
     <label>
-      Your goods or services:
+      Your good or service in exchange: <br>
       <select name="goodToExchange">
-        <option>--Select--</option>
+        <option>--Select in what you have--</option>
         {{#each posts}}
         <option value="{{this.id}}">{{this.title}}</option>
         {{/each}}
@@ -17,7 +19,7 @@
   </p>
 
   <p>
-    <label for="messages">Messages:</label>
+    <label for="messages">Message:</label>
     <textarea name="messages" placeholder="Your messages...">{{offer.messages}}</textarea>
   </p>
 
@@ -27,3 +29,5 @@
     <p>Still no logged in user, sorry!</p>
     <a href="/login">Please log in to see your profile</a>
 {{/if}}
+
+</div>

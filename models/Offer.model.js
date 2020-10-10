@@ -11,7 +11,7 @@ const offerSchema = Schema({
   messages: String,
   status: {
     type: String,
-    enum: ['Pending', 'Accepted', 'Refused'],
+    enum: ['Pending', 'Accepted', 'Declined'],
     default: 'Pending'
   }
 },
@@ -31,7 +31,7 @@ offerSchema.virtual('alreadyanswered').get(function() {
 offerSchema.virtual('acceptOrDecline').get(function() {
   if (this.status === 'Accepted') {
     return true;
-  } else if (this.status === 'Refused') {
+  } else if (this.status === 'Declined') {
     return false;
   }
 });

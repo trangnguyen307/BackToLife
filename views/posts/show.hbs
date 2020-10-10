@@ -14,8 +14,11 @@
   <section>
     <div>
       <h2>{{post.title}}</h2>
+      <h3>City: {{post.city}}</h3>
       <p><span style="font-weight: bold;" >Numbers of flowers suggested:</span> {{post.pointsEstimate}}</p>
+      
     </div>
+
     <hr align="left">
    
     <p id='showpost-main'><span style="font-weight: bold;" >Description:</span> {{post.description}}</p>
@@ -39,11 +42,10 @@
     </div>
 
     <hr align="left">
-
-
+    
     <p>Share this post with your friends</p>
-    <p id="sharepost"> 
-    http://ironjs.herokuapp.com/posts/{{this.post.id}}</p>    
+    <span id="sharepost"> 
+    http://ironjs.herokuapp.com/posts/{{this.post.id}}</span>    
 
     <button onclick="copyToClipboard('#sharepost')"> Click to copy URL in your clipboard !</button> 
     

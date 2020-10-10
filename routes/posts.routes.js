@@ -245,6 +245,7 @@ router.get('/:id/edit',(req,res,next) => {
 
 router.post('/:id/edit', fileUploader.fields([{name:'pic'}]), (req,res,next) => {
   console.log('req.body:   ',req.body)
+
   Post.findById(req.params.id)
     .then(postFromDb => {
       let picURL= postFromDb.picURL;
@@ -266,9 +267,10 @@ router.post('/:id/edit', fileUploader.fields([{name:'pic'}]), (req,res,next) => 
       },{new:true})
         .then(postUpdated => {
           console.log('postupdate:  ',postUpdated)
-          res.redirect ('/profile/myprofile')
+          res.redirect ('/posts/${postUpdated.id}')
         })
         .catch(err => next(err))
+
     })
     .catch(err => next(err))
 })
