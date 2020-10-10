@@ -6,6 +6,7 @@ const Post = require('../models/Post.model');
 const Offer = require('../models/Offer.model');
 const fileUploader = require('../configs/cloudinary.config');
 const { Router } = require('express');
+const { connections } = require('mongoose');
 
 
 
@@ -66,7 +67,7 @@ router.get('/categories', (req,res,next) => {
     
   }
   if (city) {
-    query.city = req.query.city
+    query.city = {"$regex": req.query.city, "$options":"i"}
   }
 
   Post.find(query).sort({createdAt:-1})
@@ -147,7 +148,7 @@ router.post('/:id/offer', function (req, res, next) {
           } else {
             console.log("req.body.goodToExchange      ", req.body.goodToExchange)
             let goodToExchange;
-            if (req.body.goodToExchange && req.body.goodToExchange !== '--Select--') {
+            if (req.body.goodToExchange && req.body.goodToExchange !== '--Select in what you have--') {
               goodToExchange = req.body.goodToExchange;
             } 
             let pointsEstimate;
@@ -189,6 +190,16 @@ router.get('/:offerid/editoffer',(req,res,next) => {
     .then(offer => {
       console.log(req.session.currentUser._id)
       Post.find({creatorId: req.session.currentUser._id}).then (postsFromDb => {
+        console.log('postsFromDb:', postsFromDb)
+        console.log('offer.postId', offer.postId)
+      
+      postsFromDb.forEach(post => {
+        console.log('post.id:', post.id)
+        console.log('offer.goodToExchange.id', offer.goodToExchange.id)
+        if (offer.goodToExchange.id === post.id) {
+          post.inselected = true;
+        }
+      })
         res.render('posts/offer-edit',{
           userInSession: req.session.currentUser,
           offer:offer,
@@ -201,16 +212,54 @@ router.get('/:offerid/editoffer',(req,res,next) => {
 })
 
 router.post('/:offerid/editoffer',(req,res,next) => {
-  Offer.findByIdAndUpdate(req.params.offerid, {
-    goodToExchange: req.body.goodToExchange,
-    messages:req.body.messages
-  }, {new:true})
-    .then(offerUpdated => {
-      console.log('offerUpdated:    ',offerUpdated)
-      res.redirect('/profile/dashboard')
-    })
-    .catch(err=>next(err))
+  let goodToExchange;
+  if (req.body.goodToExchange && req.body.goodToExchange !== '--Select in what you have--') {
+    goodToExchange = req.body.goodToExchange;
+  } 
+  let pointsEstimate;
+  if (req.body.pointsEstimate) {
+    pointsEstimate = req.body.pointsEstimate;
+  } else {
+    pointsEstimate = 0;
+  }
+  if (req.body.pointsEstimate<= req.session.currentUser.mypoints) {
+    Offer.findByIdAndUpdate(req.params.offerid, {
+      goodToExchange: goodToExchange,
+      pointsEstimate: req.body.pointsEstimate,
+      messages:req.body.messages
+    }, {new:true})
+      .then(offerUpdated => {
+        console.log('offerUpdated:    ',offerUpdated)
+        res.redirect('/profile/dashboard')
+      })
+      .catch(err=>next(err))
+  } else {
+    Offer.findById(req.params.offerid).populate('creatorId').populate('postId').populate('goodToExchange')
+    .then(offer => {
+      console.log(req.session.currentUser._id)
+      Post.find({creatorId: req.session.currentUser._id}).then (postsFromDb => {
+        console.log('postsFromDb:', postsFromDb)
+        console.log('offer.postId', offer.postId)
+      
+      postsFromDb.forEach(post => {
+        console.log('post.id:', post.id)
+        console.log('offer.goodToExchange.id', offer.goodToExchange.id)
+        if (offer.goodToExchange.id === post.id) {
+          post.inselected = true;
+        }
+      })
+        res.render('posts/offer-edit',{
+          userInSession: req.session.currentUser,
+          offer:offer,
+          posts:postsFromDb,
+          errorMessage: "You don't have enough flowers to make this offer!"
+        })
+      })
+  }).catch(err=>next(err))
+}
 })
+  
+
 
 
 //

@@ -240,7 +240,7 @@ router.get('/profile/:profileid', (req, res, next) => {
     Post.find({creatorId:id})
     .then (posts => {
       if (req.session.currentUser._id===req.params.profileid) {
-        res.render('profile/myprofile',{userInSession:req.session.currentUser,posts})
+        res.redirect('/profile/myprofile')
       } else {
         res.render('profile/profile', {
           userInSession: req.session.currentUser,

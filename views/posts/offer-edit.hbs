@@ -12,18 +12,26 @@
       <select name="goodToExchange">
         <option>--Select in what you have--</option>
         {{#each posts}}
-        <option value="{{this.id}}">{{this.title}}</option>
+        <option value="{{id}}" {{#if inselected}} selected {{/if}}>{{this.title}}</option>
         {{/each}}
       </select>
     </label>
   </p>
-
+   <p>
+    <label for="pointsEstimate">Or number of flowers:</label>
+    <input type="text" name="pointsEstimate" id="pointsEstimate" value="{{offer.pointsEstimate}}"/>
+  </p>
   <p>
     <label for="messages">Message:</label>
     <textarea name="messages" placeholder="Your messages...">{{offer.messages}}</textarea>
   </p>
 
+ 
+
   <button type="submit">Send</button>
+  {{#if errorMessage}}
+    <p class="error">{{errorMessage}}</p>
+  {{/if}}
 </form>
 {{else}}
     <p>Still no logged in user, sorry!</p>
