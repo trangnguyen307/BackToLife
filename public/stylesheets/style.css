@@ -733,6 +733,10 @@ button {
   margin: auto;
   padding-bottom: 40px; }
 
+#dashboardheader img {
+  height: 30px;
+  position: absolute; }
+
 #dashboardheader {
   background-color: rgba(196, 244, 255, 0.87);
   height: 200px; }
@@ -795,8 +799,16 @@ button {
 .dashboard span {
   font-style: italic; }
 
-#status {
+.accepted {
   background-color: yellow;
+  display: inline-block; }
+
+.declined {
+  background-color: lightgrey;
+  display: inline-block; }
+
+.pending {
+  background-color: orange;
   display: inline-block; }
 
 /*
@@ -833,10 +845,26 @@ button {
 
 .label-file {
   cursor: pointer;
-  color: #00b1ca;
-  font-weight: bold; }
+  color: black;
+  font-weight: bold;
+  border: 1px solid grey;
+  border-radius: 2px;
+  margin: auto;
+  background-color: white;
+  width: 420px; }
 
-.label-file:hover {
+.label-file span:hover {
   color: #25a5c4; }
+
+.input-file {
+  display: none; }
+
+.label-file img {
+  width: 40px; }
+
+.label-file span {
+  position: relative;
+  top: -13px;
+  color: lightgray; }
 
 /*# sourceMappingURL=style.css.map */

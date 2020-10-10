@@ -3,7 +3,7 @@
 {{#if userInSession}}
     <div id="dashboardheader">
     <h1>My dashboard </h2>
-    <h2>My flowers: {{ userInSession.mypoints}}</h2>
+    <h2>My flowers: {{ userInSession.mypoints}} <span><img src="https://res.cloudinary.com/dyybiq3aw/image/upload/v1601751700/project2-upload/flower_km7avz.png" alt ="logo"></span></h2>
     </div>
     <section class ="myrequests">
         
@@ -36,7 +36,16 @@
                 {{/if}}
                 </p>
                 <p>Message: <span>{{this.messages}}</span></p>
-                <p id="status">Status: {{this.status}}</p>
+
+                {{#if alreadyanswered}}
+                    {{#if acceptOrDecline}}
+                     <p class='accepted'>Status: {{this.status}}</p>
+                    {{else}}
+                     <p class='declined'>Status: {{this.status}}</p>
+                    {{/if}}
+                {{else}}
+                <p class='pending'>Status: {{this.status}}</p>
+                {{/if}}
                 
                 {{#unless this.alreadyanswered }}
                 <p><a href="/posts/{{this.id}}/editoffer">Edit</a></p>
