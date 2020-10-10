@@ -243,19 +243,32 @@ router.get('/:id/edit',(req,res,next) => {
 
 })
 
-router.post('/:id/edit', (req,res,next) => {
+router.post('/:id/edit', fileUploader.fields([{name:'pic'}]), (req,res,next) => {
   console.log('req.body:   ',req.body)
-  Post.findOneAndUpdate({_id:req.params.id}, {
-    categories: req.body.categories,
-    title: req.body.title,
-    description: req.body.description,
-    //picURL: req.file.path,
-    pointsEstimate:req.body.pointsEstimate,
-    city: req.body.city
-  },{new:true})
-    .then(postUpdated => {
-      console.log('postupdate:  ',postUpdated)
-      res.redirect ('/profile/myprofile')
+  Post.findById(req.params.id)
+    .then(postFromDb => {
+      let picURL= postFromDb.picURL;
+      console.log('postFromDb.picURL:   ',postFromDb.picURL);
+      if (req.files.pic) {
+        console.log('req.files:   ', req.files.pic.length)
+        picURL = [req.files.pic[0]];
+        if (req.files.pic[1]) {
+          picURL.push(req.files.pic[1]);
+        }
+      }
+      Post.findOneAndUpdate({_id:req.params.id}, {
+        categories: req.body.categories,
+        title: req.body.title,
+        description: req.body.description,
+        picURL: picURL,
+        pointsEstimate:req.body.pointsEstimate,
+        city: req.body.city
+      },{new:true})
+        .then(postUpdated => {
+          console.log('postupdate:  ',postUpdated)
+          res.redirect ('/profile/myprofile')
+        })
+        .catch(err => next(err))
     })
     .catch(err => next(err))
 })
