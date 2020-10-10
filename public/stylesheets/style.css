@@ -831,17 +831,22 @@ button {
 .myprofileedit label,
 .mypostedit label,
 .myofferedit label,
-.myoffer label {
+.myoffer label,
+.myofferedit label {
   display: block; }
 
 .myprofileedit input, textarea,
 .mypostedit input, select, textarea,
-.myoffer input, textarea {
+.myoffer input, textarea
+.myofferedit input {
   margin-top: 10px;
   width: 420px;
   padding: 10px;
   font-size: 16px;
   font-family: "Podkova", serif; }
+
+#inputflower {
+  width: 420px; }
 
 .label-file {
   cursor: pointer;
