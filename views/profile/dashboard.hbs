@@ -67,7 +67,16 @@
                 {{/if}}
                 
                 <p>Messages: {{this.messages}}</p>
-                <p>Status: {{this.status}}</p>
+                {{#if alreadyanswered}}
+                    {{#if acceptOrDecline}}
+                     <p class='accepted'>Status: {{this.status}}</p>
+                    {{else}}
+                     <p class='refused'>Status: {{this.status}}</p>
+                    {{/if}}
+                {{else}}
+                <p class='pending'>Status: {{this.status}}</p>
+                {{/if}}
+                
                 {{#unless this.alreadyanswered }}
                 <form action="/offers/{{this.id}}/response" method="POST">
                     <p>

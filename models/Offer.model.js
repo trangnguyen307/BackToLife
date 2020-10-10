@@ -28,6 +28,14 @@ offerSchema.virtual('alreadyanswered').get(function() {
     return false;
   }
 });
+offerSchema.virtual('acceptOrDecline').get(function() {
+  if (this.status === 'Accepted') {
+    return true;
+  } else if (this.status === 'Refused') {
+    return false;
+  }
+});
+
 offerSchema.virtual('goodToExchangeChoosed').get(function() {
   if (this.goodToExchange) {
     return true;
