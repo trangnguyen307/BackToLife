@@ -175,7 +175,7 @@ router.post('/:offerid/editoffer',(req,res,next) => {
       console.log('offerUpdated:    ',offerUpdated)
       res.redirect('/profile/dashboard')
     })
-    .catcbh(err=>next(err))
+    .catch(err=>next(err))
 })
 
 
@@ -221,7 +221,8 @@ router.post('/:id/edit', (req,res,next) => {
   },{new:true})
     .then(postUpdated => {
       console.log('postupdate:  ',postUpdated)
-      res.redirect ('/profile/myprofile')
+      res.redirect(`/posts/${postUpdated.id}`)
+
     })
     .catch(err => next(err))
 })

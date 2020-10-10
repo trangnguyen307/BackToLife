@@ -1,12 +1,13 @@
-<h1>Make an offer!!!</h1>
-<h2>For: {{post.title}}</h2>
-<h3>You are willing to give:</h3>
+<div class ="myoffer">
+
+<h1>Make an offer!</h1>
+<h2>For the post: {{post.title}}</h2>
 <form action="/posts/{{post.id}}/offer" method="POST">
   <p>
     <label>
-      Your goods or services:
+      Your good or service in exchange:
       <select name="goodToExchange">
-        <option>--Select--</option>
+        <option>--Select in what you have--</option>
         {{#each posts}}
         <option value="{{id}}">{{title}}</option>
         {{/each}}
@@ -18,7 +19,7 @@
     <input type="text" name="pointsEstimate" id="pointsEstimate" placeholder="1,2,3"/>
   </p> --}}
   <p>
-    <label for="messages">Messages:</label>
+    <label for="messages">Message:</label>
     <textarea name="messages" placeholder="Your messages..."></textarea>
   </p>
   
@@ -28,3 +29,5 @@
     <p class="error">{{errorMessage}}</p>
   {{/if}}
 </form>
+
+</div>

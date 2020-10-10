@@ -725,22 +725,23 @@ padding-left: 50px;
 #show-post hr {
   width: 250px;
   height: 2px;
-  background-color: black;
+  background-color: lightgrey;
 }
 #showpost-previous {
   width: 50px;
-  height: 50px;
   position: absolute;
   margin-left: 0px;
   margin-top: 210px;
+  object-fit: cover;
 }
 #showpost-next {
   width: 50px;
-  height: 50px;
   position: absolute;
   margin-left: 450px;
   margin-top: 210px;
+  object-fit: cover;
 }
+
 #show-post article{
   position: relative;
   height: 500px;
@@ -751,29 +752,39 @@ padding-left: 50px;
   height:500px;
   visibility:visible;
   position: absolute;
+
+  object-fit: cover;
+  // width: 300px;
+  // margin: 100px;
+
 }
 #showpost-makeoffer {
   color: black;
   background-color: rgba(196, 244, 255, 0.87);
   padding: 10px 15px;
-  float: right;
+  float: left;
 }
 #showpost-img2 {
-  //margin-left: 55px;
+  // //margin-left: 55px;
   width:500px;
   height:500px;
   visibility:visible;
   position: absolute;
+
+  object-fit: cover;
+  // width: 300px;
+  // margin: 100px;
 }
+
 #show-post section {
   margin-left: 60px;
   width: 600px;
   display: flex;
   flex-direction: column;
 }
-#show-post section div {
-  height: 100px;
-}
+// #show-post section div {
+//   height: 100px;
+// }
 #showpost-main {
   flex: 1;
 }
@@ -788,6 +799,7 @@ padding-left: 50px;
   width: 100px;
   height: 100px;
   border-radius: 50%;
+  object-fit: cover;
 }
 /*
    #                                                
@@ -1008,21 +1020,26 @@ padding-left: 50px;
  |______\__,_|_|\__| |_| \___/|_|  |_| |_| |_|
 */
 
-.myprofileedit {
+.myprofileedit, .mypostedit, .myofferedit, .myoffer {
   display: block;
   background-color: rgba(196, 244, 255, 0.87);
   width: 50%;
   margin: auto;
   padding: 50px;
+  padding-bottom: 70px;
   text-align: center;
 }
 
-.myprofileedit label {
+.myprofileedit label, 
+.mypostedit label,
+.myofferedit label,
+.myoffer label {
   display: block;
-  margin-bottom: 10px;
 }
 
-.myprofileedit input, textarea{
+.myprofileedit input, textarea,
+.mypostedit input, select, textarea, 
+.myoffer input, textarea {
   margin-top: 10px;
   width: 420px;
   padding: 10px;
@@ -1030,4 +1047,31 @@ padding-left: 50px;
   font-family: "Podkova", serif;
   
 }
+
+// .inputfile + label {
+//   font-size: 1.25em;
+//   font-weight: 700;
+//   color: white;
+//   background-color: black;
+//   display: inline-block;
+// }
+
+// .inputfile:focus + label,
+// .inputfile + label:hover {
+//   background-color: red;
+// }
+
+.label-file {
+    cursor: pointer;
+    color: #00b1ca;
+    font-weight: bold;
+}
+.label-file:hover {
+    color: #25a5c4;
+}
+
+// et on masque le input
+// .input-file {
+//     display: none;
+// }
 

@@ -28,6 +28,7 @@ offerSchema.virtual('alreadyanswered').get(function() {
     return false;
   }
 });
+
 const Offer = mongoose.model('Offer', offerSchema);
 
 
