@@ -173,12 +173,12 @@ router.post('/offers/:id/response', (req, res, next) => {
         const promises = [];
         promises.push(User.findOneAndUpdate(
           {_id:offerUpdated.creatorId.id},
-          {$inc: { transactions: 1, mypoints: Number(pointsEstimate)} },
+          {$inc: { transactions: 1, mypoints: Number(pointsEstimate)+1} },
           {new:true}
           ));
         promises.push(User.findOneAndUpdate(
           {_id:offerUpdated.authorId.id},
-          {$inc: { transactions: 1, mypoints: -Number(pointsEstimate)} },
+          {$inc: { transactions: 1, mypoints: -Number(pointsEstimate)+1} },
           {new:true}
         ));
         Promise.all(promises).then(values => res.redirect('/profile/dashboard')).catch(next)
@@ -221,9 +221,10 @@ router.post('/profile/myprofile-edit', fileUploader.single('photo'), (req, res, 
   }, {new: true})
     .then(currentUserUpdated => 
       // {console.log('test');
-      res.render('profile/myprofile', 
-      {userInSession: currentUserUpdated}
-      )
+      res.redirect('/profile/myprofile')
+      // res.render('profile/myprofile', 
+      // {userInSession: currentUserUpdated}
+      //)
     // }
       
     )

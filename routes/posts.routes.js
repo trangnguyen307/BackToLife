@@ -316,7 +316,7 @@ router.post('/:id/edit', fileUploader.fields([{name:'pic'}]), (req,res,next) => 
       },{new:true})
         .then(postUpdated => {
           console.log('postupdate:  ',postUpdated)
-          res.redirect ('/posts/${postUpdated.id}')
+          res.redirect (`/posts/${postUpdated.id}`)
         })
         .catch(err => next(err))
 
