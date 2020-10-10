@@ -2,7 +2,7 @@
 
 {{#if userInSession}}
 
-<h1>Edit for: {{post.title}}</h1>
+<h1>Edit for post: {{post.title}}</h1>
 
 <form action="/posts/{{post._id}}/edit" method="POST" enctype="multipart/form-data">
 
@@ -45,9 +45,10 @@
   </p>
 
   <p>
-    <label>
-      Picture:
-      <input type="file" multiple name="pic">
+    <label class="label-file">
+       <img src="https://res.cloudinary.com/dyybiq3aw/image/upload/v1601581026/project2-upload/photovide_utfkuw.png" alt ="nophoto">
+       <span> Click here to update 2 photos max</span>
+      <input class="input-file" type="file" multiple name="pic">
     </label>
   </p>
   

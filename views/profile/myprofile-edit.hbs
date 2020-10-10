@@ -7,8 +7,12 @@
 
 <form action="/profile/myprofile-edit" method="POST" enctype="multipart/form-data">
 <p>
+    MY PHOTO 
+</p>
+<p>
     <label class="label-file">
-      MY PHOTO <br>
+      <img src="https://res.cloudinary.com/dyybiq3aw/image/upload/v1601581026/project2-upload/photovide_utfkuw.png" alt ="nophoto">
+      <span> Click here to update your profile photo</span>
       <input class="input-file" type="file" name="photo" value="{{userInSession.myphoto}}">
     </label>
 </p>

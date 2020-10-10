@@ -939,6 +939,11 @@ padding-left: 50px;
     padding-bottom: 40px;
 }
 
+#dashboardheader img {
+  height: 30px;
+  position: absolute;
+}
+
 #dashboardheader {
   background-color: rgba(196, 244, 255, 0.87);
   height: 200px;
@@ -1018,21 +1023,20 @@ padding-left: 50px;
   font-style: italic;
 }
 
-#status {
+.accepted {
   background-color: yellow;
   display: inline-block;
 }
 
+.declined {
+  background-color: lightgrey;
+  display: inline-block;
+}
 
-// {{#if this.status = "Pending"}}
-// <li class = "requestPending">
-// {{else if}}
-// <li class = "requestAccepted">
-// {{else}}
-// <li class = "requestRefused"></li>
-// {{/if}}
-
-
+.pending{
+  background-color: orange;
+  display: inline-block;
+}
 
 /*
   ______    _ _ _      __                     
@@ -1056,13 +1060,15 @@ padding-left: 50px;
 .myprofileedit label, 
 .mypostedit label,
 .myofferedit label,
-.myoffer label {
+.myoffer label, 
+.myofferedit label {
   display: block;
 }
 
 .myprofileedit input, textarea,
 .mypostedit input, select, textarea, 
-.myoffer input, textarea {
+.myoffer input, textarea 
+.myofferedit input {
   margin-top: 10px;
   width: 420px;
   padding: 10px;
@@ -1071,30 +1077,35 @@ padding-left: 50px;
   
 }
 
-// .inputfile + label {
-//   font-size: 1.25em;
-//   font-weight: 700;
-//   color: white;
-//   background-color: black;
-//   display: inline-block;
-// }
-
-// .inputfile:focus + label,
-// .inputfile + label:hover {
-//   background-color: red;
-// }
+#inputflower {
+  width: 420px;
+}
 
 .label-file {
     cursor: pointer;
-    color: #00b1ca;
+    color: black;
     font-weight: bold;
+    border: 1px solid grey;
+    border-radius: 2px;
+    margin: auto;
+    background-color: white;
+    width: 420px;
 }
-.label-file:hover {
+.label-file span:hover {
     color: #25a5c4;
 }
 
-// et on masque le input
-// .input-file {
-//     display: none;
-// }
+.input-file {
+    display: none;
+}
+
+.label-file img {
+  width: 40px; 
+}
+
+.label-file span {
+  position: relative;
+  top: -13px;
+  color: lightgray;
+}
 
