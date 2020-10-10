@@ -4,15 +4,14 @@
 <h2>For the post: {{post.title}}</h2>
 <form action="/posts/{{post.id}}/offer" method="POST">
   <p>
-    <label>
-      Your good or service in exchange:
+    <label>Your good or service in exchange: </label>
       <select name="goodToExchange">
         <option>--Select in what you have--</option>
         {{#each posts}}
         <option value="{{id}}">{{title}}</option>
         {{/each}}
       </select>
-    </label>
+   
   </p>
   <p>
     <label for="pointsEstimate">Or number of flowers:</label>
