@@ -28,8 +28,15 @@ offerSchema.virtual('alreadyanswered').get(function() {
     return false;
   }
 });
-offerSchema.virtual('offerchoosed').get(function() {
+offerSchema.virtual('goodToExchangeChoosed').get(function() {
   if (this.goodToExchange) {
+    return true;
+  } else {
+    return false;
+  }
+});
+offerSchema.virtual('flowerChoosed').get(function() {
+  if (this.pointsEstimate) {
     return true;
   } else {
     return false;

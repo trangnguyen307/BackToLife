@@ -12,9 +12,29 @@
             <ol>
             {{#each requests}}
             <li>
-                <p>Send to (creatorId): {{this.creatorId.username}}</p>
-                <p>For (postId): {{this.postId.title}}</p>
-                <p>Offer: <a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a></p>
+                <p>Send to (creatorId): <a href="/profile/{{creatorId.id}}" target="blank">{{this.creatorId.username}}</a></p>
+                <p>For (postId): <a href="/posts/{{postId.id}}" target="blank">{{this.postId.title}}</a></p>
+                <p>
+                {{#if alreadyanswered}}
+                    {{#if goodToExchangeChoosed}}
+                        <p>Offer: <a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</p>
+                    {{/if}}
+
+                    {{#if flowerChoosed}}
+                        <p>Offer: {{this.pointsEstimate}} flowers</p>
+                    {{/if}}
+                {{else}}
+                    <p>Offers:
+                        {{#if goodToExchangeChoosed}}
+                        <a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a>
+                    {{else}}
+                        Nothing
+                    {{/if}}
+                        Or {{this.pointsEstimate}} flowers
+
+                    </p>
+                {{/if}}
+                </p>
                 <p>Message: {{this.messages}}</p>
                 <p>Status: {{this.status}}</p>
                 
@@ -36,21 +56,38 @@
             <li>
                 <p>From: <a href="/profile/{{authorId.id}}" target="blank">{{this.authorId.username}}</a></p>
                 <p>For (postId): <a href="/posts/{{postId.id}}">{{this.postId.title}}</a></p>
-                {{!-- <p>Offer: <a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a></p> --}}
+                {{#if alreadyanswered}}
+                    {{#if goodToExchangeChoosed}}
+                        <p>Offer: <a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</p>
+                    {{/if}}
+
+                    {{#if flowerChoosed}}
+                        <p>Offer: {{this.pointsEstimate}} flowers</p>
+                    {{/if}}
+                {{/if}}
+                
                 <p>Messages: {{this.messages}}</p>
                 <p>Status: {{this.status}}</p>
                 {{#unless this.alreadyanswered }}
                 <form action="/offers/{{this.id}}/response" method="POST">
-                <label for="offer">Offers:</label>
-                {{#if offerchoosed}}
-                <input type="radio" name="offer" value={{this.goodToExchange.id}}><a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a>
-                {{else}}
-                <input type="radio" name="offer" value="nothing">Nothing
-                {{/if}}
-                <input type="radio" name="offer" value={{this.pointsEstimate}}> {{this.pointsEstimate}} flowers
-                <input type="radio" name="response" value="accepte">Accept
-                <input type="radio" name="response" value="decline">Decline
-                <p><button>Send</button></p>
+                    <p>
+                        <label>Offers: 
+                            {{#if goodToExchangeChoosed}}
+                            <input type="radio" name="offer" value={{this.goodToExchange.id}}><a href="/posts/{{this.goodToExchange.id}}" target="blank">{{this.goodToExchange.title}}</a>
+                            {{else}}
+                            <input type="radio" name="offer" value="nothing">Nothing
+                            {{/if}}
+                            <input type="radio" name="offer" value={{this.pointsEstimate}}> {{this.pointsEstimate}} flowers
+                       </label> 
+                    </p>
+                    <p>
+                        <label>
+                            Your reponse:
+                            <input type="radio" name="response" value="accepte">Accept
+                            <input type="radio" name="response" value="decline">Decline
+                        </label>
+                    </p>
+                    <p><button>Send</button></p>
                 </form>
                 {{/unless}}
             </li>
