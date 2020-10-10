@@ -210,8 +210,12 @@ router.post('/profile/myprofile-edit', fileUploader.single('photo'), (req, res, 
   // const {city, mydescription} = req.body;
   // console.log('dans edit')
   console.log(process.env.CLOUDINARY_KEY)
+  let myphoto = req.session.currentUser.myphoto;
+  if (req.file) {
+   myphoto=req.file.path
+  }
   User.findByIdAndUpdate({ _id: req.session.currentUser._id }, {
-    myphoto: req.file.path,
+    myphoto: myphoto,
     city: req.body.city,
     mydescription : req.body.mydescription
   }, {new: true})

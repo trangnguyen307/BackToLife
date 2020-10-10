@@ -6,19 +6,19 @@
 <p>
     <label>
       My photo
-      <input type="file" name="photo">
+      <input type="file" name="photo" value="{{userInSession.myphoto}}">
     </label>
 </p>
 <p>
     <label>
       City
-      <input type="text" name="city" placeholder="Your city" />
+      <input type="text" name="city" placeholder="Your city" value="{{userInSession.city}}"/>
     </label>
 </p>
 <p>
     <label>
       Description
-      <textarea name="mydescription" placeholder="Your description"></textarea>
+      <textarea name="mydescription" placeholder="Your description">{{userInSession.mydescription}}</textarea>
     </label>
 </p>
   <button>Update my profile</button>
