@@ -699,6 +699,27 @@ button {
   margin-bottom: 30px; }
 
 /*
+###### #####  #####   ####  #####  
+#      #    # #    # #    # #    # 
+#####  #    # #    # #    # #    # 
+#      #####  #####  #    # #####  
+#      #   #  #   #  #    # #   #  
+###### #    # #    #  ####  #    # */
+.error {
+  width: 32em;
+  display: block;
+  margin: 30px auto;
+  padding: 20px;
+  text-align: center;
+  background-color: rgba(196, 244, 255, 0.5); }
+
+.error a {
+  font-size: 35px; }
+
+.error h2 {
+  line-height: 35px; }
+
+/*
   _____            _     _                         _ 
  |  __ \          | |   | |                       | |
  | |  | | __ _ ___| |__ | |__   ___   __ _ _ __ __| |

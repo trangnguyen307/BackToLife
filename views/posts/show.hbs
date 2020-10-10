@@ -2,9 +2,11 @@
   
   <article>
     <img src={{post.picURL.0.path}} id='showpost-img1'>
+    {{#if showimage2}}
     <img src={{post.picURL.1.path}} id='showpost-img2'>
     <img src ='../../images/previous.png'onclick="showImage()" id='showpost-previous'>
     <img src ='../../images/next.png'onclick="showImage()" id='showpost-next'>
+    {{/if}}
   </article>
 
   
@@ -12,8 +14,11 @@
   <section>
     <div>
       <h2>{{post.title}}</h2>
+      <h3>City: {{post.city}}</h3>
       <p><span style="font-weight: bold;" >Numbers of flowers suggested:</span> {{post.pointsEstimate}}</p>
+      
     </div>
+
     <hr align="left">
    
     <p id='showpost-main'><span style="font-weight: bold;" >Description:</span> {{post.description}}</p>

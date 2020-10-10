@@ -7,11 +7,11 @@ const offerSchema = Schema({
   authorId: {type: Schema.Types.ObjectId, ref: 'User'},
   postId: {type: Schema.Types.ObjectId, ref: 'Post'},
   goodToExchange: {type: Schema.Types.ObjectId, ref: 'Post'},
-  //pointsEstimate: String,
+  pointsEstimate: Number,
   messages: String,
   status: {
     type: String,
-    enum: ['Pending', 'Accepted', 'Refused'],
+    enum: ['Pending', 'Accepted', 'Declined'],
     default: 'Pending'
   }
 },
@@ -28,7 +28,28 @@ offerSchema.virtual('alreadyanswered').get(function() {
     return false;
   }
 });
+offerSchema.virtual('acceptOrDecline').get(function() {
+  if (this.status === 'Accepted') {
+    return true;
+  } else if (this.status === 'Declined') {
+    return false;
+  }
+});
 
+offerSchema.virtual('goodToExchangeChoosed').get(function() {
+  if (this.goodToExchange) {
+    return true;
+  } else {
+    return false;
+  }
+});
+offerSchema.virtual('flowerChoosed').get(function() {
+  if (this.pointsEstimate) {
+    return true;
+  } else {
+    return false;
+  }
+});
 const Offer = mongoose.model('Offer', offerSchema);
 
 

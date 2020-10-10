@@ -9,7 +9,7 @@ const { Router } = require('express');
 
 
 
-// CREER UN POSTE
+// CREER UN POST
 router.get('/new', function (req, res, next) {
   if (!req.session.currentUser) {
     res.redirect('/login');
@@ -19,17 +19,22 @@ router.get('/new', function (req, res, next) {
   res.render('posts/new',{userInSession: req.session.currentUser});
 });
 
-router.post('/new', fileUploader.fields([{name:'pic1'},{name:'pic2'}]), function (req, res, next) {
+router.post('/new', fileUploader.fields([{name:'pic'}]), function (req, res, next) {
   if (!req.session.currentUser) {
     return next(new Error('You must be logged to create a post'));
   }
   console.log('req.files.path:   ',req.files)
   console.log('creatorId:', req.session.currentUser._id)
+  let picURL = [req.files.pic[0]];
+  
+  if (req.files.pic[1]) {
+    picURL.push(req.files.pic[1]);
+  }
   Post.create({
     title: req.body.title,
     creatorId: req.session.currentUser._id,
     description: req.body.description,
-    picURL: [req.files.pic1[0],req.files.pic2[0]],
+    picURL: picURL,
     pointsEstimate:req.body.pointsEstimate,
     city: req.body.city,
     categories: req.body.categories,
@@ -42,7 +47,7 @@ router.post('/new', fileUploader.fields([{name:'pic1'},{name:'pic2'}]), function
 
 
 
-// AFFICHER TOUS LES POSTES
+// AFFICHER TOUS LES POSTS
 
 router.get('/categories', (req,res,next) => {
   const {search,categories, city} = req.query
@@ -81,9 +86,10 @@ router.get('/categories', (req,res,next) => {
         userInSession: req.session.currentUser,
         cats:cats
       })
-      .catch(err => next(err));
-    });
-  })
+      
+    })
+    .catch(err =>next(err));
+  });
 
 
 router.post('/categories', (req,res,next) => {
@@ -123,24 +129,52 @@ router.post('/:id/offer', function (req, res, next) {
   const id = req.params.id;
   console.log("req.body:", req.body)
 
-  Post.findById(id).then(post => {
-    //const creatorId = post.creatorId
-    Offer.create({
-        postId: req.params.id,
-        creatorId: post.creatorId,
-        authorId: req.session.currentUser._id,
-        goodToExchange: req.body.goodToExchange,
-        //pointsEstimate: req.body.pointsEstimate,
-        messages: req.body.messages
-      })
-        .then(offer => {
-          console.log('offer:', offer)
-          res.redirect(`/posts/categories`);
+  
+    Post.findById(id)
+      .then(post => {
+        User.findById(req.session.currentUser._id)
+        .then(userFromDb => {
+          if (userFromDb.mypoints < req.body.pointsEstimate) {
+            Post.find({creatorId:req.session.currentUser})
+            .then(postsFromDb => {
+              res.render('posts/offer', {
+                userInSession: req.session.currentUser,
+                post: post,
+                posts: postsFromDb,
+                errorMessage:"You don't have enough flowers to make this offer!"}) 
+              })
+            .catch(next)
+          } else {
+            console.log("req.body.goodToExchange      ", req.body.goodToExchange)
+            let goodToExchange;
+            if (req.body.goodToExchange && req.body.goodToExchange !== '--Select--') {
+              goodToExchange = req.body.goodToExchange;
+            } 
+            let pointsEstimate;
+            if (req.body.pointsEstimate) {
+              pointsEstimate = req.body.pointsEstimate;
+            } else {
+              pointsEstimate = 0;
+            }
+            Offer.create({
+              postId: req.params.id,
+              creatorId: post.creatorId,
+              authorId: req.session.currentUser._id,
+              goodToExchange: goodToExchange,
+              pointsEstimate: pointsEstimate,
+              messages: req.body.messages
+            })
+            .then(offer => {
+              console.log('offer:', offer)
+              res.redirect(`/posts/categories`);
+            })
+            .catch(next);
+          }
         })
-        .catch(next)
-      ;
-
-  }).catch(next)
+        .catch(next);
+    
+      }).catch(next)
+  
   
 });
 
@@ -209,19 +243,33 @@ router.get('/:id/edit',(req,res,next) => {
 
 })
 
-router.post('/:id/edit', (req,res,next) => {
+router.post('/:id/edit', fileUploader.fields([{name:'pic'}]), (req,res,next) => {
   console.log('req.body:   ',req.body)
-  Post.findOneAndUpdate({_id:req.params.id}, {
-    categories: req.body.categories,
-    title: req.body.title,
-    description: req.body.description,
-    //picURL: req.file.path,
-    pointsEstimate:req.body.pointsEstimate,
-    city: req.body.city
-  },{new:true})
-    .then(postUpdated => {
-      console.log('postupdate:  ',postUpdated)
-      res.redirect(`/posts/${postUpdated.id}`)
+
+  Post.findById(req.params.id)
+    .then(postFromDb => {
+      let picURL= postFromDb.picURL;
+      console.log('postFromDb.picURL:   ',postFromDb.picURL);
+      if (req.files.pic) {
+        console.log('req.files:   ', req.files.pic.length)
+        picURL = [req.files.pic[0]];
+        if (req.files.pic[1]) {
+          picURL.push(req.files.pic[1]);
+        }
+      }
+      Post.findOneAndUpdate({_id:req.params.id}, {
+        categories: req.body.categories,
+        title: req.body.title,
+        description: req.body.description,
+        picURL: picURL,
+        pointsEstimate:req.body.pointsEstimate,
+        city: req.body.city
+      },{new:true})
+        .then(postUpdated => {
+          console.log('postupdate:  ',postUpdated)
+          res.redirect ('/posts/${postUpdated.id}')
+        })
+        .catch(err => next(err))
 
     })
     .catch(err => next(err))
@@ -249,6 +297,12 @@ router.get('/:id', function (req, res, next) {
       const id = post.creatorId;
       User.findById(id).then(userFromDb => {
         let showbuttonoffer = true;
+        let showimage2;
+        if (post.picURL.length === 2) {
+          showimage2 = true;
+        } else {
+          showimage2 = false;
+        }
         if (req.session.currentUser && req.session.currentUser._id === userFromDb.id) {
           showbuttonoffer = false;
         }
@@ -256,6 +310,7 @@ router.get('/:id', function (req, res, next) {
           post: post,
           userInSession: req.session.currentUser,
           userFromDb: userFromDb,
+          showimage2:showimage2,
           showbuttonoffer:showbuttonoffer
         })
       }).catch(next);

@@ -11,6 +11,7 @@ const User = require('../models/User.model.js')
 const routeGuard = require('../configs/route-guard.config');
 const Offer = require('../models/Offer.model');
 
+
 /* GET Signup */
 router.get('/signup', (req, res, next) => {
   res.render('auth/signup');
@@ -131,12 +132,14 @@ router.get('/profile/dashboard', (req, res, next) => {
     values[0] // []
     values[1] // []
     
-    
-    res.render('profile/dashboard', {
-      requests: values[0],
-      propositions: values[1],
-      userInSession: req.session.currentUser
-    })
+    User.findById(req.session.currentUser._id).then(user => {
+      res.render('profile/dashboard', {
+        requests: values[0],
+        propositions: values[1],
+        userInSession: user
+      });
+    }).catch(next)
+  
   }).catch(next)
 });
 
@@ -144,28 +147,41 @@ router.post('/offers/:id/response', (req, res, next) => {
   if (!req.session.currentUser) {
     res.redirect('/login')
   }
+  console.log('req.body.response:   ',req.body.response)
+  console.log('req.body.offer:   ',req.body.offer)
+  console.log('typeof(req.body.offer):   ',typeof(req.body.offer))
   const id = req.params.id;
   let status;
   if (req.body.response === 'accepte') {
     status = 'Accepted';
   } else if (req.body.response === 'decline') {
-    status = 'Refused';
+    status = 'Declined';
   }
+  let goodToExchange,pointsEstimate=0;
+  if (req.body.offer ==='nothing') {
+    goodToExchange = null;
+  } else if (mongoose.Types.ObjectId.isValid(req.body.offer)){
+    goodToExchange =req.body.offer;
+  } else {
+    pointsEstimate = req.body.offer;
+  }
+  
   console.log ('status:::',status)
-  Offer.findByIdAndUpdate(id, {status:status},{new:true}).populate('creatorId').populate('authorId')
+  Offer.findByIdAndUpdate(id, {status:status,goodToExchange:goodToExchange,pointsEstimate:pointsEstimate},{new:true}).populate('creatorId').populate('authorId')
     .then(offerUpdated => {
-      console.log('offerUpdated.creatorId:   ',offerUpdated.creatorId)
-      console.log('offerUpdated.authorId:   ',offerUpdated.authorId)
       if (status==='Accepted') {
-        User.updateMany(
-          {_id: {$in: [offerUpdated.creatorId.id,offerUpdated.authorId.id]}},
-          {$inc: { transactions: 1 }},
+        const promises = [];
+        promises.push(User.findOneAndUpdate(
+          {_id:offerUpdated.creatorId.id},
+          {$inc: { transactions: 1, mypoints: Number(pointsEstimate)} },
           {new:true}
-          ).then (userfromdb => {
-            console.log('user:  ',userfromdb);
-            res.redirect('/profile/dashboard');
-          })
-          .catch(next);
+          ));
+        promises.push(User.findOneAndUpdate(
+          {_id:offerUpdated.authorId.id},
+          {$inc: { transactions: 1, mypoints: -Number(pointsEstimate)} },
+          {new:true}
+        ));
+        Promise.all(promises).then(values => res.redirect('/profile/dashboard')).catch(next)
       } else {
         User.updateMany(
           {_id: {$in: [offerUpdated.creatorId.id,offerUpdated.authorId.id]}},
@@ -194,8 +210,12 @@ router.post('/profile/myprofile-edit', fileUploader.single('photo'), (req, res, 
   // const {city, mydescription} = req.body;
   // console.log('dans edit')
   console.log(process.env.CLOUDINARY_KEY)
+  let myphoto = req.session.currentUser.myphoto;
+  if (req.file) {
+   myphoto=req.file.path
+  }
   User.findByIdAndUpdate({ _id: req.session.currentUser._id }, {
-    myphoto: req.file.path,
+    myphoto: myphoto,
     city: req.body.city,
     mydescription : req.body.mydescription
   }, {new: true})
