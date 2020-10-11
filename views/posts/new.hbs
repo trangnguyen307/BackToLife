@@ -40,8 +40,8 @@
     
   </p>
 
-  <p class='custom-file-input'>
-    PHOTOS: 
+  {{!-- <p class='custom-file-input'>
+    PHOTOS
   </p>
   <p>
     <label class="label-file">
@@ -50,8 +50,28 @@
       <span> Click here to upload up to 2 photos</span>  
       <input class="input-file" type="file" multiple name="pic">
     </label>
-     {{!-- <input type="file" multiple name="pic2">   --}}
-  </p>
+     
+  </p> --}}
+  
+
+  <p class='custom-file-input'>
+      PHOTOS (2 maximum) 
+    </p>
+    <div class="photoupload">
+      <label for="file">
+        <img src="https://res.cloudinary.com/dyybiq3aw/image/upload/v1601581026/project2-upload/photovide_utfkuw.png" alt ="nophoto">
+        <span> Click here to upload photos</span>  
+        </label>
+        <input id="file" type="file" multiple name="pic" onchange="javascript:updateList()"/>
+      <div id="fileList">
+        <p>Selected files:</p>
+      </div>
+      {{!-- <input type="file" multiple name="pic2">   --}}
+    </div>
+
+
+
+
   <p>
     <label>
       NUMBER OF FLOWERS ESTIMATED

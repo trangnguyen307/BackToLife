@@ -44,16 +44,37 @@
     </label>
   </p>
 
-  <p>
+  {{!-- <p>
     <label class="label-file">
        <img src="https://res.cloudinary.com/dyybiq3aw/image/upload/v1601581026/project2-upload/photovide_utfkuw.png" alt ="nophoto">
        <span> Click here to update 2 photos max</span>
       <input class="input-file" type="file" multiple name="pic">
     </label>
-  </p>
+  </p> --}}
   
 
+  <p> PHOTOS (2 maximum) </p>  
+    {{!-- <label for="choose-file" class="custom-file-upload" id="choose-file-label">
+       <img src="https://res.cloudinary.com/dyybiq3aw/image/upload/v1601581026/project2-upload/photovide_utfkuw.png" alt ="nophoto">
+      <span>Click here to upload photos</span>
+    </label>
+    <input multiple name="pic" type="file" id="choose-file"/> --}}
+
+<div class="photoupload">
+  <label for="file">
+  <img src="https://res.cloudinary.com/dyybiq3aw/image/upload/v1601581026/project2-upload/photovide_utfkuw.png" alt ="nophoto">
+  <span>Click here to upload photos</span>
+  </label>
+  <input type="file" name="pic" id="file" multiple onchange="javascript:updateList()" />
+  <div id="fileList">
+    <p>Selected files:</p>
+  </div>
+</div>
+
+
+<p>
   <button>Update</button>
+</p>
 </form>
 
 {{else}}

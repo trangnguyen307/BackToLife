@@ -848,28 +848,35 @@ button {
 #inputflower {
   width: 420px; }
 
-.label-file {
-  cursor: pointer;
-  color: black;
+.photoupload {
+  margin-top: 10px;
+  color: grey;
   font-weight: bold;
   border: 1px solid grey;
   border-radius: 2px;
   margin: auto;
   background-color: white;
-  width: 420px; }
+  width: 420px;
+  font: 16px 'Podkova', serif; }
 
-.label-file span:hover {
-  color: #25a5c4; }
+.photoupload label:hover {
+  color: #63E3FF;
+  cursor: pointer; }
 
-.input-file {
+.photoupload img {
+  width: 50px; }
+
+#file {
   display: none; }
 
-.label-file img {
-  width: 40px; }
+#fileList {
+  margin-top: -20px; }
 
-.label-file span {
+#fileList li {
+  padding-bottom: 10px; }
+
+.photoupload span {
   position: relative;
-  top: -13px;
-  color: lightgray; }
+  top: -20px; }
 
 /*# sourceMappingURL=style.css.map */

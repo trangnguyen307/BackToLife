@@ -9,13 +9,16 @@
 <p>
     MY PHOTO 
 </p>
-<p>
-    <label class="label-file">
+<div class="photoupload">
+    <label for="file">
       <img src="https://res.cloudinary.com/dyybiq3aw/image/upload/v1601581026/project2-upload/photovide_utfkuw.png" alt ="nophoto">
       <span> Click here to update your profile photo</span>
-      <input class="input-file" type="file" name="photo" value="{{userInSession.myphoto}}">
+      <input id="file" type="file" name="photo" value="{{userInSession.myphoto}}" onchange="javascript:updateList()">
     </label>
-</p>
+    <div id="fileList">
+    <p>Selected file:</p>
+  </div>
+</div>
 <p>
     <label>
       CITY <br>

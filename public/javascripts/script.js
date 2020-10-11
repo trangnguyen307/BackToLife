@@ -47,3 +47,26 @@ function copyToClipboard(element) {
   $temp.remove();
 }
 
+
+// $(document).ready(function () {
+// 	$('#choose-file').change(function () {
+// 		var i = $(this).prev('label').clone();
+//     var file = $('#choose-file')[0].files[0].name;
+//     $(this).prev('label').text(file);
+   
+
+//   }); 
+
+//  });
+
+
+function updateList() {
+  var input = document.getElementById('file');
+  var output = document.getElementById('fileList');
+
+  output.innerHTML = '<ul>';
+  for (var i = 0; i < input.files.length; ++i) {
+    output.innerHTML += '<li>' + input.files.item(i).name + '</li>';
+  }
+  output.innerHTML += '</ul>';
+}

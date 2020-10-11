@@ -788,6 +788,7 @@ padding-left: 50px;
 #showpost-main {
   flex: 1;
 }
+
 #showpost-button {
   display: block;
   float: right;
@@ -1081,31 +1082,102 @@ padding-left: 50px;
   width: 420px;
 }
 
-.label-file {
-    cursor: pointer;
-    color: black;
-    font-weight: bold;
-    border: 1px solid grey;
-    border-radius: 2px;
-    margin: auto;
-    background-color: white;
-    width: 420px;
-}
-.label-file span:hover {
-    color: #25a5c4;
+// .label-file {
+//     cursor: pointer;
+//     color: black;
+//     font-weight: bold;
+//     border: 1px solid grey;
+//     border-radius: 2px;
+//     margin: auto;
+//     background-color: white;
+//     width: 420px;
+// }
+// .label-file span:hover {
+//     color: #25a5c4;
+// }
+
+// .input-file {
+//     display: none;
+// }
+
+// .label-file img {
+//   width: 40px; 
+// }
+
+// .label-file span {
+//   position: relative;
+//   top: -13px;
+//   color: lightgray;
+// }
+
+
+// .custom-file-upload  {
+//   margin-top: 10px;
+//   cursor: pointer;
+//   color: black;
+//   font-weight: bold;
+//   border: 1px solid grey;
+//   border-radius: 2px;
+//   margin: auto;
+//   background-color: white;
+//   width: 420px;
+//   padding: 10px;
+
+// }
+// .custom-file-upload span:hover {
+//   color: #25a5c4;
+// }
+
+// .custom-file-upload img {
+//   width: 40px; 
+// }
+
+// #choose-file {
+//   display: none;
+// }
+
+
+// .custom-file-upload span{
+//   position: relative;
+//   top: -13px;
+// }
+
+
+.photoupload {
+  margin-top: 10px;
+  color: grey;
+  font-weight: bold;
+  border: 1px solid grey;
+  border-radius: 2px;
+  margin: auto;
+  background-color: white;
+  width: 420px;
+  // padding: 10px;
+  font: 16px 'Podkova', serif;
 }
 
-.input-file {
-    display: none;
+.photoupload label:hover {
+  color: #63E3FF;
+  cursor: pointer;
 }
 
-.label-file img {
-  width: 40px; 
+.photoupload img {
+  width: 50px; 
 }
 
-.label-file span {
+#file {
+  display: none;
+}
+
+#fileList{
+  margin-top: -20px;
+}
+
+#fileList li{
+  padding-bottom: 10px;
+}
+
+.photoupload span{
   position: relative;
-  top: -13px;
-  color: lightgray;
+  top: -20px;
 }
-
