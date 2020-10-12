@@ -214,6 +214,9 @@ router.post('/profile/myprofile-edit', fileUploader.single('photo'), (req, res, 
   if (req.file) {
    myphoto=req.file.path
   }
+  console.log('myphoto:    ',myphoto)
+  console.log('req.session.currentUser.myphoto     ',req.session.currentUser.myphoto)
+  console.log('req.file   ',req.file)
   User.findByIdAndUpdate({ _id: req.session.currentUser._id }, {
     myphoto: myphoto,
     city: req.body.city,
