@@ -201,37 +201,67 @@ router.post('/offers/:id/response', (req, res, next) => {
 //modifier le profil 
 router.get('/profile/myprofile-edit', (req, res, next) => {
   User.findOne({_id: req.session.currentUser._id})
-    .then(userInSession => res.render('profile/myprofile-edit', {userInSession}))
+    .then(userInSession => {
+      console.log('userInSession    ',userInSession)
+      res.render('profile/myprofile-edit', {userInSession})
+    })
     .catch(err => next(err))
   ;
 });
 
 router.post('/profile/myprofile-edit', fileUploader.single('photo'), (req, res, next) => {
+  User.findById(req.session.currentUser._id)
+    .then(userFromDb => {
+      let myphoto = userFromDb.myphoto;
+      if (req.file) {
+      myphoto=req.file.path
+      }
+      console.log('myphoto:    ',myphoto)
+      console.log('userFromDb.myphoto     ',userFromDb.myphoto)
+      console.log('req.file   ',req.file)
+      User.findByIdAndUpdate({ _id: userFromDb.id }, {
+        myphoto: myphoto,
+        city: req.body.city,
+        mydescription : req.body.mydescription
+      }, {new: true})
+        .then(currentUserUpdated => 
+          // {console.log('test');
+          res.redirect('/profile/myprofile')
+          // res.render('profile/myprofile', 
+          // {userInSession: currentUserUpdated}
+          //)
+        // }
+          
+        )
+        .catch(err => next(err))
+    })
+    .catch(err=>next(err))
   // const {city, mydescription} = req.body;
   // console.log('dans edit')
-  console.log(process.env.CLOUDINARY_KEY)
-  let myphoto = req.session.currentUser.myphoto;
-  if (req.file) {
-   myphoto=req.file.path
-  }
-  console.log('myphoto:    ',myphoto)
-  console.log('req.session.currentUser.myphoto     ',req.session.currentUser.myphoto)
-  console.log('req.file   ',req.file)
-  User.findByIdAndUpdate({ _id: req.session.currentUser._id }, {
-    myphoto: myphoto,
-    city: req.body.city,
-    mydescription : req.body.mydescription
-  }, {new: true})
-    .then(currentUserUpdated => 
-      // {console.log('test');
-      res.redirect('/profile/myprofile')
-      // res.render('profile/myprofile', 
-      // {userInSession: currentUserUpdated}
-      //)
-    // }
+  // console.log(process.env.CLOUDINARY_KEY)
+  // console.log(req.session.currentUser)
+  // let myphoto = req.session.currentUser.myphoto;
+  // if (req.file) {
+  //  myphoto=req.file.path
+  // }
+  // console.log('myphoto:    ',myphoto)
+  // console.log('req.session.currentUser.myphoto     ',req.session.currentUser.myphoto)
+  // console.log('req.file   ',req.file)
+  // User.findByIdAndUpdate({ _id: req.session.currentUser._id }, {
+  //   myphoto: myphoto,
+  //   city: req.body.city,
+  //   mydescription : req.body.mydescription
+  // }, {new: true})
+  //   .then(currentUserUpdated => 
+  //     // {console.log('test');
+  //     res.redirect('/profile/myprofile')
+  //     // res.render('profile/myprofile', 
+  //     // {userInSession: currentUserUpdated}
+  //     //)
+  //   // }
       
-    )
-    .catch(err => next(err))
+  //   )
+  //   .catch(err => next(err))
   })
 
 
