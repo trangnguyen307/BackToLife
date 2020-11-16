@@ -8,6 +8,7 @@ a {
   margin: 0; }
   a:hover {
     opacity: 0.5;
+    text-decoration: none;
     cursor: pointer; }
   a:visited {
     color: #63E3FF;
@@ -28,7 +29,6 @@ body {
  |_|  |_|\___|\__,_|\__,_|\___|_|                      
 */
 header {
-  height: 70px;
   padding: 0 30px;
   display: flex;
   justify-content: space-between;
@@ -51,25 +51,23 @@ header {
 .navbar > a > span {
   font-size: 1.2em; }
 
-.nav-item {
+.nav-item a {
   margin: auto 1.2em;
   font-size: 1.2em;
   transition: opacity .125s linear;
   -webkit-text-stroke: 0.2px #63E3FF !important; }
-  .nav-item:hover {
+  .nav-item a:hover {
     cursor: pointer;
-    -webkit-text-stroke: 0.2px white; }
-  .nav-item:visited {
+    -webkit-text-stroke: 0.2px white;
+    text-decoration: none; }
+  .nav-item a:visited {
     color: #63E3FF;
     text-decoration: none; }
-
-.nav-item a {
-  color: #63E3FF; }
 
 .navbar-nav {
   text-transform: uppercase;
   font-weight: bold;
-  text-align: center;
+  text-align: end;
   background-color: #fff; }
 
 /*
@@ -101,6 +99,11 @@ footer a,
   text-decoration: none;
   transition: opacity .125s linear;
   color: #63E3FF; }
+
+footer a:hover {
+  text-decoration: none;
+  color: #63E3FF;
+  opacity: 0.5; }
 
 .footersociallinks {
   display: flex;
@@ -253,6 +256,10 @@ footer a,
   animation-duration: 10s;
   animation-name: slidein;
   animation-iteration-count: infinite; }
+
+.home h3 {
+  margin-top: 1.7em;
+  font-weight: bold; }
 
 @keyframes slidein {
   from {
@@ -630,6 +637,10 @@ button {
 
 #about h3 {
   text-align: center; }
+
+#about a {
+  text-decoration: none;
+  color: #000; }
 
 /*#     #                      
 #     # ###### #      #####  

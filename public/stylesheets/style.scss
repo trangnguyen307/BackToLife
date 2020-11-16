@@ -8,6 +8,7 @@ a {
   margin: 0;
   &:hover {
     opacity: 0.5;
+    text-decoration:none;
     cursor: pointer;
     // background-color: black;
   }
@@ -38,7 +39,7 @@ body {
 */
 
 header {
-  height: 70px;
+  // height: 70px;
   padding: 0 30px;
   display: flex;
   justify-content: space-between;
@@ -64,7 +65,7 @@ header {
 .navbar > a > span {
   font-size: 1.2em;
 }
-.nav-item {
+.nav-item a{
   margin: auto 1.2em;
   font-size: 1.2em;
   transition: opacity .125s linear;
@@ -74,6 +75,7 @@ header {
     // opacity: 0.5;
     cursor: pointer;
     -webkit-text-stroke: 0.2px white;
+    text-decoration: none;
     // background-color: black;
   }
 
@@ -82,13 +84,11 @@ header {
     text-decoration: none;
   }
 }
-.nav-item a {
-  color: #63E3FF;
-}
+
 .navbar-nav {
   text-transform:uppercase;
   font-weight: bold;
-  text-align: center;
+  text-align: end;
   background-color: #fff;
 }
 
@@ -125,6 +125,12 @@ footer a,
   text-decoration: none;
   transition: opacity .125s linear;
   color: #63E3FF;
+}
+
+footer a:hover {
+  text-decoration: none;
+  color: #63E3FF;
+  opacity: 0.5;
 }
 
 
@@ -323,6 +329,10 @@ width: 30px;
   animation-name: slidein;
   animation-iteration-count: infinite;
   
+}
+.home  h3 {
+  margin-top: 1.7em;
+  font-weight: bold;
 }
 
 @keyframes slidein {
@@ -784,6 +794,10 @@ padding-left: 50px;
 }
 #about h3 {
   text-align: center;
+}
+#about a {
+  text-decoration: none;
+  color: #000;
 }
 
 /*#     #                      
