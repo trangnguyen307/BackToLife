@@ -9,7 +9,7 @@
 		src="https://github.com/trangnguyen307/BackToLife/blob/master/public/images/thumbnail.png">
 </h1>
 
-## NodeJS/ExpressJS Full-Stack Project
+## NodeJS/ExpressJS Project
 With the desire to contribute our part in protecting the Earth, we created this community to help people exchange goods with each other. Instead of throwing away the things you no longer need (but still good quality), give it a second life. This exchange helps you save more, while reducing waste into the environment.
 
 This application is hosted on **Heroku**.
